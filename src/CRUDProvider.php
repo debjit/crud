@@ -51,9 +51,15 @@ class CRUDProvider extends ServiceProvider {
             return $app[Console\MigrationCommand::class];
         });
 
+
+        $this->app->singleton('command.crud.admin', function($app) {
+            return $app[Console\CreateAdminCommand::class];
+        });
+
         $this->commands([
             'command.crud.scaffold',
             'command.crud.migration',
+            'command.crud.admin',
             'command.crud.model'
         ]);
     }
@@ -91,7 +97,7 @@ class CRUDProvider extends ServiceProvider {
         /*
          * Setting up migrations for publishing
          */
-        $migrationsPath = __DIR__ . '/migrations';
+        $migrationsPath = __DIR__ . '/migrations/';
         $this->publishes([$migrationsPath=>database_path('/migrations')],'migrations');
 
         if (! $this->app->routesAreCached()) {
