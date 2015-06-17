@@ -35,6 +35,9 @@ class CRUDProvider extends ServiceProvider {
         }
     }
 
+    /**
+     *
+     */
     private function registerCommands() {
         $this->app->singleton('command.crud.scaffold', function($app) {
             return $app[Console\ScaffoldCommand::class];
@@ -55,6 +58,9 @@ class CRUDProvider extends ServiceProvider {
         ]);
     }
 
+    /**
+     *
+     */
     public function boot() {
 
         /*
@@ -82,6 +88,12 @@ class CRUDProvider extends ServiceProvider {
          */
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'crud');
 
+        /*
+         * Setting up migrations for publishing
+         */
+        $migrationsPath = __DIR__ . '/migrations';
+        $this->publishes([$migrationsPath=>database_path('/migrations')],'migrations');
+
         if (! $this->app->routesAreCached()) {
             require __DIR__.'/routes.php';
         }
@@ -97,6 +109,7 @@ class CRUDProvider extends ServiceProvider {
         if ($this->app->environment() === 'local') {
             return array([
                 'command.crud.scaffold',
+                'command.crud.migration',
                 'command.crud.model'
             ]);
         } else {
@@ -111,17 +124,13 @@ class CRUDProvider extends ServiceProvider {
      */
     private function setupDependencies() {
         /*
-         * Registering dependencies, so the user won't have to
+         * Registering dependencies, so the developers won't have to
          */
         $this->app->register(ImageServiceProvider::class);
         $this->app->register(MarkdownServiceProvider::class);
 
-        if ($this->app->environment() === 'local') {
-            $this->app->register(GeneratorsServiceProvider::class);
-        }
-
         /*
-         * Adding aliases so the user won't have to
+         * Adding aliases so the developers won't have to
          */
         $loader = AliasLoader::getInstance();
         $loader->alias('InterventionImage', Image::class);
