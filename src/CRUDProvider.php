@@ -15,6 +15,7 @@ use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 use Intervention\Image\ImageServiceProvider;
+use Laracasts\Generators\GeneratorsServiceProvider;
 
 class CRUDProvider extends ServiceProvider {
     /**
@@ -25,7 +26,13 @@ class CRUDProvider extends ServiceProvider {
     public function register()
     {
         $this->setupDependencies();
-        $this->registerCommands();
+
+        /*
+         * Only register the CLI commands if we're in a local (probably development) environment
+         */
+        if ($this->app->environment() === 'local') {
+            $this->registerCommands();
+        }
     }
 
     private function registerCommands() {
@@ -37,8 +44,13 @@ class CRUDProvider extends ServiceProvider {
             return $app[Console\ModelCommand::class];
         });
 
+        $this->app->singleton('command.crud.migration', function($app) {
+            return $app[Console\MigrationCommand::class];
+        });
+
         $this->commands([
             'command.crud.scaffold',
+            'command.crud.migration',
             'command.crud.model'
         ]);
     }
@@ -82,12 +94,21 @@ class CRUDProvider extends ServiceProvider {
      */
     public function provides()
     {
-        return array([
-            'command.crud.scaffold',
-            'command.crud.model'
-        ]);
+        if ($this->app->environment() === 'local') {
+            return array([
+                'command.crud.scaffold',
+                'command.crud.model'
+            ]);
+        } else {
+            return [];
+        }
+
     }
 
+    /**
+     * Set up the package dependencies, so that the developer won't have to :)
+     * Some dependencies should be ran in development environments only...
+     */
     private function setupDependencies() {
         /*
          * Registering dependencies, so the user won't have to
@@ -95,8 +116,8 @@ class CRUDProvider extends ServiceProvider {
         $this->app->register(ImageServiceProvider::class);
         $this->app->register(MarkdownServiceProvider::class);
 
-        if ($this->app->environment() == 'local') {
-            $this->app->register(\Laracasts\Generators\GeneratorsServiceProvider::class);
+        if ($this->app->environment() === 'local') {
+            $this->app->register(GeneratorsServiceProvider::class);
         }
 
         /*

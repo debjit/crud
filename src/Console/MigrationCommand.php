@@ -13,20 +13,20 @@ use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
-class ScaffoldCommand extends Command {
+class MigrationCommand extends Command {
     /**
      * The console command name.
      *
      * @var string
      */
-    protected $name = 'crud:scaffold';
+    protected $name = 'crud:migration';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Generate a new set of Models, Controllers and Migrations';
+    protected $description = 'Generate a new migration specific to the CRUD package';
 
     /**
      * Create a new command instance.
@@ -44,19 +44,14 @@ class ScaffoldCommand extends Command {
     public function fire()
     {
         $name = $this->argument('name');
-        $modelName = Str::studly($this->argument('name'));
         $tableName = 'crud_' . Str::lower($name);
 
 
-        $this->call('crud:migration',[
-            'name'=>$name
-        ]);
-
-        $this->call('crud:model',[
-            'name'=>$modelName,
+        $this->call('make:migration',[
+            'name'=>'create_' . Str::plural($tableName) . '_table',
+            '--create'=>$tableName,
             '--table'=>$tableName
         ]);
-
 
     }
 
@@ -68,7 +63,7 @@ class ScaffoldCommand extends Command {
     protected function getArguments()
     {
         return [
-            ['name', InputArgument::REQUIRED, 'The name of the module you wish to create'],
+            ['name', InputArgument::REQUIRED, 'The name of the migration you wish to create'],
         ];
     }
 
