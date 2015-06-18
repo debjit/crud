@@ -1,11 +1,10 @@
 var gulp = require('gulp');
 
-var bowerBase = 'resources/bower/startbootstrap-sb-admin-2-sass/dist'
-
+var bowerBase = 'resources/bower/startbootstrap-sb-admin-2-sass/dist';
 
 gulp.task('styles:copy', function() {
   return gulp.src( bowerBase + '/css/*.css')
-      .pipe(gulp.dest('public/styles'))
+      .pipe(gulp.dest('public/styles'));
 });
 
 gulp.task('scripts:copy', function() {
