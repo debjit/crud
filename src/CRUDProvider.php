@@ -10,6 +10,9 @@ namespace BlackfyreStudio\CRUD;
 
 use GrahamCampbell\Markdown\Facades\Markdown;
 use GrahamCampbell\Markdown\MarkdownServiceProvider;
+use Illuminate\Html\FormFacade;
+use Illuminate\Html\HtmlFacade;
+use Illuminate\Html\HtmlServiceProvider;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Str;
@@ -135,6 +138,7 @@ class CRUDProvider extends ServiceProvider {
          */
         $this->app->register(ImageServiceProvider::class);
         $this->app->register(MarkdownServiceProvider::class);
+        $this->app->register(HtmlServiceProvider::class);
 
         /*
          * Adding aliases so the developers won't have to
@@ -142,5 +146,7 @@ class CRUDProvider extends ServiceProvider {
         $loader = AliasLoader::getInstance();
         $loader->alias('InterventionImage', Image::class);
         $loader->alias('Markdown', Markdown::class);
+        $loader->alias('CRUDForm',FormFacade::class);
+        $loader->alias('CRUDHTML',HtmlFacade::class);
     }
 }
