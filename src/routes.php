@@ -12,13 +12,14 @@
 ], function() {
     \Route::get('/',[
         'as'=>'crud.home',
-        'uses'=>'BlackfyreStudio\CRUD\DashboardController@index'
+        'uses'=>'BlackfyreStudio\CRUD\Controllers\DashboardController@index'
     ]);
-    /*
+
     \Route::get('index/{model}',[
-        'as'=>'crud.index'
+        'as'=>'crud.index',
+        'uses'=>'BlackfyreStudio\CRUD\Controllers\CRUDController@index'
     ]);
-    */
+
     \Route::post('slugger',[
         'as'=>'crud.slugger',
         function() {

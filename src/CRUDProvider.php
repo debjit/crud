@@ -55,15 +55,19 @@ class CRUDProvider extends ServiceProvider {
             return $app[Console\MigrationCommand::class];
         });
 
-
         $this->app->singleton('command.crud.admin', function($app) {
             return $app[Console\CreateAdminCommand::class];
+        });
+
+        $this->app->singleton('command.crud.controller', function($app) {
+            return $app[Console\ControllerCommand::class];
         });
 
         $this->commands([
             'command.crud.scaffold',
             'command.crud.migration',
             'command.crud.admin',
+            'command.crud.controller',
             'command.crud.model'
         ]);
     }

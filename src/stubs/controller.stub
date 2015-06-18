@@ -1,0 +1,35 @@
+<?php namespace DummyRootNamespaceHttp\Controllers\Crud;
+
+use BlackfyreStudio\CRUD\Master;
+
+/**
+ * Class DummyClass
+ * @package DummyRootNamespaceHttp\Controllers\Crud
+ */
+class DummyClass extends Master  {
+
+    /**
+      * This function is called when configuring the list view.
+      * @return void
+      */
+     public function listView() {
+
+     }
+
+     /**
+      * This function is called when configuring the form view.
+      * @return void
+      */
+     public function formView() {
+
+     }
+
+     /**
+      * This function is called when configuring the filter view.
+      * @return void
+      */
+     public function filters() {
+
+     }
+
+}

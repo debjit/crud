@@ -6,7 +6,7 @@
  * Time: 9:55 AM
  */
 
-namespace BlackfyreStudio\CRUD;
+namespace BlackfyreStudio\CRUD\Controllers;
 
 
 use Illuminate\Routing\Controller;

@@ -8,11 +8,9 @@
 
 namespace BlackfyreStudio\CRUD\Controllers\Auth;
 
+use Illuminate\Routing\Controller;
 
-
-use BlackfyreStudio\CRUD\Controllers\BaseController;
-
-class AuthController extends BaseController
+class AuthController extends Controller
 {
 
 }

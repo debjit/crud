@@ -57,7 +57,9 @@ class ScaffoldCommand extends Command {
             '--table'=>$tableName
         ]);
 
-
+        $this->call('crud:controller', [
+            'name'=>$modelName
+        ]);
     }
 
     /**

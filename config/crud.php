@@ -23,7 +23,7 @@ return [
      * The directory where the crud models are located.
      * @var string
      */
-    'directory'=>'crud',
+    'directory'=>'Crud',
 
     /**
      * Global date/time formatting.
