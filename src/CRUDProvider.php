@@ -36,7 +36,8 @@ class CRUDProvider extends ServiceProvider {
     }
 
     /**
-     *
+     * This method registers all the commands provided by the package
+     * @return void
      */
     private function registerCommands() {
         $this->app->singleton('command.crud.scaffold', function($app) {
@@ -65,7 +66,7 @@ class CRUDProvider extends ServiceProvider {
     }
 
     /**
-     *
+     * @return void
      */
     public function boot() {
 
@@ -79,7 +80,7 @@ class CRUDProvider extends ServiceProvider {
         /*
          * Setting up asset publishing (css, javascript, fonts, images, ...)
          */
-        $publicPath = __DIR__.'/../public';
+        $publicPath = __DIR__.'/../public/';
         $this->publishes([$publicPath => public_path('vendor/blackfyrestudio/crud')], 'public');
 
         /*
@@ -90,15 +91,15 @@ class CRUDProvider extends ServiceProvider {
         $this->mergeConfigFrom($configPath . 'crud.php','crud');
 
         /*
+         * Setting up migrations for publishing
+         */
+        $migrationsPath = __DIR__ . '/../resources/migrations/';
+        $this->publishes([$migrationsPath=>database_path('/migrations')],'migrations');
+
+        /*
          * Setting up translations
          */
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'crud');
-
-        /*
-         * Setting up migrations for publishing
-         */
-        $migrationsPath = __DIR__ . '/migrations/';
-        $this->publishes([$migrationsPath=>database_path('/migrations')],'migrations');
 
         if (! $this->app->routesAreCached()) {
             require __DIR__.'/routes.php';
