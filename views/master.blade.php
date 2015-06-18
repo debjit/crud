@@ -66,7 +66,7 @@
 
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
-                {!! BlackfyreStudio\CRUD\Builder\MenuBuilder::build() !!}
+                {!! BlackfyreStudio\CRUD\Builders\MenuBuilder::build() !!}
             </div>
             <!-- /.sidebar-collapse -->
         </div>
