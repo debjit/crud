@@ -13,6 +13,9 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as OriginController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Console\AppNamespaceDetectorTrait;
+use Input;
+use Redirect;
+use Session;
 
 class CRUDController extends OriginController
 {
@@ -109,6 +112,40 @@ class CRUDController extends OriginController
         //
     }
 
+    /**
+     * Remove the specified resources from storage.
+     *
+     * @access public
+     *
+     * @param $name
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function multiDestroy($name)
+    {
+        $items = Input::get('delete');
+        $model = Master::getInstance($name);
+        if (count($items) === 0) {
+            return Redirect::route('admin.model.index', $name);
+        }
+        foreach ($items as $id => $item) {
+            $model->buildForm($id)
+            ->getFormBuilder()
+            ->destroy();
+        }
+        // Set the flash message
+        Session::flash('message.success', trans('bauhaus::messages.success.model-deleted', [
+            'count' => (count($items) > 1 ? 'multiple' : 'one'),
+            'model' => $model->getPluralName()
+        ]));
+        // afterMultiDestroy hook
+        if (method_exists($model, 'afterMultiDestroy')) {
+            return $model->afterMultiDestroy(Redirect::route('admin.model.index', $name));
+        }
+        return Redirect::route('admin.model.index', $name);
+    }
 
+    public function export($name, $type) {
+
+    }
 
 }

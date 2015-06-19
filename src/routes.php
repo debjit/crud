@@ -26,11 +26,13 @@
     ]);
 
     \Route::get('index/{model}/create', [
-        'as'=>'crud.create'
+        'as'=>'crud.create',
+        'uses'=>'BlackfyreStudio\CRUD\Controllers\CRUDController@create'
     ]);
 
     \Route::post('destroy', [
-        'as'=>'crud.multi-destroy'
+        'as'=>'crud.multi-destroy',
+        'uses'=>'BlackfyreStudio\CRUD\Controllers\CRUDController@multiDestroy'
     ]);
 
     \Route::get('/',[
@@ -38,7 +40,8 @@
     ]);
 
     \Route::get('/export/{model}/{type}',[
-        'as'=>'crud.export'
+        'as'=>'crud.export',
+        'uses'=>'BlackfyreStudio\CRUD\Controllers\CRUDController@export'
     ])->where('type',implode('|',Config::get('crud.export-types')));
 
     \Route::post('slugger',[
@@ -47,4 +50,17 @@
             return \Response::json(['response'=>\Illuminate\Support\Str::slug(\Input::get('toSlug'))]);
         }
     ]);
+
+    \Route::group([
+        'prefix'=>'modal'
+    ], function() {
+        \Route::get('modal/belongs_to/{model}/create', [
+            'as'   => 'modal.belongs_to.create',
+            'uses' => 'KraftHaus\Bauhaus\Modal\FieldBelongsToController@create'
+        ]);
+        \Route::get('modal/delete/{model}', [
+            'as'   => 'modal.delete',
+            'uses' => 'BlackfyreStudio\CRUD\Controllers\ModalController@delete'
+        ]);
+    });
 });
