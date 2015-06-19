@@ -37,6 +37,10 @@
         'as'=>'crud.modal.delete'
     ]);
 
+    \Route::get('/export/{model}/{type}',[
+        'as'=>'crud.export'
+    ])->where('type',implode('|',Config::get('crud.export-types')));
+
     \Route::post('slugger',[
         'as'=>'crud.slugger',
         function() {

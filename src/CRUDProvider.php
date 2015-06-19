@@ -15,12 +15,17 @@ use Illuminate\Html\HtmlFacade;
 use Illuminate\Html\HtmlServiceProvider;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\AliasLoader;
-use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 use Intervention\Image\ImageServiceProvider;
-use Laracasts\Generators\GeneratorsServiceProvider;
+use Maatwebsite\Excel\ExcelServiceProvider;
+use Maatwebsite\Excel\Facades\Excel;
 
-class CRUDProvider extends ServiceProvider {
+/**
+ * Class CRUDProvider
+ * @package BlackfyreStudio\CRUD
+ */
+class CRUDProvider extends ServiceProvider
+{
     /**
      * Register the service provider.
      *
@@ -39,27 +44,53 @@ class CRUDProvider extends ServiceProvider {
     }
 
     /**
+     * Set up the package dependencies, so that the developer won't have to :)
+     * Some dependencies should be ran in development environments only...
+     */
+    private function setupDependencies()
+    {
+        /*
+         * Registering dependencies, so the developers won't have to
+         */
+        $this->app->register(ImageServiceProvider::class);
+        $this->app->register(MarkdownServiceProvider::class);
+        $this->app->register(HtmlServiceProvider::class);
+        $this->app->register(ExcelServiceProvider::class);
+
+        /*
+         * Adding aliases so the developers won't have to
+         */
+        $loader = AliasLoader::getInstance();
+        $loader->alias('InterventionImage', Image::class);
+        $loader->alias('Markdown', Markdown::class);
+        $loader->alias('CRUDForm', FormFacade::class);
+        $loader->alias('CRUDHTML', HtmlFacade::class);
+        $loader->alias('CRUDExcel', Excel::class);
+    }
+
+    /**
      * This method registers all the commands provided by the package
      * @return void
      */
-    private function registerCommands() {
-        $this->app->singleton('command.crud.scaffold', function($app) {
+    private function registerCommands()
+    {
+        $this->app->singleton('command.crud.scaffold', function ($app) {
             return $app[Console\ScaffoldCommand::class];
         });
 
-        $this->app->singleton('command.crud.model', function($app) {
+        $this->app->singleton('command.crud.model', function ($app) {
             return $app[Console\ModelCommand::class];
         });
 
-        $this->app->singleton('command.crud.migration', function($app) {
+        $this->app->singleton('command.crud.migration', function ($app) {
             return $app[Console\MigrationCommand::class];
         });
 
-        $this->app->singleton('command.crud.admin', function($app) {
+        $this->app->singleton('command.crud.admin', function ($app) {
             return $app[Console\CreateAdminCommand::class];
         });
 
-        $this->app->singleton('command.crud.controller', function($app) {
+        $this->app->singleton('command.crud.controller', function ($app) {
             return $app[Console\ControllerCommand::class];
         });
 
@@ -75,41 +106,42 @@ class CRUDProvider extends ServiceProvider {
     /**
      * @return void
      */
-    public function boot() {
+    public function boot()
+    {
 
         /*
          * Setting up view for publishing
          */
-        $viewPath = __DIR__.'/../views';
+        $viewPath = __DIR__ . '/../views';
         $this->publishes([$viewPath => base_path('resources/views/vendor/crud')], 'views');
         $this->loadViewsFrom($viewPath, 'crud');
 
         /*
          * Setting up asset publishing (css, javascript, fonts, images, ...)
          */
-        $publicPath = __DIR__.'/../public/';
+        $publicPath = __DIR__ . '/../public/';
         $this->publishes([$publicPath => public_path('vendor/blackfyrestudio/crud')], 'public');
 
         /*
          * Setting up config files for publishing
          */
         $configPath = __DIR__ . '/../config/';
-        $this->publishes([$configPath=>config_path('crud.php')],'config');
-        $this->mergeConfigFrom($configPath . 'crud.php','crud');
+        $this->publishes([$configPath => config_path('crud.php')], 'config');
+        $this->mergeConfigFrom($configPath . 'crud.php', 'crud');
 
         /*
          * Setting up migrations for publishing
          */
         $migrationsPath = __DIR__ . '/../resources/migrations/';
-        $this->publishes([$migrationsPath=>database_path('/migrations')],'migrations');
+        $this->publishes([$migrationsPath => database_path('/migrations')], 'migrations');
 
         /*
          * Setting up translations
          */
-        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'crud');
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'crud');
 
-        if (! $this->app->routesAreCached()) {
-            require __DIR__.'/routes.php';
+        if (!$this->app->routesAreCached()) {
+            require __DIR__ . '/routes.php';
         }
     }
 
@@ -130,27 +162,5 @@ class CRUDProvider extends ServiceProvider {
             return [];
         }
 
-    }
-
-    /**
-     * Set up the package dependencies, so that the developer won't have to :)
-     * Some dependencies should be ran in development environments only...
-     */
-    private function setupDependencies() {
-        /*
-         * Registering dependencies, so the developers won't have to
-         */
-        $this->app->register(ImageServiceProvider::class);
-        $this->app->register(MarkdownServiceProvider::class);
-        $this->app->register(HtmlServiceProvider::class);
-
-        /*
-         * Adding aliases so the developers won't have to
-         */
-        $loader = AliasLoader::getInstance();
-        $loader->alias('InterventionImage', Image::class);
-        $loader->alias('Markdown', Markdown::class);
-        $loader->alias('CRUDForm',FormFacade::class);
-        $loader->alias('CRUDHTML',HtmlFacade::class);
     }
 }

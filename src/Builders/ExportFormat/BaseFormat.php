@@ -73,13 +73,13 @@ abstract class BaseFormat
      * @param  string $result
      *
      * @access public
-     * @return mixed
+     * @return \Illuminate\Http\Response
      */
     public function createResponse($result)
     {
         return Response::make($result, 200, [
             'Content-Type' => $this->getContentType(),
-            'Content-Disposition' => sprintf('attachment; filename="%s"', $this->getFilename()),
+            'Content-Disposition' => sprintf('attachment; filename="%s"', $this->getFilename())
         ]);
     }
 
