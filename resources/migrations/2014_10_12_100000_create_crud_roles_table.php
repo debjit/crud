@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCRUDRolesTable extends Migration
+class CreateCrudRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,12 @@ class CreateCRUDRolesTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('crud_roles', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('role_name');
+            $table->text('permissions');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -22,6 +27,6 @@ class CreateCRUDRolesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('crud_roles');
     }
 }
