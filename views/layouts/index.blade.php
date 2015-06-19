@@ -10,6 +10,57 @@
     <!-- /.row -->
 @stop
 
+@section('sidebar')
+    <ul class="nav nav-sidebar">
+        <li>
+            <a href="{{ route('crud.index', $ModelName) }}">
+                <i class="fa fa-bars"></i>
+                {{ trans('crud::index.button.overview') }}
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('crud.create', $ModelName) }}">
+                <i class="fa fa-plus"></i>
+                {{ trans('crud::index.button.create-new', ['model' => $MasterInstance->getModelSingularName()]) }}
+            </a>
+        </li>
+    </ul>
+
+    @if ($MasterInstance->getScopePlanner()->hasScopes())
+        <ul class="nav nav-sidebar">
+            <li class="title">
+                <i class="fa fa-search"></i>
+                {{ trans('crud::index.sidebar.scopes') }}
+            </li>
+            @foreach ($MasterInstance->getScopePlanner()->getScopes() as $scope)
+                <li>
+                    <a href="?_scope={{ $scope->getScope() }}&_filtering=?" class="inset">
+                        {{ $scope->getLabel() }}
+                    </a>
+                </li>
+            @endforeach
+        </ul>
+    @endif
+
+    <ul class="nav nav-sidebar nav-bottom">
+        <li>
+            <div class="btn-group dropup">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-share-square-o"></i>
+                    {{ trans('crud::index.sidebar.export') }}
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    @foreach ($MasterInstance->getExportTypes() as $exportType)
+                        <li>
+                            <a href="{{ route('crud.export', [$ModelName, $exportType]) }}">{{ $exportType }}</a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        </li>
+    </ul>
+@stop
+
 @section('content')
 
     @if (Input::has('_filtering'))
@@ -26,15 +77,15 @@
                 <div class="panel panel-default">
                     <div class="panel-body text-center">
                         @if (Input::has('_filtering'))
-                            <p>{{ trans('bauhaus::index.no-filter-results', ['model' => $MasterInstance->getPluralName()]) }}</p>
-                            <a class="btn btn-default btn-rounded" href="{{ route('admin.model.index', $name) }}">
-                                {{ trans('bauhaus::index.button.reset-filters') }}
+                            <p>{{ trans('crud::index.no-filter-results', ['model' => $MasterInstance->getPluralName()]) }}</p>
+                            <a class="btn btn-default btn-rounded" href="{{ route('crud.index', $ModelName) }}">
+                                {{ trans('crud::index.button.reset-filters') }}
                             </a>
                         @else
-                            <p>{{ trans('bauhaus::index.no-items-yet', ['model' => $MasterInstance->getPluralName()]) }}</p>
-                            <a href="{{ route('admin.model.create', $name) }}" class="btn btn-default btn-red btn-rounded">
+                            <p>{{ trans('crud::index.no-items-yet', ['model' => $MasterInstance->getPluralName()]) }}</p>
+                            <a href="{{ route('crud.create', $ModelName) }}" class="btn btn-default btn-red btn-rounded">
                                 <i class="fa fa-plus"></i>
-                                {{ trans('bauhaus::index.button.create-new', ['model' => $MasterInstance->getSingularName()]) }}
+                                {{ trans('crud::index.button.create-new', ['model' => $MasterInstance->getSingularName()]) }}
                             </a>
                         @endif
                     </div>
@@ -44,14 +95,14 @@
     @else
         <div class="row">
             <div class="col-sm-{{ $MasterInstance->getFilterBuilder()->getResult()->getFields() ? 8 : 12 }}">
-                {{ CRUDForm::open(['method' => 'POST', 'route' => ['crud.multi-destroy', $name], 'id' => 'delete-multi-form']) }}
+                {!! CRUDForm::open(['method' => 'POST', 'route' => ['crud.multi-destroy', $ModelName], 'id' => 'delete-multi-form']) !!}
                 <table class="table table-hover">
                     <thead>
                     <tr>
                         <th width="20"></th>
-                        @foreach ($MasterInstance->getListMapper()->getFields() as $field)
+                        @foreach ($MasterInstance->getIndexPlanner()->getFields() as $field)
                             <th>
-                                <a href="{{ route('admin.model.index', [$name, '_order_by' => $field->getName(), '_order' => Input::get('_order') === 'ASC' ? 'DESC' : 'ASC']) }}">
+                                <a href="{{ route('crud.index', [$ModelName, '_order_by' => $field->getName(), '_order' => Input::get('_order') === 'ASC' ? 'DESC' : 'ASC']) }}">
                                     {{ $field->getLabel() }}
                                     @if (Input::has('_order_by') && Input::get('_order_by') === $field->getName())
                                         <i class="fa fa-sort-{{ Input::get('_order') === 'DESC' ? 'up' : 'down' }}"></i>
@@ -64,15 +115,15 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($MasterInstance->getListBuilder()->getResult() as $item)
+                    @foreach ($MasterInstance->getIndexBuilder()->getResult() as $item)
                         <tr>
                             <td><input type="checkbox" name="delete[{{ $item->getIdentifier() }}]"></td>
                             @foreach ($item->getFields() as $field)
-                                <td>{{ $field->render() }}</td>
+                                <td>{!! $field->render() !!}</td>
                             @endforeach
 
                             <td align="right">
-                                <a href="{{ route('crud.edit', [$name, $item->getIdentifier()]) }}" class="btn btn-xs btn-default">
+                                <a href="{{ route('crud.edit', [$ModelName, $item->getIdentifier()]) }}" class="btn btn-xs btn-default">
                                     {{ trans('crud::index.button.edit') }}
                                 </a>
                             </td>
@@ -82,18 +133,18 @@
                     </tbody>
                     <tfoot>
                     <tr>
-                        <td colspan="{{ count($MasterInstance->getListMapper()->getFields()) + 1 }}">
-                            <a href="{{ route('modal.delete', $name) }}" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#field-modal">
-                                {{ trans('crud::index.button.delete-selected', ['model' => $MasterInstance->getPluralName()]) }}
+                        <td colspan="{{ count($MasterInstance->getIndexPlanner()->getFields()) + 1 }}">
+                            <a href="{{ route('crud.modal.delete', $ModelName) }}" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#field-modal">
+                                {{ trans('crud::index.button.delete-selected', ['model' => $MasterInstance->getModelPluralName()]) }}
                             </a>
                         </td>
                         <td align="right">
-                            {{ $MasterInstance->getListBuilder()->getPaginator()->links() }}
+                            {{ $MasterInstance->getIndexBuilder()->getPaginator()->render() }}
                         </td>
                     </tr>
                     </tfoot>
                 </table>
-                {{ CRUDForm::close() }}
+                {!! CRUDForm::close() !!}
             </div>
 
             @if ($MasterInstance->getFilterBuilder()->getResult()->getFields())

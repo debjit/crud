@@ -18,8 +18,8 @@ class CRUDController extends OriginController
 {
     use DispatchesJobs, ValidatesRequests, AppNamespaceDetectorTrait;
 
-    private $nameSpace = null;
-    private $nameSpaceRoot = null;
+    private $nameSpace;
+    private $nameSpaceRoot;
 
     public function __construct() {
         $this->nameSpaceRoot = $this->getAppNamespace();
@@ -30,13 +30,13 @@ class CRUDController extends OriginController
      * Display a listing of the resource.
      *
      * @param string $modelName
-     * @return Response
+     * @return \Illuminate\View\View
      */
     public function index($modelName = '')
     {
         $modelNameWithNamespace = sprintf($this->nameSpace . '%sController', $modelName);;
 
-        $master = Master::getInstance($modelNameWithNamespace)->buildList();
+        $master = Master::getInstance($modelNameWithNamespace)->buildList()->buildFilters()->buildScopes();
 
 
         return view($master->getViewIndex(),[
@@ -48,7 +48,7 @@ class CRUDController extends OriginController
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -80,7 +80,7 @@ class CRUDController extends OriginController
      * Show the form for editing the specified resource.
      *
      * @param  int $id
-     * @return Response
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {

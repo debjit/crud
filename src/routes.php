@@ -25,6 +25,18 @@
         'uses'=>'BlackfyreStudio\CRUD\Controllers\CRUDController@edit'
     ]);
 
+    \Route::get('index/{model}/create', [
+        'as'=>'crud.create'
+    ]);
+
+    \Route::post('destroy', [
+        'as'=>'crud.multi-destroy'
+    ]);
+
+    \Route::get('/',[
+        'as'=>'crud.modal.delete'
+    ]);
+
     \Route::post('slugger',[
         'as'=>'crud.slugger',
         function() {

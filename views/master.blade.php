@@ -80,7 +80,16 @@
                 @include('crud::partials._session-messages')
             </div>
         </div>
-        @yield('content')
+        <div class="row">
+            <div class="col-sm-2">
+                @yield('sidebar')
+            </div>
+            <div class="col-sm-8">
+                @yield('content')
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+
     </div>
     <!-- /#page-wrapper -->
 

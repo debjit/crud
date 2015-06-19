@@ -8,8 +8,13 @@
 
 namespace BlackfyreStudio\CRUD;
 
+use BlackfyreStudio\CRUD\Builders\FilterBuilder;
 use BlackfyreStudio\CRUD\Builders\IndexBuilder;
+use BlackfyreStudio\CRUD\Builders\ScopeBuilder;
+use BlackfyreStudio\CRUD\Planner\FilterPlanner;
 use BlackfyreStudio\CRUD\Planner\IndexPlanner;
+use BlackfyreStudio\CRUD\Planner\ScopePlanner;
+use Config;
 use Illuminate\Support\Str;
 
 
@@ -33,14 +38,20 @@ class Master
      * @var int
      */
     protected $perPage = 25;
+    protected $filterPlanner;
+    protected $filterBuilder;
+    protected $scopePlanner;
+    protected $scopeBuilder;
+    protected $exportTypes;
 
     /**
      *
      */
-    public function __construct() {
+    public function __construct()
+    {
         if ($this->getModelBaseName() === null) {
             $re = "/^(.*)\\\\(\\w*)Controller$/";
-            $modelName = preg_replace($re,'$2',get_called_class());
+            $modelName = preg_replace($re, '$2', get_called_class());
             $this->setModelBaseName($modelName);
         }
 
@@ -205,7 +216,7 @@ class Master
     }
 
     /**
-     * Set the ListMapper object.
+     * Set the ListPlanner object.
      *
      * @param IndexPlanner $planner
      * @return IndexPlanner
@@ -221,7 +232,7 @@ class Master
     }
 
     /**
-     * Returns the ListMapper object.
+     * Returns the ListPlanner object.
      *
      * @access public
      * @return IndexPlanner
@@ -231,12 +242,14 @@ class Master
         return $this->indexPlanner;
     }
 
-    public function setIndexBuilder(IndexBuilder $builder) {
+    public function setIndexBuilder(IndexBuilder $builder)
+    {
         $this->indexBuilder = $builder;
         return $this;
     }
 
-    public function getIndexBuilder() {
+    public function getIndexBuilder()
+    {
         return $this->indexBuilder;
     }
 
@@ -275,5 +288,196 @@ class Master
     {
         $this->perPage = $perPage;
         return $this;
+    }
+
+    /**
+     * This function is called when configuring the filter view.
+     *
+     * @param  FilterPlanner $mapper
+     *
+     * @access public
+     * @return void
+     */
+    public function configureFilters($mapper)
+    {
+        // intentionally left blank
+    }
+
+    /**
+     * Configures the filter fields and builds the filter data from that.
+     *
+     * @access public
+     * @return Master
+     */
+    public function buildFilters()
+    {
+        $this->setFilterPlanner(new FilterPlanner());
+        $this->configureFilters($this->getFilterPlanner());
+        $this->setFilterBuilder(new FilterBuilder($this->getFilterPlanner()));
+        $this->getFilterBuilder()->build();
+        return $this;
+    }
+
+    /**
+     * Set the ListPlanner object.
+     *
+     * @param  FilterPlanner $mapper
+     *
+     * @access public
+     * @return Master
+     */
+    public function setFilterPlanner(FilterPlanner $mapper)
+    {
+        $this->filterPlanner = $mapper;
+        $mapper->setCRUDMasterInstance($this);
+        return $this;
+    }
+
+    /**
+     * Get the ListPlanner object.
+     *
+     * @access public
+     * @return FilterPlanner
+     */
+    public function getFilterPlanner()
+    {
+        return $this->filterPlanner;
+    }
+
+    /**
+     * Set the FilterBuilder object.
+     *
+     * @param  FilterBuilder $filterBuilder
+     *
+     * @access public
+     * @return Master
+     */
+    public function setFilterBuilder($filterBuilder)
+    {
+        $this->filterBuilder = $filterBuilder;
+        return $this;
+    }
+
+    /**
+     * Get the FilterBuilder object.
+     *
+     * @access public
+     * @return Master
+     */
+    public function getFilterBuilder()
+    {
+        return $this->filterBuilder;
+    }
+
+    /**
+     * This function is called when configuring the scopes view.
+     *
+     * @param  ScopePlanner $mapper
+     *
+     * @access public
+     * @return void
+     */
+    public function configureScopes($mapper)
+    {
+        // intentionally left blank
+    }
+    /**
+     * Configures the scopes and builds the scope data from that.
+     *
+     * @access public
+     * @return Master
+     */
+    public function buildScopes()
+    {
+        $this->setScopePlanner(new ScopePlanner());
+        $this->configureScopes($this->getScopePlanner());
+        $this->setScopeBuilder(new FilterBuilder($this->getScopePlanner()));
+        $this->getScopeBuilder()->build();
+        return $this;
+    }
+    /**
+     * Set the ScopePlanner object.
+     *
+     * @param  ScopePlanner $mapper
+     *
+     * @access public
+     * @return Master
+     */
+    public function setScopePlanner($mapper)
+    {
+        $this->scopePlanner = $mapper;
+        $mapper->setCRUDMasterInstance($this);
+        return $this;
+    }
+    /**
+     * Get the ScopePlanner object.
+     *
+     * @access public
+     * @return ScopePlanner
+     */
+    public function getScopePlanner()
+    {
+        return $this->scopePlanner;
+    }
+    /**
+     * Set the ScopeBuilder object.
+     *
+     * @param  FilterBuilder $scopeBuilder
+     *
+     * @access public
+     * @return Master
+     */
+    public function setScopeBuilder($scopeBuilder)
+    {
+        $this->scopeBuilder = $scopeBuilder;
+        return $this;
+    }
+    /**
+     * Get the ScopeBuilder object.
+     *
+     * @access public
+     * @return FilterBuilder
+     */
+    public function getScopeBuilder()
+    {
+        return $this->scopeBuilder;
+    }
+
+    /**
+     * Set the export types array.
+     *
+     * @param  array $exportTypes
+     *
+     * @access public
+     * @return Master
+     */
+    public function setExportTypes(array $exportTypes)
+    {
+        $this->exportTypes = $exportTypes;
+        return $this;
+    }
+    /**
+     * Get the export types array.
+     *
+     * @access public
+     * @return array
+     */
+    public function getExportTypes()
+    {
+        if (isset($this->exportTypes)) {
+            return $this->exportTypes;
+        }
+        return Config::get('crud.export-types');
+    }
+    /**
+     * Get a new export builder instance.
+     *
+     * @access public
+     * @return ExportBuilder
+     */
+    public function getExportBuilder()
+    {
+        return (new ExportBuilder())
+        ->setListBuilder($this->getListBuilder());
     }
 }
