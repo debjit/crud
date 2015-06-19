@@ -29,15 +29,19 @@ class CRUDController extends OriginController
     /**
      * Display a listing of the resource.
      *
+     * @param string $modelName
      * @return Response
      */
-    public function index($modelName)
+    public function index($modelName = '')
     {
-        $modelName = sprintf($this->nameSpace . '%sController', $modelName);;
+        $modelNameWithNamespace = sprintf($this->nameSpace . '%sController', $modelName);;
 
-        $model = Master::getInstance($modelName);
+        $master = Master::getInstance($modelNameWithNamespace);
 
-        dd($model);
+        return view($master->getViewIndex(),[
+            'ModelName'=>$modelName,
+            'MasterInstance'=>$master
+        ]);
     }
 
     /**

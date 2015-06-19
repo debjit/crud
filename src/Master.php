@@ -9,6 +9,7 @@
 namespace BlackfyreStudio\CRUD;
 
 use App\Http\Controllers\Crud\GalleryItemController;
+use Illuminate\Support\Str;
 
 
 /**
@@ -17,50 +18,156 @@ use App\Http\Controllers\Crud\GalleryItemController;
  */
 class Master
 {
-    /**
-     * @var null
-     */
-    protected $model;
+    protected $modelBaseName;
+    protected $viewLayout = 'crud::master';
+    protected $viewIndex = 'crud::layouts.index';
+    protected $viewCreate = 'crud::layouts.create';
+    protected $viewUpdate = 'crud::layouts.edit';
+    protected $modelSingularName;
+    protected $modelPluralName;
 
     /**
-     * @return null
+     *
      */
-    public function getModel()
-    {
-        return $this->model;
-    }
-
-    /**
-     * @param null $model
-     */
-    public function setModel($model)
-    {
-        $this->model = $model;
-    }
-
     public function __construct() {
-        if ($this->getModel() === null) {
-            $modelName = preg_replace('/Controller$/','',get_called_class());
-            $this->setModel($modelName);
+        if ($this->getModelBaseName() === null) {
+            $re = "/^(.*)\\\\(\\w*)Controller$/";
+            $modelName = preg_replace($re,'$2',get_called_class());
+            $this->setModelBaseName($modelName);
+        }
+
+        if ($this->getModelSingularName() === null) {
+            $this->setModelSingularName(Str::singular($this->getModelBaseName()));
+        }
+
+        if ($this->getModelPluralName() === null) {
+            $this->setModelPluralName(Str::plural($this->getModelBaseName()));
         }
     }
 
     /**
-     * Get a model instance
+     * @return null
+     */
+    public function getModelBaseName()
+    {
+        return $this->modelBaseName;
+    }
+
+    /**
+     * @param null $modelBaseName
+     */
+    public function setModelBaseName($modelBaseName)
+    {
+        $this->modelBaseName = $modelBaseName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getModelSingularName()
+    {
+        return $this->modelSingularName;
+    }
+
+    /**
+     * @param mixed $modelSingularName
+     */
+    public function setModelSingularName($modelSingularName)
+    {
+        $this->modelSingularName = $modelSingularName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getModelPluralName()
+    {
+        return $this->modelPluralName;
+    }
+
+    /**
+     * @param mixed $modelPluralName
+     */
+    public function setModelPluralName($modelPluralName)
+    {
+        $this->modelPluralName = $modelPluralName;
+    }
+
+    /**
+     * Get a CRUD instance
      *
-     * @param string $namespace The namespace of the class to be called
      * @param string $modelName
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return \BlackfyreStudio\CRUD\Master
      */
     public static function getInstance($modelName = '')
     {
-
-
         $model = new $modelName;
 
-        new GalleryItemController();
-
         return $model;
+    }
+
+    /**
+     * @return string
+     */
+    public function getViewLayout()
+    {
+        return $this->viewLayout;
+    }
+
+    /**
+     * @param string $viewLayout
+     */
+    public function setViewLayout($viewLayout)
+    {
+        $this->viewLayout = $viewLayout;
+    }
+
+    /**
+     * @return string
+     */
+    public function getViewIndex()
+    {
+        return $this->viewIndex;
+    }
+
+    /**
+     * @param string $viewIndex
+     */
+    public function setViewIndex($viewIndex)
+    {
+        $this->viewIndex = $viewIndex;
+    }
+
+    /**
+     * @return string
+     */
+    public function getViewCreate()
+    {
+        return $this->viewCreate;
+    }
+
+    /**
+     * @param string $viewCreate
+     */
+    public function setViewCreate($viewCreate)
+    {
+        $this->viewCreate = $viewCreate;
+    }
+
+    /**
+     * @return string
+     */
+    public function getViewUpdate()
+    {
+        return $this->viewUpdate;
+    }
+
+    /**
+     * @param string $viewUpdate
+     */
+    public function setViewUpdate($viewUpdate)
+    {
+        $this->viewUpdate = $viewUpdate;
     }
 
     /**

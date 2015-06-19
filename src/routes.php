@@ -20,6 +20,11 @@
         'uses'=>'BlackfyreStudio\CRUD\Controllers\CRUDController@index'
     ]);
 
+    \Route::get('index/{model}/edit/{id}',[
+        'as'=>'crud.edit',
+        'uses'=>'BlackfyreStudio\CRUD\Controllers\CRUDController@edit'
+    ]);
+
     \Route::post('slugger',[
         'as'=>'crud.slugger',
         function() {
