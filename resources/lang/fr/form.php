@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
  *
@@ -9,7 +10,19 @@
  */
 
 return [
-    'dashboard' => [
-        'title' => 'Dashboard'
-    ]
+
+	'title' => [
+		'edit-model'   => 'Modifier :model',
+		'create-model' => 'Ajouter un(e) :model'
+	],
+
+	'button' => [
+		'back-to-index' => 'Retour au :model',
+		'save'          => 'Enregistrer :model'
+	],
+
+	'modal' => [
+		'loading' => 'Chargement...'
+	]
+
 ];

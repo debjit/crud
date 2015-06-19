@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
  *
@@ -8,14 +9,27 @@
  * file that was distributed with this source code.
  */
 
- return [
-     'button' => [
-         'edit' => 'Edit',
-         'delete-selected' => 'Delete selected',
-         'overview'=> 'Overview',
-         'create-new'=> 'New'
-     ],
-     'sidebar'=> [
-         'export' => 'Export'
-     ]
- ];
+return [
+
+	'list-title'        => 'List :model',
+	'filter-title'      => 'Filter :model',
+	'browsing-filtered' => 'You are currently browsing filtered results.',
+	'no-filter-results' => 'The filter query did not return any results.',
+	'no-items-yet'      => 'You have no :model created yet.',
+
+	'button' => [
+		'create-new'      => 'Create new :model',
+		'reset-filters'   => 'Reset filters',
+		'edit'            => 'Edit',
+		'delete-selected' => 'Delete selected :model',
+		'reset'           => 'Reset',
+		'filter-submit'   => 'Filter :model',
+		'overview'        => 'Overview'
+	],
+
+	'sidebar' => [
+		'scopes' => 'Scopes',
+		'export' => 'Export ...'
+	]
+
+];
