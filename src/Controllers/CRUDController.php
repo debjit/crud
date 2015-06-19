@@ -36,7 +36,8 @@ class CRUDController extends OriginController
     {
         $modelNameWithNamespace = sprintf($this->nameSpace . '%sController', $modelName);;
 
-        $master = Master::getInstance($modelNameWithNamespace);
+        $master = Master::getInstance($modelNameWithNamespace)->buildList();
+
 
         return view($master->getViewIndex(),[
             'ModelName'=>$modelName,

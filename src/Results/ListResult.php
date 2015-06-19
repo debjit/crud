@@ -8,13 +8,8 @@
  * file that was distributed with this source code.
  */
 
-namespace BlackfyreStudio\CRUD\Planner;
+ namespace BlackfyreStudio\CRUD\Results;
 
-/**
- * Class IndexMapper
- * @package BlackfyreStudio\CRUD\Planner
- */
-class IndexPlanner extends BasePlanner
-{
+ class IndexResult extends BaseResult {
 
-}
+ }

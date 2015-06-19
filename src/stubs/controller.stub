@@ -1,35 +1,41 @@
-<?php namespace DummyRootNamespaceHttp\Controllers\Crud;
+<?php
+namespace DummyRootNamespaceHttp\Controllers\Crud;
 
 use BlackfyreStudio\CRUD\Master;
+use BlackfyreStudio\CRUD\Planner\IndexPlanner;
 
 /**
- * Class DummyClass
+ * Class GalleryItemController
  * @package DummyRootNamespaceHttp\Controllers\Crud
  */
-class DummyClass extends Master  {
+class DummyClass extends Master
+{
 
     /**
-      * This function is called when configuring the list view.
-      * @return void
-      */
-     public function listView() {
+     * This function is called when configuring the list view.
+     * @param IndexPlanner $planner
+     */
+    public function indexView(IndexPlanner $planner)
+    {
+        $planner->identifier('id');
+    }
 
-     }
+    /**
+     * This function is called when configuring the form view.
+     * @return void
+     */
+    public function formView()
+    {
 
-     /**
-      * This function is called when configuring the form view.
-      * @return void
-      */
-     public function formView() {
+    }
 
-     }
+    /**
+     * This function is called when configuring the filter view.
+     * @return void
+     */
+    public function filters()
+    {
 
-     /**
-      * This function is called when configuring the filter view.
-      * @return void
-      */
-     public function filters() {
-
-     }
+    }
 
 }

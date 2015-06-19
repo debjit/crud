@@ -8,7 +8,8 @@
 
 namespace BlackfyreStudio\CRUD;
 
-use App\Http\Controllers\Crud\GalleryItemController;
+use BlackfyreStudio\CRUD\Builders\IndexBuilder;
+use BlackfyreStudio\CRUD\Planner\IndexPlanner;
 use Illuminate\Support\Str;
 
 
@@ -25,6 +26,13 @@ class Master
     protected $viewUpdate = 'crud::layouts.edit';
     protected $modelSingularName;
     protected $modelPluralName;
+    protected $indexPlanner;
+    protected $indexBuilder;
+    /**
+     * Holds the number of items per page.
+     * @var int
+     */
+    protected $perPage = 25;
 
     /**
      *
@@ -172,12 +180,66 @@ class Master
 
     /**
      * This function is called when configuring the list view.
-     * @return void
+     * @param IndexPlanner $planner
      */
-    public function listView()
+    public function indexView(IndexPlanner $planner)
     {
 
     }
+
+    /**
+     * Configures the list fields and builds the list data from that.
+     *
+     * @access public
+     * @return $this
+     */
+    public function buildList()
+    {
+        $this->setIndexPlanner(new IndexPlanner());
+        $this->indexView($this->getIndexPlanner());
+        $this->setIndexBuilder(new IndexBuilder($this->getIndexPlanner()));
+        $this->getIndexBuilder()
+        ->setModel($this->getModelBaseName())
+        ->build();
+        return $this;
+    }
+
+    /**
+     * Set the ListMapper object.
+     *
+     * @param IndexPlanner $planner
+     * @return IndexPlanner
+     * @internal param IndexPlanner $mapper
+     *
+     * @access public
+     */
+    public function setIndexPlanner(IndexPlanner $planner)
+    {
+        $this->indexPlanner = $planner;
+        $planner->setCRUDMasterInstance($this);
+        return $this;
+    }
+
+    /**
+     * Returns the ListMapper object.
+     *
+     * @access public
+     * @return IndexPlanner
+     */
+    public function getIndexPlanner()
+    {
+        return $this->indexPlanner;
+    }
+
+    public function setIndexBuilder(IndexBuilder $builder) {
+        $this->indexBuilder = $builder;
+        return $this;
+    }
+
+    public function getIndexBuilder() {
+        return $this->indexBuilder;
+    }
+
 
     /**
      * This function is called when configuring the form view.
@@ -195,5 +257,23 @@ class Master
     public function filters()
     {
 
+    }
+
+    /**
+     * @return int
+     */
+    public function getPerPage()
+    {
+        return $this->perPage;
+    }
+
+    /**
+     * @param int $perPage
+     * @return $this
+     */
+    public function setPerPage($perPage)
+    {
+        $this->perPage = $perPage;
+        return $this;
     }
 }

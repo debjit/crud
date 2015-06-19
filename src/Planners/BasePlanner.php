@@ -51,7 +51,7 @@ class BasePlanner
     public function __call($type = '', array $arguments)
     {
         $name = array_shift($arguments);
-        $type = '\\BlackfyreStudio\\CRUD\\Fields\\' . Str::studly($type);
+        $type = '\\BlackfyreStudio\\CRUD\\Fields\\' . Str::studly($type) . 'Field';
         $field = new $type($name, $this->getCRUDMasterInstance());
 
         $this->fields[$name] = $field;

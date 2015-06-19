@@ -35,6 +35,20 @@ return [
         'datetime' => 'Y-m-d H:i:s'
     ],
 
+    'export-types' => [
+        'json',
+        'xml',
+        'csv',
+        'xls'
+    ],
+    /**
+     * How to serialize `multiple` fields.
+     *  - explode
+     *  - json
+     *  - serialize
+     */
+    'multiple-serializer' => 'json',
+
     /**
      * Additional, custom assets. They will be loaded after the main files, with the asset() helper, so the same rules apply.
      */
