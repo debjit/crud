@@ -35,10 +35,6 @@
         'uses'=>'BlackfyreStudio\CRUD\Controllers\CRUDController@multiDestroy'
     ]);
 
-    \Route::get('/',[
-        'as'=>'crud.modal.delete'
-    ]);
-
     \Route::get('/export/{model}/{type}',[
         'as'=>'crud.export',
         'uses'=>'BlackfyreStudio\CRUD\Controllers\CRUDController@export'
@@ -55,11 +51,11 @@
         'prefix'=>'modal'
     ], function() {
         \Route::get('modal/belongs_to/{model}/create', [
-            'as'   => 'modal.belongs_to.create',
+            'as'   => 'crud.modal.belongs_to.create',
             'uses' => 'KraftHaus\Bauhaus\Modal\FieldBelongsToController@create'
         ]);
         \Route::get('modal/delete/{model}', [
-            'as'   => 'modal.delete',
+            'as'   => 'crud.modal.delete',
             'uses' => 'BlackfyreStudio\CRUD\Controllers\ModalController@delete'
         ]);
     });

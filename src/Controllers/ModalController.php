@@ -26,7 +26,7 @@ class ModalController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for deleting a resource.
      *
      * @param  string $modelName
      *
@@ -38,7 +38,7 @@ class ModalController extends Controller
         $modelNameWithNamespace = sprintf($this->nameSpace . '%sController', $modelName);;
 
         $master = Master::getInstance($modelNameWithNamespace)->buildForm();
-        return view('krafthaus/bauhaus::models.modals.delete', [
+        return view('crud::modals.delete', [
             'name' => $modelName,
             'model' => $master
         ]);

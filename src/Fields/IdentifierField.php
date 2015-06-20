@@ -30,7 +30,7 @@ class IdentifierField extends BaseField
                 /*
                  * Remove unnecessary form-control class
                  */
-                str_replace('form-control', '', $this->attributes['class']);
+                $this->attributes['class'] = str_replace('form-control', '', $this->attributes['class']);
 
                 return view('crud::fields.identifier', [
                     'model' => $this->getMasterInstance()->getModelBaseName(),

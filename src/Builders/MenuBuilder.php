@@ -72,7 +72,7 @@ class MenuBuilder
     public static function build()
     {
 
-        $object = new self;
+        $menuBuilder = new self;
 
         $html = '';
         $html .= '<ul class="nav" id="side-menu">';
@@ -90,7 +90,7 @@ class MenuBuilder
         </li>
         ';
         $html .= sprintf('<li><a href="%s"><i class="fa fa-dashboard fa-fw"></i>  %s</a></li>', route('crud.home'), trans('crud::views.dashboard.title'));
-        $html .= $object->buildMenu($object->items);
+        $html .= $menuBuilder->buildMenu($menuBuilder->items);
         $html .= '</ul>';
         return $html;
     }
@@ -160,7 +160,7 @@ class MenuBuilder
             $url = '';
 
             if (isset($value['class'])) {
-                $url = route('admin.model.index', urlencode($value['class']));
+                $url = route('crud.index', urlencode($value['class']));
             } elseif (isset($value['url'])) {
                 $url = url($value['url']);
             } elseif (isset($value['route'])) {

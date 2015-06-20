@@ -1,1 +1,1 @@
-<strong>{{ link_to(route('crud.edit', [$model, $row]), $value, $attributes) }}</strong>
+<strong>{!! link_to(route('crud.edit', [$model, $row]), $value, $attributes) !!}</strong>

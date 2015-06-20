@@ -16,5 +16,21 @@ namespace BlackfyreStudio\CRUD\Planner;
  */
 class IndexPlanner extends BasePlanner
 {
+    /**
+     * Create an identifier column in the index view. It's usually the record ID
+     * @param string $name
+     * @return $this
+     */
+    public function identifier($name = '') {
+        return $this->call('identifier',$name);
+    }
 
+    /**
+     * Create a simple string in the index view
+     * @param string $name
+     * @return $this
+     */
+    public function string($name = '') {
+        return $this->call('string',$name);
+    }
 }

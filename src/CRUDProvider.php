@@ -125,9 +125,9 @@ class CRUDProvider extends ServiceProvider
         /*
          * Setting up config files for publishing
          */
-        $configPath = __DIR__ . '/../config/';
+        $configPath = __DIR__ . '/../config/crud.php';
         $this->publishes([$configPath => config_path('crud.php')], 'config');
-        $this->mergeConfigFrom($configPath . 'crud.php', 'crud');
+        $this->mergeConfigFrom($configPath, 'crud');
 
         /*
          * Setting up migrations for publishing

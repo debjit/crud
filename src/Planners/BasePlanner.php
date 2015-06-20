@@ -10,6 +10,8 @@
 
 namespace BlackfyreStudio\CRUD\Planner;
 
+use BlackfyreStudio\CRUD\Exceptions\PlannerException;
+use BlackfyreStudio\CRUD\Fields\BaseField;
 use Illuminate\Support\Str;
 
 /**
@@ -45,12 +47,20 @@ class BasePlanner
 
     /**
      * @param string $type
-     * @param array $arguments
+     * @param string $name
      * @return $this
      */
-    public function __call($type = '', array $arguments)
+    protected function call($type = '', $name = '')
     {
-        $name = array_shift($arguments);
+        if (empty($type)) {
+            throw new PlannerException('The field type is missing');
+        }
+
+        if (empty($name)) {
+            throw new PlannerException('The field name reference is missing');
+        }
+
+        /** @var BaseField $type */
         $type = '\\BlackfyreStudio\\CRUD\\Fields\\' . Str::studly($type) . 'Field';
         $field = new $type($name, $this->getCRUDMasterInstance());
 
