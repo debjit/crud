@@ -9,24 +9,38 @@ This package while is based on the Krafthaus/Bauhaus package, greatly differs on
 
 Contributions are welcome! Either as ideas or (preferably) pull requests :smile:
 
-## Tasklist
+## Work in progress
 
-* Laravel 5.1 LTS support
-* Working Scaffold command
 * Index view
-  * Bulk delete
-  * Bulk actions
-  * Boolean field actions per row
 * Create view
-* Edit view
 * Field types
   * Text
   * Email
-  * File
+  * File (DropzoneJS)
   * Image
   * Select
   * Belongs to
   * Numbers
+  * Markdown
+  * CKEditor
+
+
+## Tasklist
+
+
+* Edit view
+* Index view
+  * Bulk delete
+  * Bulk actions
+  * Boolean field actions per row
+*Field Types
+  * Image Crop
+
+
+## Done
+
+* Laravel 5.1 LTS support
+* Working Scaffold command
 
 ## Installation
 
