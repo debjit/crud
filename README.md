@@ -11,6 +11,7 @@ Contributions are welcome! Either as ideas or (preferably) pull requests :smile:
 
 ## Work in progress
 
+* IDE Support (with laravel-ide-helper, main angle on PHPStorm)
 * Index view
 * Create view
 * Field types
@@ -33,7 +34,9 @@ Contributions are welcome! Either as ideas or (preferably) pull requests :smile:
   * Bulk delete
   * Bulk actions
   * Boolean field actions per row
-*Field Types
+* Auth management
+  * Roles
+* Field Types
   * Image Crop
 
 
