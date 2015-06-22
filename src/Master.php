@@ -18,6 +18,7 @@ use BlackfyreStudio\CRUD\Planner\FormPlanner;
 use BlackfyreStudio\CRUD\Planner\IndexPlanner;
 use BlackfyreStudio\CRUD\Planner\ScopePlanner;
 use Config;
+use Illuminate\Console\AppNamespaceDetectorTrait;
 use Illuminate\Support\Str;
 
 
@@ -27,6 +28,9 @@ use Illuminate\Support\Str;
  */
 class Master
 {
+
+    use AppNamespaceDetectorTrait;
+
     protected $modelBaseName;
     protected $viewLayout = 'crud::master';
     protected $viewIndex = 'crud::layouts.index';
@@ -552,5 +556,17 @@ class Master
     public function getFormBuilder()
     {
         return $this->formBuilder;
+    }
+
+    /**
+     * Get the model table name.
+     *
+     * @access public
+     * @return mixed
+     */
+    public function getTable()
+    {
+        $model = $this->getAppNamespace() . $this->getModelBaseName();
+        return (new $model)->getTable();
     }
 }

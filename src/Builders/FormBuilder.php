@@ -247,17 +247,17 @@
      /**
       * Update a model from input.
       *
-      * @param \Input $input
+      * @param array $input
       *
       * @access public
       * @return FormBuilder
       */
-     public function update(\Input $input)
+     public function update($input)
      {
          $mapper = $this->getPlanner();
          $admin  = $mapper->getCRUDMasterInstance();
          /** @var Model $model */
-         $model = $this->getModel();
+         $model = $this->getAppNamespace() . $this->getModel();
          $this->setInput($input);
          // Field pre update
          /** @var BaseField $field */

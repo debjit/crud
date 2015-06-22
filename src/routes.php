@@ -25,6 +25,11 @@
         'uses'=>'BlackfyreStudio\CRUD\Controllers\CRUDController@edit'
     ]);
 
+    \Route::put('index/{model}/update/{id}',[
+        'as'=>'crud.update',
+        'uses'=>'BlackfyreStudio\CRUD\Controllers\CRUDController@update'
+    ]);
+
     \Route::get('index/{model}/create', [
         'as'=>'crud.create',
         'uses'=>'BlackfyreStudio\CRUD\Controllers\CRUDController@create'

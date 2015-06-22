@@ -25,7 +25,8 @@ class CRUDController extends OriginController
     private $nameSpace;
     private $nameSpaceRoot;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->nameSpaceRoot = $this->getAppNamespace();
         $this->nameSpace = $this->nameSpaceRoot . 'Http\\Controllers\\' . Config::get('crud.directory') . '\\';
     }
@@ -43,9 +44,9 @@ class CRUDController extends OriginController
         $master = Master::getInstance($modelNameWithNamespace)->buildList()->buildFilters()->buildScopes();
 
 
-        return view($master->getViewIndex(),[
-            'ModelName'=>$modelName,
-            'MasterInstance'=>$master
+        return view($master->getViewIndex(), [
+            'ModelName' => $modelName,
+            'MasterInstance' => $master
         ]);
     }
 
@@ -61,9 +62,9 @@ class CRUDController extends OriginController
 
         $master = Master::getInstance($modelNameWithNamespace)->buildForm();
 
-        return view($master->getViewCreate(),[
-            'ModelName'=>$modelName,
-            'MasterInstance'=>$master
+        return view($master->getViewCreate(), [
+            'ModelName' => $modelName,
+            'MasterInstance' => $master
         ]);
     }
 
@@ -95,7 +96,7 @@ class CRUDController extends OriginController
             return $modelNameWithNamespace->afterStore(Redirect::route('admin.model.index', $modelName));
         }
 
-        return Redirect::route('crud.index',[$modelName]);
+        return Redirect::route('crud.index', [$modelName]);
     }
 
     /**
@@ -112,23 +113,53 @@ class CRUDController extends OriginController
     /**
      * Show the form for editing the specified resource.
      *
+     * @param $modelName
      * @param  int $id
      * @return \Illuminate\View\View
      */
-    public function edit($id)
+    public function edit($modelName, $id)
     {
-        //
+        $modelNameWithNamespace = $this->namespaceModel($modelName);
+        $master = Master::getInstance($modelNameWithNamespace)->buildForm($id);
+
+        return view($master->getViewUpdate(), [
+            'ModelName' => $modelName,
+            'MasterInstance' => $master,
+            'id' => $id
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
+     * @param $name
      * @param  int $id
-     * @return Response
+     * @return $this|\Illuminate\Http\RedirectResponse
      */
-    public function update($id)
+    public function update($modelName, $id)
     {
-        //
+        $modelNameWithNamespace = $this->namespaceModel($modelName);
+        $model = Master::getInstance($modelNameWithNamespace);
+        $result = $model->buildForm($id)
+        ->getFormBuilder()
+        ->update(Input::all());
+        // Check validation errors
+        if (get_class($result) === 'Illuminate\Validation\Validator') {
+            Session::flash('message.error', trans('crud::messages.error.validation-errors'));
+            return Redirect::route('crud.edit', [$modelName, $id])
+            ->withInput()
+            ->withErrors($result);
+        }
+        // Set the flash message
+        Session::flash('message.success', trans('crud::messages.success.model-updated', [
+            'model' => $model->getModelSingularName()
+        ]));
+        // afterUpdate hook
+        if (method_exists($model, 'afterUpdate')) {
+            return $model->afterUpdate(Redirect::route('crud.index', $modelName));
+        }
+
+        return Redirect::route('crud.index', $modelName);
     }
 
     /**
@@ -174,11 +205,13 @@ class CRUDController extends OriginController
         return Redirect::route('admin.model.index', $name);
     }
 
-    public function export($name, $type) {
+    public function export($name, $type)
+    {
 
     }
 
-    private function namespaceModel($modelName = '') {
+    private function namespaceModel($modelName = '')
+    {
         $modelNameWithNamespace = sprintf($this->nameSpace . '%sController', $modelName);
 
         return $modelNameWithNamespace;
