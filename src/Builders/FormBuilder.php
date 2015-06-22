@@ -94,7 +94,7 @@
      public function build()
      {
          $formMapper = $this->getPlanner();
-         $model      = $this->getModel();
+         $model      = $this->getAppNamespace() . $this->getModel();
 
          /** @var Model $primaryKey */
          $primaryKey = (new $model)->getKeyName();
@@ -187,11 +187,11 @@
       * @return FormBuilder
       * @access public
       */
-     public function create(\Input $input)
+     public function create($input)
      {
          $mapper = $this->getPlanner();
          $admin  = $mapper->getCRUDMasterInstance();
-         $model      = $this->getModel();
+         $model      = $this->getAppNamespace() . $this->getModel();
          $primaryKey = (new $model)->getKeyName();
          $this->setInput($input);
          

@@ -213,10 +213,12 @@ abstract class BaseField
 
     /**
      * @param null|string $label
+     * @return $this
      */
     public function setLabel($label)
     {
         $this->label = $label;
+        return $this;
     }
 
     /**
@@ -274,9 +276,20 @@ abstract class BaseField
      * @param string $attribute
      * @return bool
      */
-    public function hasAttribute($attribute)
+    public function hasAttribute($attribute = '')
     {
-        return isset($this->attributes[$attribute]);
+        return array_key_exists($attribute,$this->attributes);
+    }
+
+    /**
+     * Return all the field attributes.
+     *
+     * @access public
+     * @return array
+     */
+    public function getAttributes()
+    {
+        return $this->attributes;
     }
 
     /**

@@ -80,7 +80,7 @@ class CRUDController extends OriginController
         $result = $master->buildForm()->getFormBuilder()->create(Input::all());
 
         // Check validation errors
-        if (get_class($result) == 'Illuminate\Validation\Validator') {
+        if (get_class($result) === 'Illuminate\Validation\Validator') {
             Session::flash('message.error', trans('crud::messages.error.validation-errors'));
             return Redirect::route('crud.create', [$modelName])
             ->withInput()

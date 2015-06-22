@@ -30,6 +30,11 @@
         'uses'=>'BlackfyreStudio\CRUD\Controllers\CRUDController@create'
     ]);
 
+    \Route::post('index/{model}/store', [
+        'as' => 'crud.store',
+        'uses'=>'BlackfyreStudio\CRUD\Controllers\CRUDController@store'
+    ]);
+
     \Route::post('destroy', [
         'as'=>'crud.multi-destroy',
         'uses'=>'BlackfyreStudio\CRUD\Controllers\CRUDController@multiDestroy'

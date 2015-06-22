@@ -48,6 +48,18 @@ class Master
     protected $exportTypes;
 
     /**
+     * Holds the FormPlanner class
+     * @var FormPlanner
+     */
+    protected $formPlanner;
+
+    /**
+     * Holds the FormBuilder class
+     * @var FormBuilder
+     */
+    protected $formBuilder;
+
+    /**
      *
      */
     public function __construct()
@@ -483,9 +495,10 @@ class Master
      */
     public function buildForm($identifier = null)
     {
-        $this->setFormMapper(new FormPlanner());
-        $this->formView($this->getFormMapper());
-        $this->setFormBuilder(new FormBuilder($this->getFormMapper()));
+        $this->setFormPlanner(new FormPlanner());
+        $this->formView($this->getFormPlanner());
+
+        $this->setFormBuilder(new FormBuilder($this->getFormPlanner()));
         $this->getFormBuilder()
         ->setModel($this->getModelBaseName())
         ->setIdentifier($identifier)
@@ -501,21 +514,21 @@ class Master
      * @access public
      * @return $this
      */
-    public function setFormMapper(FormPlanner $mapper)
+    public function setFormPlanner(FormPlanner $mapper)
     {
-        $this->formMapper = $mapper;
+        $this->formPlanner = $mapper;
         $mapper->setCRUDMasterInstance($this);
         return $this;
     }
     /**
-     * Get the FormMapper object.
+     * Get the FormPlanner object.
      *
      * @access public
-     * @return mixed
+     * @return FormPlanner
      */
-    public function getFormMapper()
+    public function getFormPlanner()
     {
-        return $this->formMapper;
+        return $this->formPlanner;
     }
     /**
      * Set the FormBuilder object.
@@ -523,7 +536,7 @@ class Master
      * @param  FormBuilder $builder
      *
      * @access public
-     * @return Admin
+     * @return Master
      */
     public function setFormBuilder(FormBuilder $builder)
     {

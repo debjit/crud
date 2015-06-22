@@ -1,12 +1,17 @@
+<?php
+/**
+ * @var \BlackfyreStudio\CRUD\Fields\TextField $field
+ */
+?>
 <div class="form-group {{ $errors->has($field->getName()) ? 'has-error' : '' }}">
     <label class="col-sm-3 control-label">{{ $field->getLabel() }}</label>
     <div class="col-sm-9">
 
-        @if ($field->isMultiple())
+        @if ($field->checkIfMultiple())
             @foreach ($field->getValue() as $key => $value)
                 <div class="row" data-multiply>
                     <div class="col-sm-11">
-                        {{ CRUDForm::text($field->getName() . '[]', $value, $field->getAttributes()) }}
+                        {!! CRUDForm::text($field->getName() . '[]', $value, $field->getAttributes()) !!}
                     </div>
                     <div class="col-sm-1">
                         <div class="field-infinite">
@@ -22,7 +27,7 @@
                 </div>
             @endforeach
         @else
-            {{ CRUDForm::text($field->getName(), $field->getValue(), $field->getAttributes()) }}
+            {!! CRUDForm::text($field->getName(), $field->getValue(), $field->getAttributes()) !!}
         @endif
 
         @if ($field->getDescription())

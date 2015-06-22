@@ -9,9 +9,6 @@
  */
 
 namespace BlackfyreStudio\CRUD\Planner;
-use BlackfyreStudio\CRUD\Fields\BaseField;
-use BlackfyreStudio\CRUD\Fields\IdentifierField;
-use BlackfyreStudio\CRUD\Fields\StringField;
 
 /**
  * Class IndexMapper
@@ -22,7 +19,7 @@ class IndexPlanner extends BasePlanner
     /**
      * Create an identifier column in the index view. It's usually the record ID
      * @param string $name
-     * @return IdentifierField
+     * @return \BlackfyreStudio\CRUD\Fields\IdentifierField
      */
     public function identifier($name = '') {
         return $this->call('identifier',$name);
@@ -31,7 +28,7 @@ class IndexPlanner extends BasePlanner
     /**
      * Create a simple string in the index view
      * @param string $name
-     * @return StringField
+     * @return \BlackfyreStudio\CRUD\Fields\StringField
      */
     public function string($name = '') {
         return $this->call('string',$name);
@@ -39,7 +36,7 @@ class IndexPlanner extends BasePlanner
 
     /**
      * @param string $name
-     * @return BaseField
+     * @return \BlackfyreStudio\CRUD\Fields\BaseField
      */
     public function boolean($name='') {
         return $this->call('boolean',$name);
@@ -47,7 +44,7 @@ class IndexPlanner extends BasePlanner
 
     /**
      * @param string $name
-     * @return BaseField
+     * @return \BlackfyreStudio\CRUD\Fields\BaseField
      */
     public function image($name='') {
         return $this->call('image',$name);
@@ -55,7 +52,7 @@ class IndexPlanner extends BasePlanner
 
     /**
      * @param string $name
-     * @return BaseField
+     * @return \BlackfyreStudio\CRUD\Fields\BaseField
      */
     public function select($name='') {
         return $this->call('select',$name);

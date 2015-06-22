@@ -112,11 +112,11 @@ abstract class BaseBuilder
     /**
      * Set the input for the builder from the Laravel input object.
      *
-     * @param Input $input
+     * @param array $input
      * @return BaseBuilder
      * @access public
      */
-    public function setInput(Input $input)
+    public function setInput($input)
     {
         $this->input = $input;
         return $this;

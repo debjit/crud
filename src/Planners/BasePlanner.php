@@ -60,7 +60,7 @@ class BasePlanner
             throw new PlannerException('The field name reference is missing');
         }
 
-        /** @var BaseField $type */
+        /** @var BaseField $field */
         $type = '\\BlackfyreStudio\\CRUD\\Fields\\' . Str::studly($type) . 'Field';
         $field = new $type($name, $this->getCRUDMasterInstance());
 
