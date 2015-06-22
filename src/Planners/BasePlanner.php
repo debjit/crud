@@ -48,7 +48,7 @@ class BasePlanner
     /**
      * @param string $type
      * @param string $name
-     * @return $this
+     * @return BaseField
      */
     protected function call($type = '', $name = '')
     {
@@ -66,7 +66,7 @@ class BasePlanner
 
         $this->fields[$name] = $field;
 
-        return $this;
+        return $field;
     }
 
     /**

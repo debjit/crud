@@ -10,6 +10,8 @@
 
  namespace BlackfyreStudio\CRUD\Builders;
 
+ use BlackfyreStudio\CRUD\Builders\ExportFormat\BaseFormat;
+
  class ExportBuilder {
 
      /**
@@ -50,9 +52,11 @@
       */
      public function export($type)
      {
-         $format = sprintf('\\KraftHaus\\Bauhaus\\Export\\Format\\%sFormat', ucfirst($type));
+         $format = sprintf('\\BlackfyreStudio\\CRUD\\Builders\\ExportFormat\\%sFormat', ucfirst($type));
+
+         /** @var BaseFormat $format */
          return (new $format)
-         ->setListBuilder($this->getIndexBuilder())
+         ->setIndexBuilder($this->getIndexBuilder())
          ->export();
      }
  }

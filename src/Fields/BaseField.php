@@ -424,7 +424,7 @@ abstract class BaseField
     }
 
     /**
-     * @return mixed
+     * @return Closure
      */
     public function getSaving()
     {

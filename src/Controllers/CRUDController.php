@@ -9,6 +9,7 @@
 namespace BlackfyreStudio\CRUD\Controllers;
 
 use BlackfyreStudio\CRUD\Master;
+use Config;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as OriginController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -26,7 +27,7 @@ class CRUDController extends OriginController
 
     public function __construct() {
         $this->nameSpaceRoot = $this->getAppNamespace();
-        $this->nameSpace = $this->nameSpaceRoot . 'Http\\Controllers\\' . \Config::get('crud.directory') . '\\';
+        $this->nameSpace = $this->nameSpaceRoot . 'Http\\Controllers\\' . Config::get('crud.directory') . '\\';
     }
 
     /**
@@ -37,7 +38,7 @@ class CRUDController extends OriginController
      */
     public function index($modelName = '')
     {
-        $modelNameWithNamespace = sprintf($this->nameSpace . '%sController', $modelName);;
+        $modelNameWithNamespace = $this->namespaceModel($modelName);
 
         $master = Master::getInstance($modelNameWithNamespace)->buildList()->buildFilters()->buildScopes();
 
@@ -51,21 +52,50 @@ class CRUDController extends OriginController
     /**
      * Show the form for creating a new resource.
      *
+     * @param string $modelName
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function create($modelName = '')
     {
-        //
+        $modelNameWithNamespace = $this->namespaceModel($modelName);
+
+        $master = Master::getInstance($modelNameWithNamespace)->buildForm();
+
+        return view($master->getViewCreate(),[
+            'ModelName'=>$modelName,
+            'MasterInstance'=>$master
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @return Response
+     * @param string $modelName
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store()
+    public function store($modelName = '')
     {
-        //
+        $modelNameWithNamespace = $this->namespaceModel($modelName);
+        $master = Master::getInstance($modelNameWithNamespace);
+        $result = $master->buildForm()->getFormBuilder()->create(Input::all());
+
+        // Check validation errors
+        if (get_class($result) == 'Illuminate\Validation\Validator') {
+            Session::flash('message.error', trans('crud::messages.error.validation-errors'));
+            return Redirect::route('crud.create', [$modelName])
+            ->withInput()
+            ->withErrors($result);
+        }
+        // Set the flash message
+        Session::flash('message.success', trans('crud::messages.success.model-created', [
+            'model' => $master->getModelSingularName()
+        ]));
+        // afterStore hook
+        if (method_exists($modelNameWithNamespace, 'afterStore')) {
+            return $modelNameWithNamespace->afterStore(Redirect::route('admin.model.index', $modelName));
+        }
+
+        return Redirect::route('crud.index',[$modelName]);
     }
 
     /**
@@ -146,6 +176,12 @@ class CRUDController extends OriginController
 
     public function export($name, $type) {
 
+    }
+
+    private function namespaceModel($modelName = '') {
+        $modelNameWithNamespace = sprintf($this->nameSpace . '%sController', $modelName);
+
+        return $modelNameWithNamespace;
     }
 
 }

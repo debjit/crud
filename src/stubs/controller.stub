@@ -22,18 +22,27 @@ class DummyClass extends Master
 
     /**
      * This function is called when configuring the form view.
-     * @return void
+     * @param FormPlanner $planner
      */
-    public function formView()
+    public function formView(FormPlanner $planner)
     {
 
     }
 
     /**
      * This function is called when configuring the filter view.
-     * @return void
+     * @param FilterPlanner $planner
      */
-    public function filters()
+    public function filters(FilterPlanner $planner)
+    {
+
+    }
+
+    /**
+     * This function is called when configuring the scope view.
+     * @param ScopePlanner $planner
+     */
+    public function scopes(ScopePlanner $planner)
     {
 
     }

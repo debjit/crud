@@ -8,10 +8,13 @@
 
 namespace BlackfyreStudio\CRUD;
 
+use BlackfyreStudio\CRUD\Builders\ExportBuilder;
 use BlackfyreStudio\CRUD\Builders\FilterBuilder;
+use BlackfyreStudio\CRUD\Builders\FormBuilder;
 use BlackfyreStudio\CRUD\Builders\IndexBuilder;
 use BlackfyreStudio\CRUD\Builders\ScopeBuilder;
 use BlackfyreStudio\CRUD\Planner\FilterPlanner;
+use BlackfyreStudio\CRUD\Planner\FormPlanner;
 use BlackfyreStudio\CRUD\Planner\IndexPlanner;
 use BlackfyreStudio\CRUD\Planner\ScopePlanner;
 use Config;
@@ -208,7 +211,9 @@ class Master
     {
         $this->setIndexPlanner(new IndexPlanner());
         $this->indexView($this->getIndexPlanner());
+
         $this->setIndexBuilder(new IndexBuilder($this->getIndexPlanner()));
+
         $this->getIndexBuilder()
         ->setModel($this->getModelBaseName())
         ->build();
@@ -248,6 +253,9 @@ class Master
         return $this;
     }
 
+    /**
+     * @return IndexBuilder
+     */
     public function getIndexBuilder()
     {
         return $this->indexBuilder;
@@ -256,18 +264,18 @@ class Master
 
     /**
      * This function is called when configuring the form view.
-     * @return void
+     * @param FormPlanner $planner
      */
-    public function formView()
+    public function formView(FormPlanner $planner)
     {
 
     }
 
     /**
      * This function is called when configuring the filter view.
-     * @return void
+     * @param FilterPlanner $planner
      */
-    public function filters()
+    public function filters(FilterPlanner $planner)
     {
 
     }
@@ -291,19 +299,6 @@ class Master
     }
 
     /**
-     * This function is called when configuring the filter view.
-     *
-     * @param  FilterPlanner $mapper
-     *
-     * @access public
-     * @return void
-     */
-    public function configureFilters($mapper)
-    {
-        // intentionally left blank
-    }
-
-    /**
      * Configures the filter fields and builds the filter data from that.
      *
      * @access public
@@ -312,7 +307,7 @@ class Master
     public function buildFilters()
     {
         $this->setFilterPlanner(new FilterPlanner());
-        $this->configureFilters($this->getFilterPlanner());
+        $this->filters($this->getFilterPlanner());
         $this->setFilterBuilder(new FilterBuilder($this->getFilterPlanner()));
         $this->getFilterBuilder()->build();
         return $this;
@@ -362,7 +357,7 @@ class Master
      * Get the FilterBuilder object.
      *
      * @access public
-     * @return Master
+     * @return FilterBuilder
      */
     public function getFilterBuilder()
     {
@@ -372,12 +367,11 @@ class Master
     /**
      * This function is called when configuring the scopes view.
      *
-     * @param  ScopePlanner $mapper
+     * @param ScopePlanner $planner
      *
      * @access public
-     * @return void
      */
-    public function configureScopes($mapper)
+    public function scopes(ScopePlanner $planner)
     {
         // intentionally left blank
     }
@@ -390,7 +384,7 @@ class Master
     public function buildScopes()
     {
         $this->setScopePlanner(new ScopePlanner());
-        $this->configureScopes($this->getScopePlanner());
+        $this->scopes($this->getScopePlanner());
         $this->setScopeBuilder(new FilterBuilder($this->getScopePlanner()));
         $this->getScopeBuilder()->build();
         return $this;
@@ -477,7 +471,73 @@ class Master
      */
     public function getExportBuilder()
     {
-        return (new ExportBuilder())
-        ->setListBuilder($this->getListBuilder());
+        return (new ExportBuilder())->setIndexBuilder($this->getIndexBuilder());
+    }
+
+    /**
+     * Configures the list fields and builds the list data from that.
+     *
+     * @access public
+     * @param null $identifier
+     * @return $this
+     */
+    public function buildForm($identifier = null)
+    {
+        $this->setFormMapper(new FormPlanner());
+        $this->formView($this->getFormMapper());
+        $this->setFormBuilder(new FormBuilder($this->getFormMapper()));
+        $this->getFormBuilder()
+        ->setModel($this->getModelBaseName())
+        ->setIdentifier($identifier)
+        ->setContext($identifier === null ? FormBuilder::CONTEXT_CREATE : FormBuilder::CONTEXT_EDIT)
+        ->build();
+        return $this;
+    }
+    /**
+     * Set the FormMapper object.
+     *
+     * @param  FormPlanner $mapper
+     *
+     * @access public
+     * @return $this
+     */
+    public function setFormMapper(FormPlanner $mapper)
+    {
+        $this->formMapper = $mapper;
+        $mapper->setCRUDMasterInstance($this);
+        return $this;
+    }
+    /**
+     * Get the FormMapper object.
+     *
+     * @access public
+     * @return mixed
+     */
+    public function getFormMapper()
+    {
+        return $this->formMapper;
+    }
+    /**
+     * Set the FormBuilder object.
+     *
+     * @param  FormBuilder $builder
+     *
+     * @access public
+     * @return Admin
+     */
+    public function setFormBuilder(FormBuilder $builder)
+    {
+        $this->formBuilder = $builder;
+        return $this;
+    }
+    /**
+     * Get the FormBuilder object.
+     *
+     * @access public
+     * @return FormBuilder
+     */
+    public function getFormBuilder()
+    {
+        return $this->formBuilder;
     }
 }
