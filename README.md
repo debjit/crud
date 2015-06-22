@@ -12,7 +12,6 @@ Contributions are welcome! Either as ideas or (preferably) pull requests :smile:
 ## Work in progress
 
 * IDE Support (with laravel-ide-helper, main angle on PHPStorm)
-* Edit view
 * Field types
   * Text
   * Email
@@ -44,6 +43,7 @@ Contributions are welcome! Either as ideas or (preferably) pull requests :smile:
 * Working Scaffold command
 * Index view
 * Create view
+* Edit view
 
 ## Installation
 
