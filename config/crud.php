@@ -17,7 +17,15 @@ return [
      * The package main title.
      * @var string
      */
-    'title'=>'BlackfyreStudio/CRUD',
+    'title'=>[
+        'long'=>'BlackfyreStudio/CRUD',
+        'short'=>'CRUD'
+    ],
+
+    'company'=>[
+        'name'=>'BlacfyreStudio',
+        'link'=>'https://github.com/BlackfyreStudio'
+    ],
 
     /**
      * The directory where the crud models are located.
@@ -56,5 +64,11 @@ return [
         'stylesheets' => [],
         'javascript' => []
     ],
-    'menu'=>[]
+    'menu'=>[
+        [
+            'title'=>'Gallery Items',
+            'class'=>'GalleryItem',
+            'icon'=>'picture-o'
+        ]
+    ]
 ];

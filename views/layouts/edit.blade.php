@@ -1,4 +1,4 @@
-@extends('crud::master')
+@extends('crud::master-no-control')
 
 @section('subheader')
     <div class="row">
@@ -8,6 +8,17 @@
         <!-- /.col-lg-12 -->
     </div>
     <!-- /.row -->
+    <section class="content-header">
+        <h1>
+            {{ trans('crud::form.title.edit-model', ['model' => $MasterInstance->getModelSingularName()]) }}
+            <small></small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="{{URL::route('crud.home')}}"><i class="fa fa-dashboard"></i> {{trans('crud::views.dashboard.title')}}</a></li>
+            <li><a href="{{ route('crud.index', $ModelName) }}"><i class="fa fa-list"></i> {{ trans('crud::index.list-title', ['model' => $MasterInstance->getModelPluralName()]) }}</a></li>
+            <li class="active"><i class="fa fa-edit"></i>  {{ trans('crud::form.title.edit-model', ['model' => $MasterInstance->getModelSingularName()]) }}</li>
+        </ol>
+    </section>
 @stop
 
 @section('sidebar')

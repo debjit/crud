@@ -1,107 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
+@include('crud::partials._header')
 
-<head>
+<div class="wrapper">
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    @include('crud::partials._nav')
 
-    <title>{{Config::get('crud.title')}}</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="{{asset('vendor/blackfyrestudio/crud/styles/sb-admin-2.min.css')}}" rel="stylesheet">
-
-    @foreach (Config::get('crud.assets.stylesheets') as $stylesheet)
-        <link rel="stylesheet" href="{{ asset($stylesheet) }}">
-    @endforeach
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
-
-<body>
-
-<div id="wrapper">
-
-    <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{{URL::route('crud.home')}}">{{Config::get('crud.title')}}</a>
-        </div>
-        <!-- /.navbar-header -->
-
-        <ul class="nav navbar-top-links navbar-right">
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-user">
-                    <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                    </li>
-                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                    </li>
-                </ul>
-                <!-- /.dropdown-user -->
-            </li>
-            <!-- /.dropdown -->
-        </ul>
-        <!-- /.navbar-top-links -->
-
-        <div class="navbar-default sidebar" role="navigation">
-            <div class="sidebar-nav navbar-collapse">
-                {!! BlackfyreStudio\CRUD\Builders\MenuBuilder::build() !!}
-            </div>
-            <!-- /.sidebar-collapse -->
-        </div>
-        <!-- /.navbar-static-side -->
-    </nav>
-
-    <div id="page-wrapper">
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
         @yield('subheader')
-        <div class="row">
-            <div class="col-xs-12">
-                @include('crud::partials._session-messages')
+
+        <!-- Main content -->
+        <section class="content">
+
+            <!-- Session notifications -->
+            <div class="row">
+                <div class="col-xs-12">
+                    @include('crud::partials._session-messages')
+                </div>
             </div>
+
+            <!-- Page Content -->
+            @yield('content')
+
+        </section><!-- /.content -->
+    </div><!-- /.content-wrapper -->
+
+    <!-- Main Footer -->
+    <footer class="main-footer">
+        <!-- Default to the left -->
+        <strong>Copyright &copy; 2015 <a target="_blank" href="{{Config::get('crud.company.link')}}">{{Config::get('crud.company.name')}}</a>.</strong> All rights reserved.
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Create the tabs -->
+        <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+            <li class="active"><a href="#control-sidebar-filter-tab" data-toggle="tab"><i class="fa fa-filter"></i></a></li>
+            <li><a href="#control-sidebar-scopes-tab" data-toggle="tab"><i class="fa fa-crosshairs"></i></a></li>
+            <li><a href="#control-sidebar-export-tab" data-toggle="tab"><i class="fa fa-download"></i></a></li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <!-- Home tab content -->
+            <div class="tab-pane active" id="control-sidebar-filter-tab">
+                <h3 class="control-sidebar-heading">Filters</h3>
+                @yield('filters')
+                <a href="#" class="btn btn-info btn-block" data-toggle="control-sidebar">Close</a>
+            </div><!-- /.tab-pane -->
+            <!-- Settings tab content -->
+            <div class="tab-pane" id="control-sidebar-scopes-tab">
+                <h3 class="control-sidebar-heading">Scopes</h3>
+                @yield('scopes')
+                <a href="#" class="btn btn-info btn-block" data-toggle="control-sidebar">Close</a>
+            </div><!-- /.tab-pane -->
+            <div class="tab-pane" id="control-sidebar-export-tab">
+                <h3 class="control-sidebar-heading">Export</h3>
+                @yield('export')
+                <a href="#" class="btn btn-info btn-block" data-toggle="control-sidebar">Close</a>
+            </div><!-- /.tab-pane -->
         </div>
-        <div class="row">
-            <div class="col-sm-2">
-                @yield('sidebar')
-            </div>
-            <div class="col-sm-8">
-                @yield('content')
-            </div>
-            <div class="col-sm-2"></div>
-        </div>
+    </aside><!-- /.control-sidebar -->
+    <!-- Add the sidebar's background. This div must be placed
+         immediately after the control sidebar -->
+    <div class='control-sidebar-bg'></div>
+</div><!-- ./wrapper -->
 
-    </div>
-    <!-- /#page-wrapper -->
+@include('crud::partials._footer')
 
-</div>
-<!-- /#wrapper -->
-
-<script src="{{asset('vendor/blackfyrestudio/crud/scripts/admin.min.js')}}"></script>
-
-@foreach (Config::get('crud.assets.javascript') as $javascript)
-    <script src="{{ asset($javascript) }}"></script>
-@endforeach
-
-</body>
-
-</html>

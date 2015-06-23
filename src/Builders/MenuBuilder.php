@@ -75,21 +75,8 @@ class MenuBuilder
         $menuBuilder = new self;
 
         $html = '';
-        $html .= '<ul class="nav" id="side-menu">';
-        $html .= '
-        <li class="sidebar-search">
-            <div class="input-group custom-search-form">
-                <input type="text" class="form-control" placeholder="Search...">
-                <span class="input-group-btn">
-                <button class="btn btn-default" type="button">
-                    <i class="fa fa-search"></i>
-                </button>
-            </span>
-            </div>
-            <!-- /input-group -->
-        </li>
-        ';
-        $html .= sprintf('<li><a href="%s"><i class="fa fa-dashboard fa-fw"></i>  %s</a></li>', route('crud.home'), trans('crud::views.dashboard.title'));
+        $html .= '<ul class="sidebar-menu" id="side-menu">';
+        $html .= sprintf('<li><a href="%s"><i class="fa fa-dashboard fa-fw"></i>  <span>%s</span></a></li>', route('crud.home'), trans('crud::views.dashboard.title'));
         $html .= $menuBuilder->buildMenu($menuBuilder->items);
         $html .= '</ul>';
         return $html;
@@ -108,75 +95,61 @@ class MenuBuilder
 
         /* TODO: Find/Create suitable permission manager */
 
+        /* TODO: Permission management */
+
+        /* TODO: modify html for the new template */
+
         $html = '';
-        /*
-        $user = \Sentry::getUser();
-        */
-        foreach ($menu as $value) {
 
-            /*
-                Check if the current item should be filtered by permissions
-                If there's a permission requirement we check it, if fails we skip this iteration
-            */
+        foreach ($menu as $key=>$value) {
 
-            /*
-            if (isset($value['permission'])) {
-                if (is_array($value['permission'])) {
-                    $permissions = [];
-                    foreach ($value['permission'] as $p) {
-                        $p = str_replace('.','-',$p);
-                        $permissions[] = $p;
-                        $permissions[] = $p . '.read';
-                    }
-                    if (!$user->hasAnyAccess($permissions)) {
-                        continue;
-                    }
-                } else {
-                    if (!$user->hasAnyAccess([$value['permission'],$value['permission'].'.view'])) {
-                        continue;
-                    }
+            if ($key === 'separator') {
+
+                $html .= '<li class="header">' . $value . '</li>';
+
+            } else {
+
+
+                $icon = '';
+
+                if (array_key_exists('icon',$value)) {
+                    $icon = sprintf('<i class="fa fa-%s"></i>&nbsp;', $value['icon']);
                 }
-            }
-            */
 
-            /* TODO: modify html for the new template */
-
-            $icon = '';
-            if (isset($value['icon'])) {
-                $icon = sprintf('<i class="fa fa-%s"></i>&nbsp;', $value['icon']);
-            }
-
-            if (isset($value['children'])) {
-                $html .= '<li>';
-                $html .= sprintf('<a href="#">%s%s<span class="fa arrow"></span></a>', $icon, $value['title']);
-                $html .= '<ul class="nav">';
-                $html .= $this->buildMenu($value['children']);
-                $html .= '</ul>';
-                $html .= '</li>';
-                continue;
-            }
-
-
-            $url = '';
-
-            if (isset($value['class'])) {
-                $url = route('crud.index', urlencode($value['class']));
-            } elseif (isset($value['url'])) {
-                $url = url($value['url']);
-            } elseif (isset($value['route'])) {
-                $url = route($value['route']);
-            }
-
-            $custom = '';
-
-            if (isset($value['custom']) && is_array($value['custom'])) {
-                foreach ($value['custom'] AS $k=>$v) {
-                    $custom[] = $k . '="' . $v . '"';
+                if (array_key_exists('children',$value)) {
+                    $html .= '<li>';
+                    $html .= sprintf('<a href="#">%s%s<i class="fa fa-angle-left pull-right"></i></a>', $icon, $value['title']);
+                    $html .= '<ul class="treeview-menu">';
+                    $html .= $this->buildMenu($value['children']);
+                    $html .= '</ul>';
+                    $html .= '</li>';
+                    continue;
                 }
-                $custom = implode(' ', $custom);
+
+
+                $url = '';
+
+                if (array_key_exists('class',$value)) {
+                    $url = route('crud.index', urlencode($value['class']));
+                } elseif (array_key_exists('url',$value)) {
+                    $url = url($value['url']);
+                } elseif (array_key_exists('route',$value)) {
+                    $url = route($value['route']);
+                }
+
+                $custom = '';
+
+                if (array_key_exists('custom',$value) && is_array($value['custom'])) {
+                    foreach ($value['custom'] AS $k=>$v) {
+                        $custom[] = $k . '="' . $v . '"';
+                    }
+                    $custom = implode(' ', $custom);
+                }
+
+                $html .= sprintf('<li><a href="%s" %s>%s<span>%s</span></a></li>', $url, $custom, $icon, $value['title']);
             }
 
-            $html .= sprintf('<li><a href="%s" %s>%s%s</a></li>', $url, $custom, $icon, $value['title']);
+
         }
         return $html;
     }

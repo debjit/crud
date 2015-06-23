@@ -99,6 +99,10 @@ class FormPlanner extends BasePlanner
         return $this->call('select',$name);
     }
 
+    public function markdown($name='') {
+        return $this->call('markdown',$name);
+    }
+
     /**
      * Check if this mapper has tabs.
      *

@@ -1,13 +1,17 @@
-@extends('crud::master')
+@extends('crud::master-no-control')
 
 @section('subheader')
-    <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">{{ trans('crud::form.title.create-model', ['model' => $MasterInstance->getModelSingularName()]) }}</h1>
-        </div>
-        <!-- /.col-lg-12 -->
-    </div>
-    <!-- /.row -->
+    <section class="content-header">
+        <h1>
+            {{ trans('crud::form.title.create-model', ['model' => $MasterInstance->getModelSingularName()]) }}
+            <small></small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="{{URL::route('crud.home')}}"><i class="fa fa-dashboard"></i> {{trans('crud::views.dashboard.title')}}</a></li>
+            <li><a href="{{ route('crud.index', $ModelName) }}"><i class="fa fa-list"></i> {{ trans('crud::index.list-title', ['model' => $MasterInstance->getModelPluralName()]) }}</a></li>
+            <li class="active"><i class="fa fa-plus"></i>  {{ trans('crud::form.title.create-model', ['model' => $MasterInstance->getModelSingularName()]) }}</li>
+        </ol>
+    </section>
 @stop
 
 @section('sidebar')
@@ -28,9 +32,7 @@
 @stop
 
 @section('content')
-
     {!! CRUDForm::open(['route' => ['crud.store', $ModelName], 'class' => 'form-horizontal', 'files' => true]) !!}
     @include('crud::partials._form')
     {!! CRUDForm::close() !!}
-
 @stop

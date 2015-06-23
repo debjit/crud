@@ -1,0 +1,12 @@
+/* Template base */
+
+$icon-font-path: '../fonts/';
+
+@import "../bower/bootstrap-sass-official/assets/stylesheets/bootstrap";
+@import "../bower/font-awesome/scss/font-awesome";
+@import "../bower/admin-lte.scss/scss/admin-lte";
+@import "template/_skin-green";
+
+/* Vendor imports */
+@import "vendor/bootstrap-markdown";
+@import "vendor/icheck-square";

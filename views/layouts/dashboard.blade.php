@@ -1,13 +1,15 @@
-@extends('crud::master')
+@extends('crud::master-no-control')
 
 @section('subheader')
-    <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">{{trans('crud::views.dashboard.title')}}</h1>
-        </div>
-        <!-- /.col-lg-12 -->
-    </div>
-    <!-- /.row -->
+    <section class="content-header">
+        <h1>
+            {{trans('crud::views.dashboard.title')}}
+            <small></small>
+        </h1>
+        <ol class="breadcrumb">
+            <li class="active"><i class="fa fa-dashboard"></i> {{trans('crud::views.dashboard.title')}}</li>
+        </ol>
+    </section>
 @stop
 
 @section('content')
