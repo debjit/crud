@@ -67,16 +67,16 @@
                 <div class="panel panel-default">
                     <div class="panel-body text-center">
                         @if (Input::has('_filtering'))
-                            <p>{{ trans('crud::index.no-filter-results', ['model' => $MasterInstance->getPluralName()]) }}</p>
+                            <p>{{ trans('crud::index.no-filter-results', ['model' => $MasterInstance->getModelPluralName()]) }}</p>
                             <a class="btn btn-default btn-rounded" href="{{ route('crud.index', $ModelName) }}">
                                 {{ trans('crud::index.button.reset-filters') }}
                             </a>
                         @else
-                            <p>{{ trans('crud::index.no-items-yet', ['model' => $MasterInstance->getPluralName()]) }}</p>
+                            <p>{{ trans('crud::index.no-items-yet', ['model' => $MasterInstance->getModelPluralName()]) }}</p>
                             <a href="{{ route('crud.create', $ModelName) }}"
                                class="btn btn-default btn-red btn-rounded">
                                 <i class="fa fa-plus"></i>
-                                {{ trans('crud::index.button.create-new', ['model' => $MasterInstance->getSingularName()]) }}
+                                {{ trans('crud::index.button.create-new', ['model' => $MasterInstance->getModelSingularName()]) }}
                             </a>
                         @endif
                     </div>
