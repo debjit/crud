@@ -17,9 +17,10 @@ var paths = {
     ],
     scripts: [
         bowerBase + 'jquery/dist/jquery.js',
-        bowerBase + 'bootstrap/dist/js/bootstrap.js',
+        bowerBase + 'bootstrap/dist/js/bootstrap.js',/*
         bowerBase + 'datatables/media/js/jquery.dataTables.js',
         bowerBase + 'datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.js',
+        */
         bowerBase + 'jquery-slimscroll/jquery.slimscroll.js',
         bowerBase + 'fastclick/lib/fastclick.js',
         bowerBase + 'markdown/lib/markdown.js',

@@ -314,7 +314,7 @@
      {
          $mapper = $this->getPlanner();
          $admin  = $mapper->getCRUDMasterInstance();
-         $model = $this->getModel();
+         $model =  $this->getAppNamespace() .$this->getModel();
          $model = $model::find($this->getIdentifier());
          // Model before delete hook
          if (method_exists($admin, 'beforeDelete')) {

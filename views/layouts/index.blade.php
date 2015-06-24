@@ -7,14 +7,19 @@
             <small></small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="{{URL::route('crud.home')}}"><i class="fa fa-dashboard"></i> {{trans('crud::views.dashboard.title')}}</a></li>
+            <li><a href="{{URL::route('crud.home')}}"><i
+                            class="fa fa-dashboard"></i> {{trans('crud::views.dashboard.title')}}</a></li>
             <li class="active">{{ trans('crud::index.list-title', ['model' => $MasterInstance->getModelPluralName()]) }}</li>
         </ol>
     </section>
 @stop
 
 @section('filters')
-    <!-- -->
+    @if ($MasterInstance->getFilterBuilder()->getResult()->getFields())
+        @include($MasterInstance->getView('filter'))
+        @else
+        <p>{{trans('crud::index.no-filters')}}</p>
+    @endif
 @stop
 
 @section('scopes')
@@ -32,6 +37,8 @@
                 </li>
             @endforeach
         </ul>
+        @else
+        <p>{{trans('crud::index.no-scopes')}}</p>
     @endif
 @stop
 
@@ -66,7 +73,8 @@
                             </a>
                         @else
                             <p>{{ trans('crud::index.no-items-yet', ['model' => $MasterInstance->getPluralName()]) }}</p>
-                            <a href="{{ route('crud.create', $ModelName) }}" class="btn btn-default btn-red btn-rounded">
+                            <a href="{{ route('crud.create', $ModelName) }}"
+                               class="btn btn-default btn-red btn-rounded">
                                 <i class="fa fa-plus"></i>
                                 {{ trans('crud::index.button.create-new', ['model' => $MasterInstance->getSingularName()]) }}
                             </a>
@@ -85,68 +93,82 @@
                                 <i class="fa fa-plus"></i>
                                 {{ trans('crud::index.button.create-new', ['model' => $MasterInstance->getModelSingularName()]) }}
                             </a>
-                            <a class="btn btn-primary" href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i> Options</a>
+                            <a class="btn btn-primary" href="#" data-toggle="control-sidebar"><i
+                                        class="fa fa-gears"></i> Options</a>
                         </div>
                     </div>
+                    {!! CRUDForm::open(['method' => 'POST', 'route' => ['crud.multi-destroy', $ModelName], 'id' => 'delete-multi-form']) !!}
                     <div class="box-body mailbox-messages">
-                {!! CRUDForm::open(['method' => 'POST', 'route' => ['crud.multi-destroy', $ModelName], 'id' => 'delete-multi-form']) !!}
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th width="20"></th>
-                        @foreach ($MasterInstance->getIndexPlanner()->getFields() as $field)
-                            <th>
-                                <a href="{{ route('crud.index', [$ModelName, '_order_by' => $field->getName(), '_order' => Input::get('_order') === 'ASC' ? 'DESC' : 'ASC']) }}">
-                                    {{ $field->getLabel() }}
-                                    @if (Input::has('_order_by') && Input::get('_order_by') === $field->getName())
-                                        <i class="fa fa-sort-{{ Input::get('_order') === 'DESC' ? 'up' : 'down' }}"></i>
-                                    @endif
-                                </a>
-                            </th>
-                        @endforeach
 
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach ($MasterInstance->getIndexBuilder()->getResult() as $item)
-                        <tr>
-                            <td><input type="checkbox" name="delete[{{ $item->getIdentifier() }}]"></td>
-                            @foreach ($item->getFields() as $field)
-                                <td>{!! $field->render() !!}</td>
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th width="20"></th>
+                                @foreach ($MasterInstance->getIndexPlanner()->getFields() as $field)
+                                    <th>
+                                        <a href="{{ route('crud.index', [$ModelName, '_order_by' => $field->getName(), '_order' => Input::get('_order') === 'ASC' ? 'DESC' : 'ASC']) }}">
+                                            {{ $field->getLabel() }}
+                                            @if (Input::has('_order_by') && Input::get('_order_by') === $field->getName())
+                                                <i class="fa fa-sort-{{ Input::get('_order') === 'DESC' ? 'up' : 'down' }}"></i>
+                                            @endif
+                                        </a>
+                                    </th>
+                                @endforeach
+
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach ($MasterInstance->getIndexBuilder()->getResult() as $item)
+                                <tr>
+                                    <td><input type="checkbox" name="delete[{{ $item->getIdentifier() }}]"></td>
+                                    @foreach ($item->getFields() as $field)
+                                        <td>{!! $field->render() !!}</td>
+                                    @endforeach
+
+                                    <td align="right">
+                                        <a href="{{ route('crud.edit', [$ModelName, $item->getIdentifier()]) }}"
+                                           class="btn btn-xs btn-warning">
+                                            <i class="fa fa-edit"></i> {{ trans('crud::index.button.edit') }}
+                                        </a>
+                                    </td>
+
+                                </tr>
                             @endforeach
-
-                            <td align="right">
-                                <a href="{{ route('crud.edit', [$ModelName, $item->getIdentifier()]) }}" class="btn btn-xs btn-warning">
-                                    <i class="fa fa-edit"></i> {{ trans('crud::index.button.edit') }}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="box-footer clearfix">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <a href="{{ route('crud.modal.delete', $ModelName) }}" class="btn btn-danger"
+                                   data-toggle="modal" data-target="#field-modal">
+                                    <i class="fa fa-trash"></i> {{ trans('crud::index.button.delete-selected', ['model' => $MasterInstance->getModelPluralName()]) }}
                                 </a>
-                            </td>
-
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-                {!! CRUDForm::close() !!}
-                        <div class="box-footer clearfix">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <a href="{{ route('crud.modal.delete', $ModelName) }}" class="btn btn-danger" data-toggle="modal" data-target="#field-modal">
-                                        <i class="fa fa-trash"></i> {{ trans('crud::index.button.delete-selected', ['model' => $MasterInstance->getModelPluralName()]) }}
-                                    </a>
-                                </div>
-                                </div>
-                                <div class="col-sm-6 text-right">
-                                    {{ $MasterInstance->getIndexBuilder()->getPaginator()->render() }}
-                                </div>
                             </div>
                         </div>
+                        <div class="col-sm-6 text-right">
+                            {{ $MasterInstance->getIndexBuilder()->getPaginator()->render() }}
+                        </div>
+                    </div>
+                    {!! CRUDForm::close() !!}
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="field-modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close">&times;</button>
+                        <h4 class="modal-title">
+                            {{ trans('crud::form.modal.loading') }}
+                        </h4>
                     </div>
                 </div>
             </div>
-
-            @if ($MasterInstance->getFilterBuilder()->getResult()->getFields())
-                @include($MasterInstance->getView('filter'))
-            @endif
         </div>
+
     @endif
 @stop

@@ -40,7 +40,7 @@
         'uses'=>'BlackfyreStudio\CRUD\Controllers\CRUDController@store'
     ]);
 
-    \Route::post('destroy', [
+    \Route::post('destroy/{model}', [
         'as'=>'crud.multi-destroy',
         'uses'=>'BlackfyreStudio\CRUD\Controllers\CRUDController@multiDestroy'
     ]);

@@ -6,7 +6,7 @@
     <p>This action is irreversible.</p>
     <button type="button" class="btn btn-default btn-rounded" data-dismiss="modal">Cancel</button>
     <button type="button" id="post-delete" class="btn btn-default btn-red btn-rounded">
-        Yes, delete the {{ $model->getSingularName() }}
+        Yes, delete the {{ $model->getModelSingularName() }}
     </button>
 </div>
 

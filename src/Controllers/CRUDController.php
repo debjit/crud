@@ -178,31 +178,35 @@ class CRUDController extends OriginController
      *
      * @access public
      *
-     * @param $name
+     * @param $modelName
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function multiDestroy($name)
+    public function multiDestroy($modelName)
     {
         $items = Input::get('delete');
-        $model = Master::getInstance($name);
+        $modelNameWithNamespace = $this->namespaceModel($modelName);
+        $model = Master::getInstance($modelNameWithNamespace);
+
         if (count($items) === 0) {
-            return Redirect::route('admin.model.index', $name);
+            return Redirect::route('crud.index', $modelName);
         }
+
         foreach ($items as $id => $item) {
             $model->buildForm($id)
             ->getFormBuilder()
             ->destroy();
         }
+
         // Set the flash message
-        Session::flash('message.success', trans('bauhaus::messages.success.model-deleted', [
+        Session::flash('message.success', trans('crud::messages.success.model-deleted', [
             'count' => (count($items) > 1 ? 'multiple' : 'one'),
-            'model' => $model->getPluralName()
+            'model' => $model->getModelPluralName()
         ]));
         // afterMultiDestroy hook
         if (method_exists($model, 'afterMultiDestroy')) {
-            return $model->afterMultiDestroy(Redirect::route('admin.model.index', $name));
+            return $model->afterMultiDestroy(Redirect::route('crud.index', $modelName));
         }
-        return Redirect::route('admin.model.index', $name);
+        return Redirect::route('crud.index', $modelName);
     }
 
     public function export($name, $type)

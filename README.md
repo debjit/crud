@@ -22,13 +22,13 @@ Contributions are welcome! Either as ideas or (preferably) pull requests :smile:
   * Numbers
   * Markdown
   * CKEditor
+  * Tags
 
 
 ## Tasklist
 
 
 * Index view
-  * Bulk delete
   * Bulk actions
   * Boolean field actions per row
 * Auth management
@@ -42,6 +42,7 @@ Contributions are welcome! Either as ideas or (preferably) pull requests :smile:
 * Laravel 5.1 LTS support
 * Working Scaffold command
 * Index view
+  * Bulk delete
 * Create view
 * Edit view
 

@@ -11,25 +11,27 @@
 
 return [
 
-	'list-title'        => 'List :model',
-	'filter-title'      => 'Filter :model',
-	'browsing-filtered' => 'You are currently browsing filtered results.',
-	'no-filter-results' => 'The filter query did not return any results.',
-	'no-items-yet'      => 'You have no :model created yet.',
+    'list-title' => 'List :model',
+    'filter-title' => 'Filter :model',
+    'browsing-filtered' => 'You are currently browsing filtered results.',
+    'no-filter-results' => 'The filter query did not return any results.',
+    'no-items-yet' => 'You have no :model created yet.',
+    'no-filters' => 'There are no filters for this index.',
+    'no-scopes' => 'There are no scopes for this index.',
 
-	'button' => [
-		'create-new'      => 'Create new :model',
-		'reset-filters'   => 'Reset filters',
-		'edit'            => 'Edit',
-		'delete-selected' => 'Delete selected :model',
-		'reset'           => 'Reset',
-		'filter-submit'   => 'Filter :model',
-		'overview'        => 'Overview'
-	],
+    'button' => [
+        'create-new' => 'Create new :model',
+        'reset-filters' => 'Reset filters',
+        'edit' => 'Edit',
+        'delete-selected' => 'Delete selected :model',
+        'reset' => 'Reset',
+        'filter-submit' => 'Filter :model',
+        'overview' => 'Overview'
+    ],
 
-	'sidebar' => [
-		'scopes' => 'Scopes',
-		'export' => 'Export ...'
-	]
+    'sidebar' => [
+        'scopes' => 'Scopes',
+        'export' => 'Export ...'
+    ]
 
 ];
