@@ -42,14 +42,42 @@ class InstallCommand extends Command {
      */
     public function fire()
     {
+        $this->info('Publishing CSS, JS, Fonts and images required to work');
         $this->call('vendor:publish',[
-            '--provider'=>'BlackfyreStudio\CRUD\CRUDProvider'
+            '--provider'=>'BlackfyreStudio\CRUD\CRUDProvider',
+            '--tag'=>'public'
         ]);
+
+
+        $this->info('Publishing config file');
+        $this->call('vendor:publish',[
+            '--provider'=>'BlackfyreStudio\CRUD\CRUDProvider',
+            '--tag'=>'config'
+        ]);
+
+
+        $this->info('Publishing migrations to be run');
+        $this->call('vendor:publish',[
+            '--provider'=>'BlackfyreStudio\CRUD\CRUDProvider',
+            '--tag'=>'migrations'
+        ]);
+
+
+        $this->info('Running migrations');
         $this->call('migrate');
 
+        $this->info('Seeding database');
         $this->call('db:seed',[
             '--class'=>'BlackfyreStudio\\CRUD\\DatabaseSeeder'
         ]);
+
+        if ($this->confirm('Do you want to create an administrator?')) {
+          $email = $this->ask('Administrator email address?');
+
+          $this->call('crud:admin', [
+            'email'=>$email
+            ]);
+        }
 
     }
 

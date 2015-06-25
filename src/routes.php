@@ -17,8 +17,7 @@
 ]);
 
 \Route::group([
-    'prefix' => \Config::get('crud.uri'),
-    'middleware'=>'auth'
+    'prefix' => \Config::get('crud.uri')
 ], function() {
     \Route::get('/',[
         'as'=>'crud.home',
