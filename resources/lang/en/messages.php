@@ -11,20 +11,34 @@
 
 return [
 
-	'success' => [
-		'title'         => 'Success!',
-		'model-created' => 'Created a new :model',
-		'model-updated' => 'Updated a :model',
-		'model-deleted' => 'Deleted :count :model'
-	],
+    'success' => [
+        'title' => 'Success!',
+        'model-created' => 'Created a new :model',
+        'model-updated' => 'Updated a :model',
+        'model-deleted' => 'Deleted :count :model',
+        'messages' => [
+            'sign-in' => [
+                'user-signed-in' => 'User logged in.'
+            ],
+            'sign-out' => [
+                'user-signed-out' => 'User signed out.'
+            ]
+        ]
+    ],
 
-	'warning' => [
-		'title' => 'Warning!'
-	],
+    'warning' => [
+        'title' => 'Warning!'
+    ],
 
-	'error' => [
-		'title'             => 'Whoops!',
-		'validation-errors' => 'Validation errors'
-	]
+    'error' => [
+        'title' => 'Whoops!',
+        'validation-errors' => 'Validation errors',
+        'messages' => [
+            'sign-in' => [
+                'validation-error' => 'Validation error.',
+                'user-not-found' => 'User not found'
+            ]
+        ]
+    ]
 
 ];

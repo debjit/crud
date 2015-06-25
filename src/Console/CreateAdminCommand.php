@@ -11,7 +11,6 @@ namespace BlackfyreStudio\CRUD\Console;
 use BlackfyreStudio\CRUD\Models\CrudUser;
 use Illuminate\Console\Command;
 use Illuminate\Database\QueryException;
-use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 

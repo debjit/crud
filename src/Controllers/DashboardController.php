@@ -13,6 +13,7 @@ use Illuminate\Routing\Controller;
 
 class DashboardController extends Controller {
     public function index() {
+        dd(\Auth::user());
         return view('crud::layouts.dashboard');
     }
 }

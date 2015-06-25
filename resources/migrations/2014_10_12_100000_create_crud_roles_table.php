@@ -14,7 +14,7 @@ class CreateCrudRolesTable extends Migration
     {
         Schema::create('crud_roles', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('role_name');
+            $table->string('role_name')->unique();
             $table->text('permissions');
             $table->timestamps();
         });

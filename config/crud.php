@@ -33,6 +33,12 @@ return [
      */
     'directory'=>'Crud',
 
+    'default-roles'=>[
+        'Administrator',
+        'Editor',
+        'User'
+    ],
+
     /**
      * Global date/time formatting.
      * @var array

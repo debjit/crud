@@ -14,7 +14,7 @@ class CreateCrudPermissionsTable extends Migration
     {
         Schema::create('crud_permissions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('permission');
+            $table->string('permission')->unique();
             $table->timestamps();
         });
     }

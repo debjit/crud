@@ -56,6 +56,10 @@ Add the package to the providers list in `config/app.php`
 ```
 BlackfyreStudio\CRUD\CRUDProvider::class
 ```
+Overwrite the Auth model settings in `config/auth.php` to
+```
+'model' => BlackfyreStudio\CRUD\Models\CrudUser::class
+```
 To publish the package files
 ```
 $ php artisan vendor:publish --provider="BlackfyreStudio\CRUD\CRUDProvider"

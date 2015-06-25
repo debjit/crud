@@ -84,8 +84,8 @@ class CRUDController extends OriginController
         if (get_class($result) === 'Illuminate\Validation\Validator') {
             Session::flash('message.error', trans('crud::messages.error.validation-errors'));
             return Redirect::route('crud.create', [$modelName])
-            ->withInput()
-            ->withErrors($result);
+                ->withInput()
+                ->withErrors($result);
         }
         // Set the flash message
         Session::flash('message.success', trans('crud::messages.success.model-created', [
@@ -97,17 +97,6 @@ class CRUDController extends OriginController
         }
 
         return Redirect::route('crud.index', [$modelName]);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -132,7 +121,7 @@ class CRUDController extends OriginController
     /**
      * Update the specified resource in storage.
      *
-     * @param $name
+     * @param string $modelName
      * @param  int $id
      * @return $this|\Illuminate\Http\RedirectResponse
      */
@@ -141,14 +130,14 @@ class CRUDController extends OriginController
         $modelNameWithNamespace = $this->namespaceModel($modelName);
         $model = Master::getInstance($modelNameWithNamespace);
         $result = $model->buildForm($id)
-        ->getFormBuilder()
-        ->update(Input::all());
+            ->getFormBuilder()
+            ->update(Input::all());
         // Check validation errors
         if (get_class($result) === 'Illuminate\Validation\Validator') {
             Session::flash('message.error', trans('crud::messages.error.validation-errors'));
             return Redirect::route('crud.edit', [$modelName, $id])
-            ->withInput()
-            ->withErrors($result);
+                ->withInput()
+                ->withErrors($result);
         }
         // Set the flash message
         Session::flash('message.success', trans('crud::messages.success.model-updated', [
@@ -160,17 +149,6 @@ class CRUDController extends OriginController
         }
 
         return Redirect::route('crud.index', $modelName);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 
     /**
@@ -193,8 +171,8 @@ class CRUDController extends OriginController
 
         foreach ($items as $id => $item) {
             $model->buildForm($id)
-            ->getFormBuilder()
-            ->destroy();
+                ->getFormBuilder()
+                ->destroy();
         }
 
         // Set the flash message
