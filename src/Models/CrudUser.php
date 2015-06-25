@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Support\Str;
 
 class CrudUser extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
@@ -32,4 +33,8 @@ class CrudUser extends Model implements AuthenticatableContract, CanResetPasswor
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    public function roles() {
+        return $this->belongsToMany(CrudRole::class)->withPivot('role_name','permissions');
+    }
 }
