@@ -84,7 +84,7 @@ class GenerateRolesCommand extends Command {
 
             $model = new Permission();
             $model->name = $permission;
-            $model->slug = Str::slug($permission);
+            $model->slug = Str::lower($permission);
             $model->description = $description;
             $model->save();
 
