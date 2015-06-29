@@ -30,7 +30,8 @@
   "autoload": {
     "psr-4": {
       "BlackfyreStudio\\CRUD\\": "src/",
-      "BlackfyreStudio\\CRUD\\Tests\\": "tests/"
+      "BlackfyreStudio\\CRUD\\Tests\\": "tests/",
+      "BlackfyreStudio\\CRUD\\Console\\": "src/Console"
     }
   }
 }
