@@ -60,6 +60,10 @@ class ScaffoldCommand extends Command {
         $this->call('crud:controller', [
             'name'=>$modelName
         ]);
+
+        $this->call('crud:roles', [
+            '--controller'=>$modelName
+        ]);
     }
 
     /**

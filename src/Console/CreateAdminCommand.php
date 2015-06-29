@@ -8,7 +8,7 @@
 
 namespace BlackfyreStudio\CRUD\Console;
 
-use BlackfyreStudio\CRUD\Models\CrudUser;
+use BlackfyreStudio\CRUD\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Database\QueryException;
 use Symfony\Component\Console\Input\InputOption;
@@ -45,7 +45,7 @@ class CreateAdminCommand extends Command {
     public function fire()
     {
 
-        $user = new CrudUser();
+        $user = new User();
 
         $user->email = $this->argument('email');
 
@@ -62,9 +62,10 @@ class CreateAdminCommand extends Command {
             $user->name = $this->option('name');
         }
 
-
         try {
             $user->save();
+            /* Assign as admin */
+            $user->assignRole(1);
         } catch (QueryException $e) {
             $this->error('User already exists with this email!');
         }

@@ -1,8 +1,10 @@
 <?php
 namespace BlackfyreStudio\CRUD\Seeds;
 
-use BlackfyreStudio\CRUD\Models\CrudRole;
+use Caffeinated\Shinobi\Models\Permission;
+use Caffeinated\Shinobi\Models\Role;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 use InvalidArgumentException;
 
 class CrudRoles extends Seeder
@@ -21,21 +23,25 @@ class CrudRoles extends Seeder
         }
 
         foreach($roles AS $i=>$role) {
-            /**
-             * Yes, pun intended :)
-             * @var CrudRole $roleModel
-             */
-            $roleModel = new CrudRole();
 
-            $roleModel->role_name = $role;
+            $roleModel = new Role();
+
+            $roleModel = $roleModel->create([
+                'name'=> $role,
+                'slug'=> Str::slug($role)
+            ]);
 
             if ($i === 0) {
-                $roleModel->permissions = json_encode([
-                    'access'=>['superuser']
-                ]);
-            }
+                $permission = new Permission();
 
-            $roleModel->save();
+                $permission = $permission->create([
+                    'name' => 'SuperUser',
+                    'slug' => 'su',
+                    'description' => 'The holder of this permission is the overlord'
+                ]);
+
+                $roleModel->assignPermission($permission->id);
+            }
         }
     }
 }

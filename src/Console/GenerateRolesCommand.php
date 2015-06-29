@@ -2,8 +2,11 @@
 namespace BlackfyreStudio\CRUD\Console;
 
 use BlackfyreStudio\CRUD\Models\CrudPermission;
+use Caffeinated\Shinobi\Models\Permission;
+use Caffeinated\Shinobi\Models\Role;
 use File;
 use Illuminate\Console\Command;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Finder\SplFileInfo;
 
@@ -51,7 +54,7 @@ class GenerateRolesCommand extends Command {
             $controllers = File::allFiles('./app/Http/Controllers/' . \Config::get('crud.directory') . '/');
 
             CrudPermission::truncate();
-            $this->info('Permissions table pruged');
+            $this->info('Permissions table purged');
 
             /** @var SplFileInfo $controller */
             foreach ($controllers AS $controller) {
@@ -68,14 +71,21 @@ class GenerateRolesCommand extends Command {
     }
 
     private function createPermissionsFor($ControllerName = '') {
-        $permissions = ['create','read','update','delete'];
+        $permissions = [
+            'create' => 'Grants create new item permission',
+            'read' => 'Grants permission to read data from this module',
+            'update' => 'Grants permission to edit the data in this module',
+            'delete' => 'Grants permission to delete data from this module'
+        ];
 
-        foreach ($permissions AS $permission) {
+        foreach ($permissions AS $permission=>$description) {
 
             $permission = $ControllerName . ':' . $permission;
 
-            $model = new CrudPermission();
-            $model->permission = $permission;
+            $model = new Permission();
+            $model->name = $permission;
+            $model->slug = Str::slug($permission);
+            $model->description = $description;
             $model->save();
 
             $this->info($permission . ' permission created');

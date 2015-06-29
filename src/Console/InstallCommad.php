@@ -56,13 +56,14 @@ class InstallCommand extends Command {
         ]);
 
 
-        $this->info('Publishing migrations to be run');
+        /* publish Shinobi migrations */
+        $this->info('Publishing Shinobi files');
         $this->call('vendor:publish',[
-            '--provider'=>'BlackfyreStudio\CRUD\CRUDProvider',
+            '--provider'=>'Caffeinated\Shinobi\ShinobiServiceProvider',
             '--tag'=>'migrations'
         ]);
 
-
+        /* Run migrations */
         $this->info('Running migrations');
         $this->call('migrate');
 

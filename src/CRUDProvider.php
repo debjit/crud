@@ -142,12 +142,6 @@ class CRUDProvider extends ServiceProvider
         $this->mergeConfigFrom($configPath, 'crud');
 
         /*
-         * Setting up migrations for publishing
-         */
-        $migrationsPath = __DIR__ . '/../resources/migrations/';
-        $this->publishes([$migrationsPath => database_path('/migrations')], 'migrations');
-
-        /*
          * Setting up translations
          */
         $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'crud');
