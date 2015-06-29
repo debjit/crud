@@ -5,6 +5,7 @@ use BlackfyreStudio\CRUD\Master;
 use BlackfyreStudio\CRUD\Planner\FilterPlanner;
 use BlackfyreStudio\CRUD\Planner\FormPlanner;
 use BlackfyreStudio\CRUD\Planner\IndexPlanner;
+use BlackfyreStudio\CRUD\Planner\ScopePlanner;
 
 /**
  * Class GalleryItemController

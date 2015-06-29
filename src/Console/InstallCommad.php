@@ -42,6 +42,7 @@ class InstallCommand extends Command {
      */
     public function fire()
     {
+        $this->call('clear-compiled');
         $this->info('Publishing CSS, JS, Fonts and images required to work');
         $this->call('vendor:publish',[
             '--provider'=>'BlackfyreStudio\CRUD\CRUDProvider',
@@ -79,6 +80,7 @@ class InstallCommand extends Command {
             'email'=>$email
             ]);
         }
+        $this->call('optimize');
 
     }
 

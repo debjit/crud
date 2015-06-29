@@ -28,6 +28,10 @@
     "codeclimate/php-test-reporter": "dev-master"
   },
   "autoload": {
+    "classmap": ["src/"],
+    "psr-0": {
+      "BlackfyreStudio\\CRUD\\": "src/"
+    },
     "psr-4": {
       "BlackfyreStudio\\CRUD\\": "src/",
       "BlackfyreStudio\\CRUD\\Tests\\": "tests/",
