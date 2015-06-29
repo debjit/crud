@@ -8,6 +8,7 @@
 
 namespace BlackfyreStudio\CRUD;
 
+use Caffeinated\Shinobi\ShinobiServiceProvider;
 use GrahamCampbell\Markdown\Facades\Markdown;
 use GrahamCampbell\Markdown\MarkdownServiceProvider;
 use Illuminate\Html\FormFacade;
@@ -56,6 +57,7 @@ class CRUDProvider extends ServiceProvider
         $this->app->register(MarkdownServiceProvider::class);
         $this->app->register(HtmlServiceProvider::class);
         $this->app->register(ExcelServiceProvider::class);
+        $this->app->register(ShinobiServiceProvider::class);
 
         /*
          * Adding aliases so the developers won't have to
