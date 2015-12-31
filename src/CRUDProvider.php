@@ -97,7 +97,7 @@ class CRUDProvider extends ServiceProvider
         });
 
         $this->app->singleton('command.crud.roles', function ($app) {
-            return $app[Console\GenerateRolesCommand::class];
+            return $app[Console\CreateRoleCommand::class];
         });
 
         $this->app->singleton('command.crud.install', function ($app) {
@@ -140,6 +140,12 @@ class CRUDProvider extends ServiceProvider
         $configPath = __DIR__ . '/../config/crud.php';
         $this->publishes([$configPath => config_path('crud.php')], 'config');
         $this->mergeConfigFrom($configPath, 'crud');
+
+        /*
+         * Setting up migrations to be published
+         */
+        $migrations = __DIR__ . '/Migrations/';
+        $this->publishes([$migrations => base_path('database/migrations')],'migrations');
 
         /*
          * Setting up translations

@@ -8,7 +8,7 @@
 
 namespace BlackfyreStudio\CRUD\Console;
 
-use BlackfyreStudio\CRUD\Models\User;
+use App\User;
 use Illuminate\Console\Command;
 use Illuminate\Database\QueryException;
 use Symfony\Component\Console\Input\InputOption;
@@ -48,10 +48,11 @@ class CreateAdminCommand extends Command {
         $user = new User();
 
         $user->email = $this->argument('email');
+        $raw = '';
 
         if (is_null($this->option('password'))) {
             $password = substr(sha1(time() . $this->argument('email')),0,9);
-            $this->info('The generated password is ' . $password);
+            $raw = $password;
         } else {
             $password = $this->option('password');
         }
@@ -65,9 +66,9 @@ class CreateAdminCommand extends Command {
         try {
             $user->save();
             /* Assign as admin */
-            $user->assignRole(1);
+            $this->info('The generated password is ' . $raw);
         } catch (QueryException $e) {
-            $this->error('User already exists with this email!');
+            $this->error("Failed to create user, possible reasons: table doesn't exists yet, or there is another user with the supplied email address");
         }
 
 

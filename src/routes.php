@@ -6,18 +6,19 @@
  * Time: 5:21 PM
  */
 
-\Route::get(\Config::get('crud.uri') . '-login', [
+\Route::get(\Config::get('crud.uri') . '/login', [
     'as'=>'crud.login',
     'uses'=>'BlackfyreStudio\CRUD\Controllers\Auth\AuthController@loginPage'
 ]);
 
-\Route::post(\Config::get('crud.uri') . '-login', [
+\Route::post(\Config::get('crud.uri') . '/login', [
     'as'=>'crud.session-start',
     'uses'=>'BlackfyreStudio\CRUD\Controllers\Auth\AuthController@startSession'
 ]);
 
 \Route::group([
-    'prefix' => \Config::get('crud.uri')
+    'prefix' => \Config::get('crud.uri'),
+    'middleware' => ['crudAuth']
 ], function() {
     \Route::get('/',[
         'as'=>'crud.home',

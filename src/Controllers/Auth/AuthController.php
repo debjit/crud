@@ -15,6 +15,15 @@ use Session;
 
 class AuthController extends Controller
 {
+    protected $loginPath = '/login';
+    protected $redirectPath = '/';
+
+    function __construct()
+    {
+        $this->loginPath = \Config::get('crud.uri') . '/login';
+        $this->redirectPath = \Config::get('crud.uri') . '/';
+    }
+
     public function loginPage() {
         return view('crud::login');
     }

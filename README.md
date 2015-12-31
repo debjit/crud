@@ -29,7 +29,7 @@ Contributions are welcome! Either as ideas or (preferably) pull requests :smile:
 
 
 * Index view
-  * Bulk actions
+  * Bulk actions (Delete)
   * Boolean field actions per row
 * Auth management
   * Roles
@@ -48,6 +48,8 @@ Contributions are welcome! Either as ideas or (preferably) pull requests :smile:
 
 ## Installation
 
+### Mandatory parts
+
 To install the bleeding edge package just follow these steps
 ```
 $ composer require blackfyrestudio/crud:dev-master
@@ -56,11 +58,36 @@ Add the package to the providers list in `config/app.php`
 ```
 BlackfyreStudio\CRUD\CRUDProvider::class
 ```
-Overwrite the Auth model settings in `config/auth.php` to
+Update `App\User` to make use of the `crudRole` trait
+
+Update the `app\Http\Kernel.php` to include the Middleware for the auth
 ```
-'model' => BlackfyreStudio\CRUD\Models\CrudUser::class
+protected $routeMiddleware = [
+        'auth' => \App\Http\Middleware\Authenticate::class,
+        'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+        'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        /* This is responsible for the CRUD Authentication */
+        'crudAuth' => \BlackfyreStudio\CRUD\Middleware\Authenticate::class,
+    ];
 ```
-To publish the package files
+
+### Automatic installation
+
+This command will run all the commands required to install the package, details are in the manual part
+```
+$ php artisan crud:install
+```
+
+### Manual installation
+
+Publish the package files (assets for the public folder, views, migrations)
 ```
 $ php artisan vendor:publish --provider="BlackfyreStudio\CRUD\CRUDProvider"
 ```
+
+Run the migrations (this will create the roles & permissions tables)
+```
+$ php artisan migrate
+```
+
+## Post install

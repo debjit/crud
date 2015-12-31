@@ -57,13 +57,6 @@ class InstallCommand extends Command {
         ]);
 
 
-        /* publish Shinobi migrations */
-        $this->info('Publishing Shinobi files');
-        $this->call('vendor:publish',[
-            '--provider'=>'Caffeinated\Shinobi\ShinobiServiceProvider',
-            '--tag'=>'migrations'
-        ]);
-
         /* Run migrations */
         $this->info('Running migrations');
         $this->call('migrate');
@@ -74,7 +67,7 @@ class InstallCommand extends Command {
         ]);
 
         if ($this->confirm('Do you want to create an administrator?')) {
-          $email = $this->ask('Administrator email address?');
+          $email = $this->ask('The Administrator\'s email address?');
 
           $this->call('crud:admin', [
             'email'=>$email
