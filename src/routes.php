@@ -25,6 +25,8 @@
         'uses'=>'BlackfyreStudio\CRUD\Controllers\DashboardController@index'
     ]);
 
+    /* TODO: visit again if it could be done with dynamic resource routes */
+
     \Route::get('index/{model}',[
         'as'=>'crud.index',
         'uses'=>'BlackfyreStudio\CRUD\Controllers\CRUDController@index'

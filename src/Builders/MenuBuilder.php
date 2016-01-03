@@ -95,9 +95,7 @@ class MenuBuilder
 
         /* TODO: Find/Create suitable permission manager */
 
-        /* TODO: Permission management */
-
-        /* TODO: modify html for the new template */
+        /* TODO: Permission management, those classes that aren't readable to the user shouldn't even show up */
 
         $html = '';
 
@@ -134,7 +132,21 @@ class MenuBuilder
                 } elseif (array_key_exists('url',$value)) {
                     $url = url($value['url']);
                 } elseif (array_key_exists('route',$value)) {
-                    $url = route($value['route']);
+
+                    if (is_array($value['route'])) {
+                        $url = route(array_shift($value['route']),$value['route']);
+                    } else {
+                        $url = route($value['route']);
+                    }
+
+                    if (array_key_exists('custom',$value) && is_array($value['custom'])) {
+                        if (!array_key_exists('target',$value['custom'])) {
+                            $value['custom']['target'] = '_blank';
+                        }
+                    } else {
+                        $value['custom']['target'] = '_blank';
+                    }
+
                 }
 
                 $custom = '';

@@ -13,9 +13,20 @@ use Auth;
 use Input;
 use Session;
 
+/**
+ * Class AuthController
+ * @package BlackfyreStudio\CRUD\Controllers\Auth
+ */
 class AuthController extends Controller
 {
+    /**
+     * @var string
+     */
     protected $loginPath = '/login';
+
+    /**
+     * @var string
+     */
     protected $redirectPath = '/';
 
     function __construct()
@@ -24,6 +35,9 @@ class AuthController extends Controller
         $this->redirectPath = \Config::get('crud.uri') . '/';
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function loginPage() {
         return view('crud::login');
     }

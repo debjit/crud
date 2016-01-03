@@ -46,48 +46,6 @@ Contributions are welcome! Either as ideas or (preferably) pull requests :smile:
 * Create view
 * Edit view
 
-## Installation
+## Installing Crud
 
-### Mandatory parts
-
-To install the bleeding edge package just follow these steps
-```
-$ composer require blackfyrestudio/crud:dev-master
-```
-Add the package to the providers list in `config/app.php`
-```
-BlackfyreStudio\CRUD\CRUDProvider::class
-```
-Update `App\User` to make use of the `crudRole` trait
-
-Update the `app\Http\Kernel.php` to include the Middleware for the auth
-```
-protected $routeMiddleware = [
-        'auth' => \App\Http\Middleware\Authenticate::class,
-        'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
-        /* This is responsible for the CRUD Authentication */
-        'crudAuth' => \BlackfyreStudio\CRUD\Middleware\Authenticate::class,
-    ];
-```
-
-### Automatic installation
-
-This command will run all the commands required to install the package, details are in the manual part
-```
-$ php artisan crud:install
-```
-
-### Manual installation
-
-Publish the package files (assets for the public folder, views, migrations)
-```
-$ php artisan vendor:publish --provider="BlackfyreStudio\CRUD\CRUDProvider"
-```
-
-Run the migrations (this will create the roles & permissions tables)
-```
-$ php artisan migrate
-```
-
-## Post install
+Check the Wiki on how to install CRUD into your **new** project! https://github.com/BlackfyreStudio/crud/wiki/Installing-CRUD

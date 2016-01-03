@@ -10,6 +10,7 @@ namespace BlackfyreStudio\CRUD\Controllers;
 
 use BlackfyreStudio\CRUD\Master;
 use Config;
+use Gate;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as OriginController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -39,7 +40,12 @@ class CRUDController extends OriginController
      */
     public function index($modelName = '')
     {
-        $modelNameWithNamespace = $this->namespaceModel($modelName);
+
+        if (Gate::denies($modelName . '.read')) {
+            return view('crud::errors.403');
+        }
+
+        $modelNameWithNamespace = $this->setModelNamespace($modelName);
 
         $master = Master::getInstance($modelNameWithNamespace)->buildList()->buildFilters()->buildScopes();
 
@@ -58,7 +64,11 @@ class CRUDController extends OriginController
      */
     public function create($modelName = '')
     {
-        $modelNameWithNamespace = $this->namespaceModel($modelName);
+        if (Gate::denies($modelName . '.create')) {
+            return view('crud::errors.403');
+        }
+
+        $modelNameWithNamespace = $this->setModelNamespace($modelName);
 
         $master = Master::getInstance($modelNameWithNamespace)->buildForm();
 
@@ -76,7 +86,11 @@ class CRUDController extends OriginController
      */
     public function store($modelName = '')
     {
-        $modelNameWithNamespace = $this->namespaceModel($modelName);
+        if (Gate::denies($modelName . '.create')) {
+            return view('crud::errors.403');
+        }
+
+        $modelNameWithNamespace = $this->setModelNamespace($modelName);
         $master = Master::getInstance($modelNameWithNamespace);
         $result = $master->buildForm()->getFormBuilder()->create(Input::all());
 
@@ -108,7 +122,11 @@ class CRUDController extends OriginController
      */
     public function edit($modelName, $id)
     {
-        $modelNameWithNamespace = $this->namespaceModel($modelName);
+        if (Gate::denies($modelName . '.update')) {
+            return view('crud::errors.403');
+        }
+
+        $modelNameWithNamespace = $this->setModelNamespace($modelName);
         $master = Master::getInstance($modelNameWithNamespace)->buildForm($id);
 
         return view($master->getViewUpdate(), [
@@ -127,7 +145,11 @@ class CRUDController extends OriginController
      */
     public function update($modelName, $id)
     {
-        $modelNameWithNamespace = $this->namespaceModel($modelName);
+        if (Gate::denies($modelName . '.update')) {
+            return view('crud::errors.403');
+        }
+
+        $modelNameWithNamespace = $this->setModelNamespace($modelName);
         $model = Master::getInstance($modelNameWithNamespace);
         $result = $model->buildForm($id)
             ->getFormBuilder()
@@ -161,8 +183,12 @@ class CRUDController extends OriginController
      */
     public function multiDestroy($modelName)
     {
+        if (Gate::denies($modelName . '.delete')) {
+            return view('crud::errors.403');
+        }
+
         $items = Input::get('delete');
-        $modelNameWithNamespace = $this->namespaceModel($modelName);
+        $modelNameWithNamespace = $this->setModelNamespace($modelName);
         $model = Master::getInstance($modelNameWithNamespace);
 
         if (count($items) === 0) {
@@ -192,7 +218,7 @@ class CRUDController extends OriginController
 
     }
 
-    private function namespaceModel($modelName = '')
+    private function setModelNamespace($modelName = '')
     {
         $modelNameWithNamespace = sprintf($this->nameSpace . '%sController', $modelName);
 

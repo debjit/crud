@@ -97,6 +97,14 @@ class Master
     public function setModelBaseName($modelBaseName)
     {
         $this->modelBaseName = $modelBaseName;
+
+        if ($this->getModelSingularName() === null) {
+            $this->setModelSingularName(Str::singular($this->getModelBaseName()));
+        }
+
+        if ($this->getModelPluralName() === null) {
+            $this->setModelPluralName(Str::plural($this->getModelBaseName()));
+        }
     }
 
     /**

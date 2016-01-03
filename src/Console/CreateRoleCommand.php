@@ -5,9 +5,10 @@ use BlackfyreStudio\CRUD\Models\Role;
 use Illuminate\Console\Command;
 use Illuminate\Database\QueryException;
 
-class CreateRoleCommand extends Command {
+class CreateRoleCommand extends Command
+{
     /**
-     * The console command name.
+     * The name and signature of the console command.
      *
      * @var string
      */
@@ -28,7 +29,8 @@ class CreateRoleCommand extends Command {
      * Create a new command instance.
      *
      */
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
@@ -55,7 +57,7 @@ class CreateRoleCommand extends Command {
         try {
             $role->save();
         } catch (QueryException $e) {
-
+            $this->error('The ' . $name . ' role exists');
         }
     }
 }

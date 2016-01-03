@@ -13,7 +13,8 @@ use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
-class ScaffoldCommand extends Command {
+class ScaffoldCommand extends Command
+{
     /**
      * The console command name.
      *
@@ -32,7 +33,8 @@ class ScaffoldCommand extends Command {
      * Create a new command instance.
      *
      */
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
@@ -48,21 +50,21 @@ class ScaffoldCommand extends Command {
         $tableName = 'crud_' . Str::lower($name);
 
 
-        $this->call('crud:migration',[
-            'name'=>$name
+        $this->call('crud:migration', [
+            'name' => $name
         ]);
 
-        $this->call('crud:model',[
-            'name'=>$modelName,
-            '--table'=>$tableName
+        $this->call('crud:model', [
+            'name' => $modelName,
+            '--table' => $tableName
         ]);
 
         $this->call('crud:controller', [
-            'name'=>$modelName
+            'name' => $modelName
         ]);
 
-        $this->call('crud:roles', [
-            '--controller'=>$modelName
+        $this->call('crud:permission', [
+            'name' => $modelName
         ]);
     }
 

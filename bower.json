@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "admin-lte.scss": "~3.1.2",
-    "font-awesome": "~4.3.0",
+    "font-awesome": "~4.4.0",
     "ionicons": "~2.0.1",
     "jquery-ui": "~1.11.4",
     "iCheck": "~1.0.2",

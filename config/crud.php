@@ -72,9 +72,20 @@ return [
     ],
     'menu'=>[
         [
-            'title'=>'Gallery Items',
-            'class'=>'GalleryItem',
-            'icon'=>'picture-o'
+            'title'=>'Settings',
+            'icon'=>'gear',
+            'children'=>[
+                [
+                    'title'=>'User management',
+                    'class'=>'User',
+                    'icon'=>'user'
+                ],
+                [
+                    'title'=>'Access Control',
+                    'class'=>'GalleryItem',
+                    'icon'=>'key'
+                ],
+            ]
         ]
     ]
 ];

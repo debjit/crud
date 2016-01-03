@@ -8,7 +8,6 @@
 
 namespace BlackfyreStudio\CRUD;
 
-use Caffeinated\Shinobi\ShinobiServiceProvider;
 use GrahamCampbell\Markdown\Facades\Markdown;
 use GrahamCampbell\Markdown\MarkdownServiceProvider;
 use Illuminate\Html\FormFacade;
@@ -57,7 +56,7 @@ class CRUDProvider extends ServiceProvider
         $this->app->register(MarkdownServiceProvider::class);
         $this->app->register(HtmlServiceProvider::class);
         $this->app->register(ExcelServiceProvider::class);
-        $this->app->register(ShinobiServiceProvider::class);
+        $this->app->register(AuthProvider::class);
 
         /*
          * Adding aliases so the developers won't have to
@@ -100,6 +99,10 @@ class CRUDProvider extends ServiceProvider
             return $app[Console\CreateRoleCommand::class];
         });
 
+        $this->app->singleton('command.crud.permission', function ($app) {
+            return $app[Console\CreatePermissionsCommand::class];
+        });
+
         $this->app->singleton('command.crud.install', function ($app) {
             return $app[Console\InstallCommand::class];
         });
@@ -111,6 +114,7 @@ class CRUDProvider extends ServiceProvider
             'command.crud.controller',
             'command.crud.roles',
             'command.crud.install',
+            'command.crud.permission',
             'command.crud.model'
         ]);
     }
