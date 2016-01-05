@@ -2,16 +2,18 @@
 
 namespace BlackfyreStudio\CRUD;
 
+
 trait crudRoles
 {
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function roles()
     {
+        /** @var \Illuminate\Database\Eloquent\Model $this */
         return $this->belongsToMany(Models\Role::class);
     }
+
 
     /**
      * @param string|Models\Role $role
@@ -19,7 +21,7 @@ trait crudRoles
      */
     public function hasRole($role)
     {
-
+        /** @var \Illuminate\Database\Eloquent\Model $this */
         if (is_string($role)) {
             return $this->roles->contains('name', $role);
         }
@@ -33,10 +35,10 @@ trait crudRoles
      */
     public function assignRole($role)
     {
-
+        /** @var \App\User $this */
         if (is_string($role)) {
             return $this->roles()->save(
-                Models\Role::whereName($role)->firstOrFail()
+                Models\Role::where(['name'=>$role])->firstOrFail()
             );
         }
 
@@ -49,6 +51,7 @@ trait crudRoles
      */
     public function hasPermission($permission)
     {
+        /** @var \App\User $this */
 
         if ($this->roles->contains('root', 1)) {
             return true;
@@ -87,6 +90,7 @@ trait crudRoles
      * @return boolean
      */
     public function isRoot() {
+        /** @var \App\User $this */
         return $this->roles->contains('root', 1);
     }
 

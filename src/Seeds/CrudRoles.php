@@ -1,8 +1,6 @@
 <?php
 namespace BlackfyreStudio\CRUD\Seeds;
 
-use Caffeinated\Shinobi\Models\Permission;
-use Caffeinated\Shinobi\Models\Role;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 use InvalidArgumentException;

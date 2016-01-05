@@ -61,10 +61,12 @@ class InstallCommand extends Command {
         $this->info('Running migrations');
         $this->call('migrate');
 
+        /*
         $this->info('Seeding database');
         $this->call('db:seed',[
             '--class'=>'BlackfyreStudio\\CRUD\\DatabaseSeeder'
         ]);
+        */
 
         if ($this->confirm('Do you want to create an administrator?')) {
           $email = $this->ask('The Administrator\'s email address?');
@@ -73,6 +75,7 @@ class InstallCommand extends Command {
             'email'=>$email
             ]);
         }
+
         $this->call('optimize');
 
     }

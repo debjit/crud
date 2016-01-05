@@ -4,6 +4,7 @@ namespace BlackfyreStudio\CRUD;
 use BlackfyreStudio\CRUD\Models\Permission;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Schema;
 
 class AuthProvider extends ServiceProvider
 {
@@ -24,17 +25,19 @@ class AuthProvider extends ServiceProvider
     {
         parent::registerPolicies($gate);
 
-        $gate->before(function ($user, $ability) {
-            return \Auth::user()->isRoot();
-        });
-
-        foreach ($this->getPermissions() as $permission) {
-
-            /** @var Permission $permission */
-
-            $gate->define($permission->name, function () use ($permission) {
-                return \Auth::user()->hasPermission($permission);
+        if (Schema::hasTable('permissions') && Schema::hasTable('roles')) {
+            $gate->before(function ($user, $ability) {
+                return \Auth::user()->isRoot();
             });
+
+            foreach ($this->getPermissions() as $permission) {
+
+                /** @var Permission $permission */
+
+                $gate->define($permission->name, function () use ($permission) {
+                    return \Auth::user()->hasPermission($permission);
+                });
+            }
         }
     }
 

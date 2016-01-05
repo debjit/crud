@@ -52,9 +52,17 @@ class IndexPlanner extends BasePlanner
 
     /**
      * @param string $name
-     * @return \BlackfyreStudio\CRUD\Fields\BaseField
+     * @return \BlackfyreStudio\CRUD\Fields\SelectField
      */
     public function select($name='') {
         return $this->call('select',$name);
+    }
+
+    /**
+     * @param string $name
+     * @return \BlackfyreStudio\CRUD\Fields\BelongsToManyField
+     */
+    public function belongsToMany($name='') {
+        return $this->call('BelongsToMany',$name);
     }
 }

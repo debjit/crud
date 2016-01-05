@@ -23,6 +23,17 @@
       */
      public function render()
      {
-         return $this->getValue();
+         switch ($this->getContext()) {
+             default:
+             case $this::CONTEXT_INDEX:
+                 return $this->getValue();
+                 break;
+             case $this::CONTEXT_FILTER:
+             case $this::CONTEXT_FORM:
+                 return null;
+                 break;
+         }
+
+
      }
  }

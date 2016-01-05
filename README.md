@@ -13,16 +13,15 @@ Contributions are welcome! Either as ideas or (preferably) pull requests :smile:
 
 * IDE Support (with laravel-ide-helper, main angle on PHPStorm)
 * Field types
-  * Text
-  * Email
   * File (DropzoneJS)
   * Image
-  * Select
-  * Belongs to
   * Numbers
   * Markdown
   * CKEditor
   * Tags
+  * Date
+  * Time
+  * Date & Time
 
 
 ## Tasklist
@@ -31,8 +30,6 @@ Contributions are welcome! Either as ideas or (preferably) pull requests :smile:
 * Index view
   * Bulk actions (Delete)
   * Boolean field actions per row
-* Auth management
-  * Roles
 * Field Types
   * Image Crop
 
@@ -45,6 +42,15 @@ Contributions are welcome! Either as ideas or (preferably) pull requests :smile:
   * Bulk delete
 * Create view
 * Edit view
+* Fields
+  * Text
+  * Email
+  * Text Area
+  * Select
+  * Belongs to
+  * Belongs to many
+* Auth management
+   * Roles
 
 ## Installing Crud
 

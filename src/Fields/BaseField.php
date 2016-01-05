@@ -139,8 +139,9 @@ abstract class BaseField
     /**
      * Hook function to be run after form submitting
      * @param $input
+     * @param $model
      */
-    public function postSubmitHook($input)
+    public function postSubmitHook($input, $model)
     {
         // intentionally left blank
     }

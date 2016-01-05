@@ -65,12 +65,24 @@ class FormPlanner extends BasePlanner
 
     /**
      * @param string $name
-     * @return \BlackfyreStudio\CRUD\Fields\BaseField
+     * @return \BlackfyreStudio\CRUD\Fields\TextField
      */
     public function text($name = '') {
         return $this->call('text',$name);
     }
 
+    /**
+     * @param string $name
+     * @return \BlackfyreStudio\CRUD\Fields\TextField
+     */
+    public function email($name = '') {
+        return $this->call('email',$name);
+    }
+
+    /**
+     * @param $name
+     * @return \BlackfyreStudio\CRUD\Fields\TextareaField
+     */
     public function textarea($name) {
         return $this->call('textarea',$name);
     }
@@ -93,14 +105,42 @@ class FormPlanner extends BasePlanner
 
     /**
      * @param string $name
-     * @return \BlackfyreStudio\CRUD\Fields\
+     * @return \BlackfyreStudio\CRUD\Fields\SelectField
      */
     public function select($name='') {
         return $this->call('select',$name);
     }
 
+    /**
+     * @param string $name
+     * @return \BlackfyreStudio\CRUD\Fields\BelongsToField
+     */
+    public function belongsTo($name='') {
+        return $this->call('BelongsTo',$name);
+    }
+
+    /**
+     * @param string $name
+     * @return \BlackfyreStudio\CRUD\Fields\BelongsToManyField
+     */
+    public function belongsToMany($name='') {
+        return $this->call('BelongsToMany',$name);
+    }
+
+    /**
+     * @param string $name
+     * @return \BlackfyreStudio\CRUD\Fields\MarkdownField
+     */
     public function markdown($name='') {
         return $this->call('markdown',$name);
+    }
+
+    /**
+     * @param string $name
+     * @return \BlackfyreStudio\CRUD\Fields\PasswordField
+     */
+    public function password($name='') {
+        return $this->call('password',$name);
     }
 
     /**

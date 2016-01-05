@@ -19,6 +19,8 @@ use Intervention\Image\Facades\Image;
 use Intervention\Image\ImageServiceProvider;
 use Maatwebsite\Excel\ExcelServiceProvider;
 use Maatwebsite\Excel\Facades\Excel;
+use Thomaswelton\LaravelGravatar\Facades\Gravatar;
+use Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider;
 
 /**
  * Class CRUDProvider
@@ -57,6 +59,7 @@ class CRUDProvider extends ServiceProvider
         $this->app->register(HtmlServiceProvider::class);
         $this->app->register(ExcelServiceProvider::class);
         $this->app->register(AuthProvider::class);
+        $this->app->register(LaravelGravatarServiceProvider::class);
 
         /*
          * Adding aliases so the developers won't have to
@@ -67,6 +70,7 @@ class CRUDProvider extends ServiceProvider
         $loader->alias('CRUDForm', FormFacade::class);
         $loader->alias('CRUDHTML', HtmlFacade::class);
         $loader->alias('CRUDExcel', Excel::class);
+        $loader->alias('CRUDGravatar', Gravatar::class);
     }
 
     /**
