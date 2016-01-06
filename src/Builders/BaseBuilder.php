@@ -14,7 +14,6 @@ use BlackfyreStudio\CRUD\Planner\FormPlanner;
 use BlackfyreStudio\CRUD\Planner\IndexPlanner;
 use BlackfyreStudio\CRUD\Planner\ScopePlanner;
 use BlackfyreStudio\CRUD\Planner\FilterPlanner;
-use Illuminate\Console\AppNamespaceDetectorTrait;
 use Input;
 
 /**
@@ -23,8 +22,6 @@ use Input;
  */
 abstract class BaseBuilder
 {
-
-    use AppNamespaceDetectorTrait;
 
     /**
      * Holds the mapper object.

@@ -92,7 +92,7 @@ class IndexBuilder extends BaseBuilder
          */
         $indexPlanner = $this->getPlanner();
 
-        $model = $this->getAppNamespace() . $this->getModel();
+        $model = $this->getModel();
 
         $items = $model::with([]);
         $primaryKey = (new $model)->getKeyName();

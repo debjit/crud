@@ -32,6 +32,8 @@ class Master
     use AppNamespaceDetectorTrait;
 
     protected $modelBaseName;
+    protected $modelFullName;
+    protected $modelNameSpace;
     protected $viewLayout = 'crud::master';
     protected $viewIndex = 'crud::layouts.index';
     protected $viewCreate = 'crud::layouts.create';
@@ -80,6 +82,16 @@ class Master
 
         if ($this->getModelPluralName() === null) {
             $this->setModelPluralName(Str::plural($this->getModelBaseName()));
+        }
+
+
+        if ($this->getModelNameSpace() === null) {
+            $this->setModelNameSpace($this->getAppNamespace());
+        }
+
+
+        if ($this->getModelFullName() === null) {
+            $this->setModelFullName($this->getModelNameSpace() . $this->getModelBaseName());
         }
     }
 
@@ -239,7 +251,7 @@ class Master
         $this->setIndexBuilder(new IndexBuilder($this->getIndexPlanner()));
 
         $this->getIndexBuilder()
-        ->setModel($this->getModelBaseName())
+        ->setModel($this->getModelFullName())
         ->build();
         return $this;
     }
@@ -512,7 +524,7 @@ class Master
 
         $this->setFormBuilder(new FormBuilder($this->getFormPlanner()));
         $this->getFormBuilder()
-        ->setModel($this->getModelBaseName())
+        ->setModel($this->getModelFullName())
         ->setIdentifier($identifier)
         ->setContext($identifier === null ? FormBuilder::CONTEXT_CREATE : FormBuilder::CONTEXT_EDIT)
         ->build();
@@ -574,7 +586,39 @@ class Master
      */
     public function getTable()
     {
-        $model = $this->getAppNamespace() . $this->getModelBaseName();
+        $model = $this->getModelFullName();
         return (new $model)->getTable();
+    }
+
+    /**
+     * @return string
+     */
+    public function getModelNameSpace()
+    {
+        return $this->modelNameSpace;
+    }
+
+    /**
+     * @param string $modelNameSpace
+     */
+    public function setModelNameSpace($modelNameSpace)
+    {
+        $this->modelNameSpace = $modelNameSpace;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getModelFullName()
+    {
+        return $this->modelFullName;
+    }
+
+    /**
+     * @param mixed $modelFullName
+     */
+    public function setModelFullName($modelFullName)
+    {
+        $this->modelFullName = $modelFullName;
     }
 }

@@ -36,7 +36,7 @@ class IndexPlanner extends BasePlanner
 
     /**
      * @param string $name
-     * @return \BlackfyreStudio\CRUD\Fields\BaseField
+     * @return \BlackfyreStudio\CRUD\Fields\BooleanField
      */
     public function boolean($name='') {
         return $this->call('boolean',$name);

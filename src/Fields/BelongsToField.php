@@ -37,7 +37,7 @@ class BelongsToField extends RelationField
             case BaseField::CONTEXT_FILTER:
                 /** @var \Illuminate\Database\Eloquent\Model $baseModel */
                 /** @var \Illuminate\Database\Eloquent\Model $relatedModel */
-                $baseModel = $this->getAppNamespace() . $this->getMasterInstance()->getModelBaseName();
+                $baseModel = $this->getMasterInstance()->getModelFullName();
                 $baseModel = new $baseModel;
                 $primaryKey = $baseModel->getKeyName();
                 $relatedModel = $baseModel->{$this->getName()}()->getRelated();
@@ -56,7 +56,7 @@ class BelongsToField extends RelationField
             case BaseField::CONTEXT_FORM:
                 /** @var \Illuminate\Database\Eloquent\Model $baseModel */
                 /** @var \Illuminate\Database\Eloquent\Model $relatedModel */
-                $baseModel = $this->getAppNamespace() . $this->getMasterInstance()->getModelBaseName();
+                $baseModel = $this->getMasterInstance()->getModelFullName();
                 $baseModel = new $baseModel;
                 $primaryKey = $baseModel->getKeyName();
                 $relatedModel = $baseModel->{$this->getName()}()->getRelated();

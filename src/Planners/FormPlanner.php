@@ -89,7 +89,7 @@ class FormPlanner extends BasePlanner
 
     /**
      * @param string $name
-     * @return \BlackfyreStudio\CRUD\Fields\
+     * @return \BlackfyreStudio\CRUD\Fields\BooleanField
      */
     public function boolean($name='') {
         return $this->call('boolean',$name);

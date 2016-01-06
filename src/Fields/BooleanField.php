@@ -10,8 +10,11 @@
 
 namespace BlackfyreStudio\CRUD\Fields;
 
-class IdentifierField extends BaseField
-{
+/**
+ * Class StringField
+ * @package BlackfyreStudio\CRUD\Fields
+ */
+class BooleanField extends BaseField {
     /**
      * Render the field.
      *
@@ -21,25 +24,10 @@ class IdentifierField extends BaseField
     public function render()
     {
         switch ($this->getContext()) {
-
-            /*
-             * Identifiers are only required in the index view, nowhere else
-             */
-            case $this::CONTEXT_INDEX:
-
-                /*
-                 * Remove unnecessary form-control class
-                 */
-                $this->attributes['class'] = str_replace('form-control', '', $this->attributes['class']);
-
-                return view('crud::fields.identifier', [
-                    'model' => $this->getMasterInstance()->getModelFullName(),
-                    'row' => $this->getRowId(),
-                    'value' => $this->getValue(),
-                    'attributes' => $this->attributes
-                ]);
-                break;
             default:
+            case $this::CONTEXT_INDEX:
+                return $this->getValue();
+                break;
             case $this::CONTEXT_FILTER:
             case $this::CONTEXT_FORM:
                 return null;

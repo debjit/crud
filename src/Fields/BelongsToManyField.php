@@ -31,7 +31,7 @@ class BelongsToManyField extends RelationField
         }
         switch ($this->getContext()) {
             case BaseField::CONTEXT_INDEX:
-                $baseModel = $this->getAppNamespace() . $this->getMasterInstance()->getModelBaseName();
+                $baseModel = $this->getMasterInstance()->getModelFullName();
                 $baseModel    = new $baseModel;
                 $relatedModel = $baseModel->{$this->getName()}()->getRelated();
                 $primaryKey   = $relatedModel->getKeyName();
@@ -42,7 +42,7 @@ class BelongsToManyField extends RelationField
                 return implode(', ', $values);
                 break;
             case BaseField::CONTEXT_FORM:
-                $baseModel = $this->getAppNamespace() . $this->getMasterInstance()->getModelBaseName();
+                $baseModel = $this->getMasterInstance()->getModelFullName();
                 $baseModel  = new $baseModel;
                 $primaryKey = $baseModel->getKeyName();
                 $relatedModel = $baseModel->{$this->getName()}()->getRelated();

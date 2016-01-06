@@ -82,7 +82,7 @@ return [
                 ],
                 [
                     'title'=>'Access Control',
-                    'class'=>'GalleryItem',
+                    'class'=>'Role',
                     'icon'=>'key'
                 ],
             ]
