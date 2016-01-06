@@ -1,0 +1,115 @@
+<?php
+namespace DummyRootNamespaceHttp\Controllers\Crud;
+
+use DummyRootNamespace\User;
+use BlackfyreStudio\CRUD\Master;
+use BlackfyreStudio\CRUD\Planner\FilterPlanner;
+use BlackfyreStudio\CRUD\Planner\FormPlanner;
+use BlackfyreStudio\CRUD\Planner\IndexPlanner;
+use BlackfyreStudio\CRUD\Planner\ScopePlanner;
+
+/**
+ * Class UserController
+ * @package DummyRootNamespace\Http\Controllers\Crud
+ */
+class UserController extends Master
+{
+
+    /**
+     * This function is called when configuring the list view.
+     * @param IndexPlanner $planner
+     */
+    public function indexView(IndexPlanner $planner)
+    {
+        $planner->identifier('id');
+        $planner->string('name')
+            ->setLabel(trans('crud::user.name'));
+        $planner->string('email')
+            ->setLabel(trans('crud::user.email'));
+        $planner->belongsToMany('roles')
+            ->setLabel(trans('crud::user.roles'))
+            ->display('name');
+    }
+
+    /**
+     * This function is called when configuring the form view.
+     * @param FormPlanner $planner
+     */
+    public function formView(FormPlanner $planner)
+    {
+        $planner->text('name')
+            ->setLabel(trans('crud::user.name'));
+
+        $planner->email('email')
+            ->setLabel(trans('crud::user.email'));
+
+        $planner->password('password')
+            ->setLabel(trans('crud::user.password'));
+
+        $planner->belongsToMany('roles')
+            ->setLabel(trans('crud::user.roles'))
+            ->display('name');
+    }
+
+    /**
+     * This function is called when configuring the filter view.
+     * @param FilterPlanner $planner
+     */
+    public function filters(FilterPlanner $planner)
+    {
+        /*
+        $planner->text('email')
+            ->setLabel('crud::user.filter.email');
+        */
+    }
+
+    /**
+     * This function is called when configuring the scope view.
+     * @param ScopePlanner $planner
+     */
+    public function scopes(ScopePlanner $planner)
+    {
+
+    }
+
+    public function create($input) {
+
+
+        if ($input['password']===$input['password_confirm']) {
+
+            $input['password'] = bcrypt($input['password']);
+
+            return User::create($input);
+
+        }
+    }
+
+    /**
+     * Update hook.
+     *
+     * @param  array $input
+     *
+     * @access public
+     * @return void
+     */
+    public function update($input)
+    {
+        $user = User::find($input['user_id']);
+
+        if (empty($input['password'])) {
+            unset($input['password']);
+
+        } else {
+            if ($input['password']===$input['password_confirm']) {
+
+                $input['password'] = bcrypt($input['password']);
+
+
+            }
+        }
+
+
+        $user->update($input);
+    }
+
+}
