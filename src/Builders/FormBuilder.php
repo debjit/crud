@@ -100,7 +100,7 @@ class FormBuilder extends BaseBuilder
     public function build()
     {
         $formMapper = $this->getPlanner();
-        $model = $this->getAppNamespace() . $this->getModel();
+        $model = $this->getModel();
 
         /** @var Model $primaryKey */
         $primaryKey = (new $model)->getKeyName();
@@ -198,7 +198,7 @@ class FormBuilder extends BaseBuilder
     {
         $mapper = $this->getPlanner();
         $admin = $mapper->getCRUDMasterInstance();
-        $model = $this->getAppNamespace() . $this->getModel();
+        $model = $this->getModel();
         $primaryKey = (new $model)->getKeyName();
         $this->setInput($input);
 
@@ -276,7 +276,7 @@ class FormBuilder extends BaseBuilder
         $mapper = $this->getPlanner();
         $admin = $mapper->getCRUDMasterInstance();
         /** @var Model $model */
-        $model = $this->getAppNamespace() . $this->getModel();
+        $model = $this->getModel();
         $this->setInput($input);
         // Field pre update
         /** @var BaseField $field */
@@ -339,7 +339,7 @@ class FormBuilder extends BaseBuilder
     {
         $mapper = $this->getPlanner();
         $admin = $mapper->getCRUDMasterInstance();
-        $model = $this->getAppNamespace() . $this->getModel();
+        $model = $this->getModel();
         $model = $model::find($this->getIdentifier());
         // Model before delete hook
         if (method_exists($admin, 'beforeDelete')) {

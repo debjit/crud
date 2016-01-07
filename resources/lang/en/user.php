@@ -6,5 +6,6 @@ return [
     'password'=> 'Password',
     'passwordConfirm'=> 'Confirm :password',
     'role'=>'Role',
-    'roles'=>'Roles'
+    'roles'=>'Roles',
+    'permissions'=>'Permissions'
 ];

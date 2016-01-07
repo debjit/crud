@@ -11,12 +11,12 @@
 
 namespace BlackfyreStudio\CRUD\Fields;
 
-use Illuminate\Console\AppNamespaceDetectorTrait;
-
+/**
+ * Class BelongsToField
+ * @package BlackfyreStudio\CRUD\Fields
+ */
 class BelongsToField extends RelationField
 {
-
-    use AppNamespaceDetectorTrait;
 
     /**
      * Render the field.

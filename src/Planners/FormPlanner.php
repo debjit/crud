@@ -129,6 +129,14 @@ class FormPlanner extends BasePlanner
 
     /**
      * @param string $name
+     * @return \BlackfyreStudio\CRUD\Fields\MultipleOptionsField
+     */
+    public function multipleOptions($name='') {
+        return $this->call('MultipleOptions',$name);
+    }
+
+    /**
+     * @param string $name
      * @return \BlackfyreStudio\CRUD\Fields\MarkdownField
      */
     public function markdown($name='') {

@@ -12,11 +12,21 @@
 namespace BlackfyreStudio\CRUD\Fields;
 
 /**
- * Class BelongsToManyField
+ * Class MultipleOptionsField
  * @package BlackfyreStudio\CRUD\Fields
  */
-class BelongsToManyField extends RelationField
+class MultipleOptionsField extends RelationField
 {
+    /**
+     * Grid item width
+     * @var array
+     */
+    protected $GridWidth = [
+        'xs'=>6,
+        'sm'=>3,
+    ];
+
+
 
     /**
      * Render the field.
@@ -30,17 +40,6 @@ class BelongsToManyField extends RelationField
             throw new \InvalidArgumentException(sprintf('Please provide a display field for the `%s` relation.', $this->getName()));
         }
         switch ($this->getContext()) {
-            case BaseField::CONTEXT_INDEX:
-                $baseModel = $this->getMasterInstance()->getModelFullName();
-                $baseModel    = new $baseModel;
-                $relatedModel = $baseModel->{$this->getName()}()->getRelated();
-                $primaryKey   = $relatedModel->getKeyName();
-                $values = [];
-                foreach ($this->getValue() as $item) {
-                    $values[$item->{$primaryKey}] = $item->{$this->getDisplayField()};
-                }
-                return implode(', ', $values);
-                break;
             case BaseField::CONTEXT_FORM:
                 $baseModel = $this->getMasterInstance()->getModelFullName();
                 $baseModel  = new $baseModel;
@@ -57,15 +56,17 @@ class BelongsToManyField extends RelationField
                         $values[$item->{$primaryKey}] = $item->{$primaryKey};
                     }
                 }
-                return view('crud::fields.belongs_to_many')
+                return view('crud::fields.multiple_options')
                     ->with('field',  $this)
                     ->with('items',  $items)
-                    ->with('values', $values);
-            break;
+                    ->with('values', $values)
+                    ->with('cell', $this->compileGridClasses());
+                break;
+            case BaseField::CONTEXT_INDEX:
             case BaseField::CONTEXT_FILTER:
             default:
                 return null;
-            break;
+                break;
         }
     }
 
@@ -79,5 +80,33 @@ class BelongsToManyField extends RelationField
     {
         $this->setAttribute('multiple', true);
         return $this->attributes;
+    }
+
+    /**
+     * Get grid item width
+     * @return array
+     */
+    public function getGridWidth()
+    {
+        return $this->GridWidth;
+    }
+
+    /**
+     * Set grid item width
+     * @param array $GridWidth
+     */
+    public function setGridWidth($GridWidth)
+    {
+        $this->GridWidth = $GridWidth;
+    }
+
+    protected function compileGridClasses() {
+        $collector = [];
+
+        foreach ($this->GridWidth as $view=>$size) {
+            $collector[] = 'col-' . $view . '-' . $size;
+        }
+
+        return implode(' ',$collector);
     }
 }

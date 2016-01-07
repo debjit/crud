@@ -22,6 +22,7 @@ Contributions are welcome! Either as ideas or (preferably) pull requests :smile:
   * Date
   * Time
   * Date & Time
+  * Multiple options (Checkbox list)
 
 
 ## Tasklist
