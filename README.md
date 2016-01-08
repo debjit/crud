@@ -9,49 +9,39 @@ This package while is based on the Krafthaus/Bauhaus package, greatly differs on
 
 Contributions are welcome! Either as ideas or (preferably) pull requests :smile:
 
-## Work in progress
-
-* IDE Support (with laravel-ide-helper, main angle on PHPStorm)
-* Field types
-  * File (DropzoneJS)
-  * Image
-  * Numbers
-  * Markdown
-  * CKEditor
-  * Tags
-  * Date
-  * Time
-  * Date & Time
-  * Multiple options (Checkbox list)
-
-
 ## Tasklist
 
+* [x] Laravel 5.1 LTS support
+* [x] Working Scaffold command
+* [x] Index view
+  * [ ] Bulk actions (Delete)
+  * [ ] Boolean field actions per row
+* [x] Create view
+* [x] Edit view
+* [x] Fields
+  * [x] Text
+  * [x] Email
+  * [x] Text Area
+  * [x] Select
+  * [x] Belongs to
+  * [x] Belongs to many
+  * [x] Multiple options (Checkbox list)
+  * [ ] File (DropzoneJS)
+  * [ ] Image
+  * [ ] Image Crop
+  * [ ] Numbers
+  * [ ] Markdown
+  * [ ] CKEditor
+  * [ ] Tags
+  * [ ] Date
+  * [ ] Time
+  * [ ] Date & Time
+* [x] Auth management
+   * [x] Roles
+* [x] IDE Support (with laravel-ide-helper, main angle on PHPStorm) 
+* [ ] Document
+* [ ] User & Role controller creation based on stub
 
-* Index view
-  * Bulk actions (Delete)
-  * Boolean field actions per row
-* Field Types
-  * Image Crop
-
-
-## Done
-
-* Laravel 5.1 LTS support
-* Working Scaffold command
-* Index view
-  * Bulk delete
-* Create view
-* Edit view
-* Fields
-  * Text
-  * Email
-  * Text Area
-  * Select
-  * Belongs to
-  * Belongs to many
-* Auth management
-   * Roles
 
 ## Installing Crud
 

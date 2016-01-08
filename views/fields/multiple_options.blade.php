@@ -6,7 +6,7 @@
             <div class="{{$cell}}">
                 <div class="checkbox">
                     <label>
-                        {!! CRUDForm::checkbox($field->getName(),$option) !!} {{$label}}
+                        {!! CRUDForm::checkbox($field->getName() . '[]',$option,array_key_exists($option,$values)) !!} {{$label}}
                     </label>
                 </div>
             </div>

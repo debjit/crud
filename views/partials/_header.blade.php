@@ -27,4 +27,4 @@
 
 </head>
 
-<body class="skin-green sidebar-mini">
+<body class="{{config('crud.template-skin','skin-green')}} sidebar-mini">

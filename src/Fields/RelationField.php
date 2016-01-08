@@ -79,11 +79,13 @@ abstract class RelationField extends BaseField {
      */
     public function postSubmitHook($input, $baseModel)
     {
-
         $model = $baseModel::find($this->getMasterInstance()->getFormBuilder()->getIdentifier());
         $pivot = $this->getName();
+
         if(isset($input[$pivot])) {
             $model->{$pivot}()->sync($input[$pivot]);
+        } else {
+            $model->{$pivot}()->sync([]);
         }
     }
 }

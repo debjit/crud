@@ -1,0 +1,81 @@
+<?php
+namespace DummyRootNamespaceHttp\Controllers\Crud;
+
+use BlackfyreStudio\CRUD\Master;
+use BlackfyreStudio\CRUD\Models\Role;
+use BlackfyreStudio\CRUD\Planner\FilterPlanner;
+use BlackfyreStudio\CRUD\Planner\FormPlanner;
+use BlackfyreStudio\CRUD\Planner\IndexPlanner;
+use BlackfyreStudio\CRUD\Planner\ScopePlanner;
+
+/**
+ * Class GalleryItemController
+ * @package DummyRootNamespaceHttpHttp\Controllers\Crud
+ */
+class RoleController extends Master
+{
+
+    protected $modelNameSpace = '\BlackfyreStudio\CRUD\Models\\';
+
+    public function __constructor() {
+        $this->setModelBaseName('');
+    }
+
+    /**
+     * This function is called when configuring the list view.
+     * @param IndexPlanner $planner
+     */
+    public function indexView(IndexPlanner $planner)
+    {
+        $planner->identifier('id');
+        $planner->string('label');
+        $planner->boolean('root');
+    }
+
+    /**
+     * This function is called when configuring the form view.
+     * @param FormPlanner $planner
+     */
+    public function formView(FormPlanner $planner)
+    {
+        $planner->tab(trans('crud::user.role'),function(FormPlanner $planner) {
+            $planner->text('label');
+
+        });
+
+        $planner->tab(trans('crud::user.permissions'), function(FormPlanner $planner) {
+            $planner->multipleOptions('permissions')
+                ->display('label');
+        });
+
+    }
+
+    /**
+     * This function is called when configuring the filter view.
+     * @param FilterPlanner $planner
+     */
+    public function filters(FilterPlanner $planner)
+    {
+
+    }
+
+    /**
+     * This function is called when configuring the scope view.
+     * @param ScopePlanner $planner
+     */
+    public function scopes(ScopePlanner $planner)
+    {
+
+    }
+
+    /**
+     * Custom create rule
+     * @param array $input
+     * @return static
+     */
+    public function create($input) {
+        $input['name'] = str_slug($input['label']);
+
+        return Role::create($input);
+    }
+}

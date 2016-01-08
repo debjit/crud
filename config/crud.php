@@ -28,16 +28,16 @@ return [
     ],
 
     /**
-     * The directory where the crud models are located.
+     * The directory where the crud controllers are located.
      * @var string
      */
     'directory'=>'Crud',
 
-    'default-roles'=>[
-        'Administrator',
-        'Editor',
-        'User'
-    ],
+    /**
+     * Set the template skin
+     * @var string
+     */
+    'template-skin'=>'skin-black',
 
     /**
      * Global date/time formatting.

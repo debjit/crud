@@ -72,6 +72,11 @@ class UserController extends Master
 
     }
 
+    /**
+     * Custom create rule
+     * @param array $input
+     * @return static
+     */
     public function create($input) {
 
 
