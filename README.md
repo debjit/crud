@@ -16,6 +16,8 @@ Contributions are welcome! Either as ideas or (preferably) pull requests :smile:
 * [x] Index view
   * [ ] Bulk actions (Delete)
   * [ ] Boolean field actions per row
+  * [ ] Filters
+  * [ ] Scopes
 * [x] Create view
 * [x] Edit view
 * [x] Fields

@@ -5,8 +5,21 @@ $icon-font-path: '../fonts/';
 @import "../bower/bootstrap-sass-official/assets/stylesheets/bootstrap";
 @import "../bower/font-awesome/scss/font-awesome";
 @import "../bower/admin-lte.scss/scss/admin-lte";
-@import "template/_skin-green";
+
+/* Template skins */
 @import "template/_skin-black";
+@import "template/_skin-black-light";
+@import "template/_skin-blue";
+@import "template/_skin-blue-light";
+@import "template/_skin-green";
+@import "template/_skin-green-light";
+@import "template/_skin-purple";
+@import "template/_skin-purple-light";
+@import "template/_skin-red";
+@import "template/_skin-red-light";
+@import "template/_skin-yellow";
+@import "template/_skin-yellow-light";
+
 
 /* Vendor imports */
 @import "vendor/bootstrap-markdown";

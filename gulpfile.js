@@ -7,7 +7,8 @@ var gulp = require('gulp'),
     rename = require('gulp-rename'),
     uglify = require('gulp-uglify'),
     gutil = require('gulp-util'),
-    jshint = require('gulp-jshint');
+    jshint = require('gulp-jshint'),
+    cssnano = require('gulp-cssnano');
 
 var bowerBase = 'resources/bower/';
 
@@ -49,7 +50,8 @@ gulp.task('styles:sass', function() {
       .pipe(postcss([
           require('autoprefixer-core')({browsers: ['last 1 version']})
       ]))
-      .pipe(sourcemap.write())
+      .pipe(cssnano())
+      .pipe(sourcemap.write('.'))
       .pipe(gulp.dest('public/styles'));
 });
 
