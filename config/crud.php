@@ -22,10 +22,19 @@ return [
         'short'=>'CRUD'
     ],
 
+    /**
+     * Company information in the footer
+     */
     'company'=>[
         'name'=>'BlacfyreStudio',
         'link'=>'https://github.com/BlackfyreStudio'
     ],
+
+    /**
+     * Set the template skin
+     * @var string
+     */
+    'template-skin'=>'skin-black',
 
     /**
      * The directory where the crud controllers are located.
@@ -33,11 +42,6 @@ return [
      */
     'directory'=>'Crud',
 
-    /**
-     * Set the template skin
-     * @var string
-     */
-    'template-skin'=>'skin-black',
 
     /**
      * Global date/time formatting.

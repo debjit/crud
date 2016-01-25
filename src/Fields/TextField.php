@@ -27,9 +27,9 @@ class TextField extends BaseField
         switch ($this->getContext()) {
             default:
             case $this::CONTEXT_INDEX:
-            case $this::CONTEXT_FILTER:
                 return $this->getValue();
                 break;
+            case $this::CONTEXT_FILTER:
             case $this::CONTEXT_FORM:
                 return view('crud::fields.text', [
                     'field' => $this
