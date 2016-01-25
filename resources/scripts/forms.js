@@ -67,7 +67,7 @@
 
             // multiple limit
             var limit = $(this).find('input').last().attr('multiple-limit');
-            if (limit != undefined) {
+            if (limit !== undefined) {
                 var fields = $(this).find('input').length;
 
                 if (fields >= limit) {
