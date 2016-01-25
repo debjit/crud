@@ -1,8 +1,30 @@
 <?php
+/**
+ *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License along
+ *  with this program; if not, write to the Free Software Foundation, Inc.,
+ *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
 
 namespace BlackfyreStudio\CRUD;
 
 
+/**
+ * Class crudRoles
+ * @package BlackfyreStudio\CRUD
+ */
 trait crudRoles
 {
     /**
@@ -38,7 +60,7 @@ trait crudRoles
         /** @var \App\User $this */
         if (is_string($role)) {
             return $this->roles()->save(
-                Models\Role::where(['name'=>$role])->firstOrFail()
+                Models\Role::where(['name' => $role])->firstOrFail()
             );
         }
 
@@ -64,7 +86,7 @@ trait crudRoles
             foreach ($this->roles as $role) {
                 /** @var Models\Role $role */
 
-                if ($role->permissions->contains('name',$permission)) {
+                if ($role->permissions->contains('name', $permission)) {
                     $retVal = true;
                 }
             }
@@ -76,7 +98,7 @@ trait crudRoles
                 /** @var Models\Role $role */
 
                 /* TODO: revisit this for a more proper way */
-                if ($role->permissions->contains('name',$permission->name)) {
+                if ($role->permissions->contains('name', $permission->name)) {
                     $retVal = true;
                 }
             }
@@ -89,7 +111,8 @@ trait crudRoles
     /**
      * @return boolean
      */
-    public function isRoot() {
+    public function isRoot()
+    {
         /** @var \App\User $this */
         return $this->roles->contains('root', 1);
     }

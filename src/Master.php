@@ -1,9 +1,21 @@
 <?php
 /**
- * User: mgalicz
- * Date: 2015.06.18.
- * Time: 15:57
- * Project: crud-tester
+ *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License along
+ *  with this program; if not, write to the Free Software Foundation, Inc.,
+ *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
 namespace BlackfyreStudio\CRUD;
@@ -31,26 +43,74 @@ class Master
 
     use AppNamespaceDetectorTrait;
 
+    /**
+     * @var
+     */
     protected $modelBaseName;
+    /**
+     * @var
+     */
     protected $modelFullName;
+    /**
+     * @var
+     */
     protected $modelNameSpace;
+    /**
+     * @var string
+     */
     protected $viewLayout = 'crud::master';
+    /**
+     * @var string
+     */
     protected $viewIndex = 'crud::layouts.index';
+    /**
+     * @var string
+     */
     protected $viewCreate = 'crud::layouts.create';
+    /**
+     * @var string
+     */
     protected $viewUpdate = 'crud::layouts.edit';
+    /**
+     * @var
+     */
     protected $modelSingularName;
+    /**
+     * @var
+     */
     protected $modelPluralName;
+    /**
+     * @var
+     */
     protected $indexPlanner;
+    /**
+     * @var
+     */
     protected $indexBuilder;
     /**
      * Holds the number of items per page.
      * @var int
      */
     protected $perPage = 25;
+    /**
+     * @var
+     */
     protected $filterPlanner;
+    /**
+     * @var
+     */
     protected $filterBuilder;
+    /**
+     * @var
+     */
     protected $scopePlanner;
+    /**
+     * @var
+     */
     protected $scopeBuilder;
+    /**
+     * @var
+     */
     protected $exportTypes;
 
     /**
@@ -251,8 +311,8 @@ class Master
         $this->setIndexBuilder(new IndexBuilder($this->getIndexPlanner()));
 
         $this->getIndexBuilder()
-        ->setModel($this->getModelFullName())
-        ->build();
+            ->setModel($this->getModelFullName())
+            ->build();
         return $this;
     }
 
@@ -283,6 +343,10 @@ class Master
         return $this->indexPlanner;
     }
 
+    /**
+     * @param IndexBuilder $builder
+     * @return $this
+     */
     public function setIndexBuilder(IndexBuilder $builder)
     {
         $this->indexBuilder = $builder;
@@ -411,6 +475,7 @@ class Master
     {
         // intentionally left blank
     }
+
     /**
      * Configures the scopes and builds the scope data from that.
      *
@@ -425,6 +490,7 @@ class Master
         $this->getScopeBuilder()->build();
         return $this;
     }
+
     /**
      * Set the ScopePlanner object.
      *
@@ -439,6 +505,7 @@ class Master
         $mapper->setCRUDMasterInstance($this);
         return $this;
     }
+
     /**
      * Get the ScopePlanner object.
      *
@@ -449,6 +516,7 @@ class Master
     {
         return $this->scopePlanner;
     }
+
     /**
      * Set the ScopeBuilder object.
      *
@@ -462,6 +530,7 @@ class Master
         $this->scopeBuilder = $scopeBuilder;
         return $this;
     }
+
     /**
      * Get the ScopeBuilder object.
      *
@@ -486,6 +555,7 @@ class Master
         $this->exportTypes = $exportTypes;
         return $this;
     }
+
     /**
      * Get the export types array.
      *
@@ -499,6 +569,7 @@ class Master
         }
         return Config::get('crud.export-types');
     }
+
     /**
      * Get a new export builder instance.
      *
@@ -524,12 +595,13 @@ class Master
 
         $this->setFormBuilder(new FormBuilder($this->getFormPlanner()));
         $this->getFormBuilder()
-        ->setModel($this->getModelFullName())
-        ->setIdentifier($identifier)
-        ->setContext($identifier === null ? FormBuilder::CONTEXT_CREATE : FormBuilder::CONTEXT_EDIT)
-        ->build();
+            ->setModel($this->getModelFullName())
+            ->setIdentifier($identifier)
+            ->setContext($identifier === null ? FormBuilder::CONTEXT_CREATE : FormBuilder::CONTEXT_EDIT)
+            ->build();
         return $this;
     }
+
     /**
      * Set the FormMapper object.
      *
@@ -544,6 +616,7 @@ class Master
         $mapper->setCRUDMasterInstance($this);
         return $this;
     }
+
     /**
      * Get the FormPlanner object.
      *
@@ -554,6 +627,7 @@ class Master
     {
         return $this->formPlanner;
     }
+
     /**
      * Set the FormBuilder object.
      *
@@ -567,6 +641,7 @@ class Master
         $this->formBuilder = $builder;
         return $this;
     }
+
     /**
      * Get the FormBuilder object.
      *

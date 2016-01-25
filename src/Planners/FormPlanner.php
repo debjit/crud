@@ -1,14 +1,25 @@
 <?php
 /**
- * This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
+ *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
  *
- * (c) Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
  *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License along
+ *  with this program; if not, write to the Free Software Foundation, Inc.,
+ *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
 namespace BlackfyreStudio\CRUD\Planner;
+
 use BlackfyreStudio\CRUD\Exceptions\PlannerException;
 use BlackfyreStudio\CRUD\Fields\BaseField;
 use Illuminate\Support\Str;
@@ -20,8 +31,14 @@ use Closure;
  */
 class FormPlanner extends BasePlanner
 {
+    /**
+     * @var
+     */
     protected $tab;
 
+    /**
+     * @var string
+     */
     protected $position = 'left';
 
     /**
@@ -59,96 +76,108 @@ class FormPlanner extends BasePlanner
      * @param string $name
      * @return \BlackfyreStudio\CRUD\Fields\StringField
      */
-    public function string($name = '') {
-        return $this->call('string',$name);
+    public function string($name = '')
+    {
+        return $this->call('string', $name);
     }
 
     /**
      * @param string $name
      * @return \BlackfyreStudio\CRUD\Fields\TextField
      */
-    public function text($name = '') {
-        return $this->call('text',$name);
+    public function text($name = '')
+    {
+        return $this->call('text', $name);
     }
 
     /**
      * @param string $name
      * @return \BlackfyreStudio\CRUD\Fields\TextField
      */
-    public function email($name = '') {
-        return $this->call('email',$name);
+    public function email($name = '')
+    {
+        return $this->call('email', $name);
     }
 
     /**
      * @param $name
      * @return \BlackfyreStudio\CRUD\Fields\TextareaField
      */
-    public function textarea($name) {
-        return $this->call('textarea',$name);
+    public function textarea($name)
+    {
+        return $this->call('textarea', $name);
     }
 
     /**
      * @param string $name
      * @return \BlackfyreStudio\CRUD\Fields\BooleanField
      */
-    public function boolean($name='') {
-        return $this->call('boolean',$name);
+    public function boolean($name = '')
+    {
+        return $this->call('boolean', $name);
     }
 
     /**
      * @param string $name
      * @return \BlackfyreStudio\CRUD\Fields\
      */
-    public function image($name='') {
-        return $this->call('image',$name);
+    public function image($name = '')
+    {
+        return $this->call('image', $name);
     }
 
     /**
      * @param string $name
      * @return \BlackfyreStudio\CRUD\Fields\SelectField
      */
-    public function select($name='') {
-        return $this->call('select',$name);
+    public function select($name = '')
+    {
+        return $this->call('select', $name);
     }
 
     /**
      * @param string $name
      * @return \BlackfyreStudio\CRUD\Fields\BelongsToField
      */
-    public function belongsTo($name='') {
-        return $this->call('BelongsTo',$name);
+    public function belongsTo($name = '')
+    {
+        return $this->call('BelongsTo', $name);
     }
 
     /**
      * @param string $name
      * @return \BlackfyreStudio\CRUD\Fields\BelongsToManyField
      */
-    public function belongsToMany($name='') {
-        return $this->call('BelongsToMany',$name);
+    public function belongsToMany($name = '')
+    {
+        return $this->call('BelongsToMany', $name);
     }
 
     /**
      * @param string $name
      * @return \BlackfyreStudio\CRUD\Fields\MultipleOptionsField
      */
-    public function multipleOptions($name='') {
-        return $this->call('MultipleOptions',$name);
+    public function multipleOptions($name = '')
+    {
+        return $this->call('MultipleOptions', $name);
     }
 
     /**
      * @param string $name
      * @return \BlackfyreStudio\CRUD\Fields\MarkdownField
      */
-    public function markdown($name='') {
-        return $this->call('markdown',$name);
+    public function markdown($name = '')
+    {
+        return $this->call('markdown', $name);
     }
 
     /**
      * @param string $name
      * @return \BlackfyreStudio\CRUD\Fields\PasswordField
      */
-    public function password($name='') {
-        return $this->call('password',$name);
+    public function password($name = '')
+    {
+        return $this->call('password', $name);
     }
 
     /**
@@ -161,6 +190,7 @@ class FormPlanner extends BasePlanner
     {
         return count($this->getTabs()) > 0;
     }
+
     /**
      * Get the mapper tabs.
      *
@@ -179,10 +209,11 @@ class FormPlanner extends BasePlanner
         }
         return $tabs;
     }
+
     /**
      * Set the mapper current tab.
      *
-     * @param  string          $name
+     * @param  string $name
      * @param  string|callable $mapper
      *
      * @access public
@@ -195,14 +226,19 @@ class FormPlanner extends BasePlanner
             $mapper($this);
         }
     }
+
+    /**
+     * @return mixed
+     */
     public function getTab()
     {
         return $this->tab;
     }
+
     /**
      * Set the field position. (left|right).
      *
-     * @param  string  $position
+     * @param  string $position
      * @param  Closure $mapper
      *
      * @access public
@@ -213,6 +249,7 @@ class FormPlanner extends BasePlanner
         $this->position = $position;
         $mapper($this);
     }
+
     /**
      * Get the field position.
      *
@@ -223,6 +260,7 @@ class FormPlanner extends BasePlanner
     {
         return $this->position;
     }
+
     /**
      * Check for fields on a specific position.
      *

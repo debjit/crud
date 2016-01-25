@@ -1,11 +1,21 @@
 <?php
 /**
- * This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
+ *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
  *
- * (c) Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
  *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License along
+ *  with this program; if not, write to the Free Software Foundation, Inc.,
+ *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
 
@@ -32,9 +42,9 @@ class BelongsToManyField extends RelationField
         switch ($this->getContext()) {
             case BaseField::CONTEXT_INDEX:
                 $baseModel = $this->getMasterInstance()->getModelFullName();
-                $baseModel    = new $baseModel;
+                $baseModel = new $baseModel;
                 $relatedModel = $baseModel->{$this->getName()}()->getRelated();
-                $primaryKey   = $relatedModel->getKeyName();
+                $primaryKey = $relatedModel->getKeyName();
                 $values = [];
                 foreach ($this->getValue() as $item) {
                     $values[$item->{$primaryKey}] = $item->{$this->getDisplayField()};
@@ -43,7 +53,7 @@ class BelongsToManyField extends RelationField
                 break;
             case BaseField::CONTEXT_FORM:
                 $baseModel = $this->getMasterInstance()->getModelFullName();
-                $baseModel  = new $baseModel;
+                $baseModel = new $baseModel;
                 $primaryKey = $baseModel->getKeyName();
                 $relatedModel = $baseModel->{$this->getName()}()->getRelated();
                 $items = [];
@@ -58,14 +68,14 @@ class BelongsToManyField extends RelationField
                     }
                 }
                 return view('crud::fields.belongs_to_many')
-                    ->with('field',  $this)
-                    ->with('items',  $items)
+                    ->with('field', $this)
+                    ->with('items', $items)
                     ->with('values', $values);
-            break;
+                break;
             case BaseField::CONTEXT_FILTER:
             default:
                 return null;
-            break;
+                break;
         }
     }
 

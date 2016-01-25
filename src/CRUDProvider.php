@@ -1,6 +1,7 @@
 <?php
 /**
- *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@gmail.com>
+ *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -164,7 +165,7 @@ class CRUDProvider extends ServiceProvider
          * Setting up migrations to be published
          */
         $migrations = __DIR__ . '/Migrations/';
-        $this->publishes([$migrations => base_path('database/migrations')],'migrations');
+        $this->publishes([$migrations => base_path('database/migrations')], 'migrations');
 
         /*
          * Setting up translations
