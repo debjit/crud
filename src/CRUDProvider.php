@@ -123,6 +123,10 @@ class CRUDProvider extends ServiceProvider
             return $app[Console\InstallCommand::class];
         });
 
+        $this->app->singleton('command.crud.defaultcontrollers', function ($app) {
+            return $app[Console\CreateDefaultControllerCommand::class];
+        });
+
         $this->commands([
             'command.crud.scaffold',
             'command.crud.migration',
@@ -131,7 +135,8 @@ class CRUDProvider extends ServiceProvider
             'command.crud.roles',
             'command.crud.install',
             'command.crud.permission',
-            'command.crud.model'
+            'command.crud.model',
+            'command.crud.defaultcontrollers'
         ]);
     }
 

@@ -41,8 +41,8 @@ Contributions are welcome! Either as ideas or (preferably) pull requests :smile:
 * [x] Auth management
    * [x] Roles
 * [x] IDE Support (with laravel-ide-helper, main angle on PHPStorm) 
-* [ ] Document
-* [ ] User & Role controller creation based on stub
+* [ ] Documentation
+* [x] User & Role controller creation based on stub
 
 
 ## Installing Crud

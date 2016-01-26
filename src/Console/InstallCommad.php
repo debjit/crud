@@ -90,6 +90,14 @@ class InstallCommand extends Command {
             ]);
         }
 
+        $this->info('Creating default controllers');
+        $this->call('crud:controller-stub',[
+            'name'=>'Role'
+        ]);
+        $this->call('crud:controller-stub',[
+            'name'=>'User'
+        ]);
+
         $this->call('optimize');
 
     }
