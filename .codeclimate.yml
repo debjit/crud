@@ -1,7 +1,24 @@
-languages:
-  Ruby: false
-  JavaScript: true
-  PHP: true
-  Python: false
+engines:
+  rubocop:
+    enabled: false
+  golint:
+    enabled: false
+  eslint:
+    enabled: false
+  csslint:
+    enabled: true
+  phpcodesniffer:
+    enabled: true
+  phpmd:
+    enabled: true
+  scss-lint:
+    enabled: true
+ratings:
+  paths:
+  - src/**
+  - resources/**
+  - "**.php"
+  - "**.js"
+  - "**.scss"
 exclude_paths:
-- "public/**/*"
+- public/**/*
