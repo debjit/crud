@@ -32,7 +32,7 @@ Contributions are welcome! Either as ideas or (preferably) pull requests :smile:
   * [ ] Image
   * [ ] Image Crop
   * [ ] Numbers
-  * [ ] Markdown
+  * [x] Markdown
   * [ ] CKEditor
   * [ ] Tags
   * [ ] Date

@@ -43,9 +43,8 @@ var paths = {
         */
         bowerBase + 'jquery-slimscroll/jquery.slimscroll.js',
         bowerBase + 'fastclick/lib/fastclick.js',
-        bowerBase + 'markdown/lib/markdown.js',
-        bowerBase + 'bootstrap-markdown/js/bootstrap-markdown.js',
         bowerBase + 'iCheck/icheck.js',
+        bowerBase + 'simplemde/dist/simplemde.min.js',
         /*
         bowerBase + '',
         */

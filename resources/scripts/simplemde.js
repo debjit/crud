@@ -17,31 +17,19 @@
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+(function ($, window, document) {
 
-/* Template base */
+    'use strict';
 
-$icon-font-path: '../fonts/';
+    // auto tab selection
+    $('[data-provide=markdown]').each(function(element) {
 
-@import "../bower/bootstrap-sass-official/assets/stylesheets/bootstrap";
-@import "../bower/font-awesome/scss/font-awesome";
-@import "../bower/admin-lte.scss/scss/admin-lte";
+        var $e = $(this);
 
-/* Template skins */
-@import "template/_skin-black";
-@import "template/_skin-black-light";
-@import "template/_skin-blue";
-@import "template/_skin-blue-light";
-@import "template/_skin-green";
-@import "template/_skin-green-light";
-@import "template/_skin-purple";
-@import "template/_skin-purple-light";
-@import "template/_skin-red";
-@import "template/_skin-red-light";
-@import "template/_skin-yellow";
-@import "template/_skin-yellow-light";
+        new SimpleMDE({
+            element: element,
+            spellChecker: $e.attr('data-spell') ? true : false
+        });
+    });
 
-
-/* Vendor imports */
-@import "vendor/bootstrap-markdown";
-@import "vendor/icheck-square";
-@import "vendor/simplemde";
+})(jQuery, window, document);

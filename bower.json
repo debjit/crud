@@ -16,8 +16,6 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap-markdown": "~2.9.0",
-    "markdown": "~0.5.0"
   },
   "devDependencies": {
     "admin-lte.scss": "~3.1.2",
@@ -43,7 +41,9 @@
     "datatables": "~1.10.7",
     "datatables-plugins": "~1.10.7",
     "fullcalendar": "~2.3.1",
-    "pace": "~1.0.2"
+    "pace": "~1.0.2",
+    "markdown": "~0.5.0",
+    "simplemde": "~1.10.0"
   },
   "resolutions": {
     "jquery": ">= 2.1.0"
