@@ -181,6 +181,15 @@ class FormPlanner extends BasePlanner
     }
 
     /**
+     * @param string $name
+     * @return \BlackfyreStudio\CRUD\Fields\NumericField
+     */
+    public function number($name = '')
+    {
+        return $this->call('numeric', $name);
+    }
+
+    /**
      * Check if this mapper has tabs.
      *
      * @access public

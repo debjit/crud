@@ -31,7 +31,7 @@ Contributions are welcome! Either as ideas or (preferably) pull requests :smile:
   * [ ] File (DropzoneJS)
   * [ ] Image
   * [ ] Image Crop
-  * [ ] Numbers
+  * [x] Numbers
   * [x] Markdown
   * [ ] CKEditor
   * [ ] Tags
