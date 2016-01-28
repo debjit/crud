@@ -34,7 +34,7 @@ Contributions are welcome! Either as ideas or (preferably) pull requests :smile:
   * [x] Numbers
   * [x] Markdown
   * [ ] CKEditor
-  * [ ] Tags
+  * [x] Tags
   * [ ] Date
   * [ ] Time
   * [ ] Date & Time

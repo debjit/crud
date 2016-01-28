@@ -190,6 +190,15 @@ class FormPlanner extends BasePlanner
     }
 
     /**
+     * @param string $name
+     * @return \BlackfyreStudio\CRUD\Fields\TagField
+     */
+    public function tags($name = '')
+    {
+        return $this->call('tag', $name);
+    }
+
+    /**
      * Check if this mapper has tabs.
      *
      * @access public

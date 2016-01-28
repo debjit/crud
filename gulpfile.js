@@ -45,6 +45,7 @@ var paths = {
         bowerBase + 'fastclick/lib/fastclick.js',
         bowerBase + 'iCheck/icheck.js',
         bowerBase + 'simplemde/dist/simplemde.min.js',
+        bowerBase + 'select2/dist/js/select2.full.js',
         /*
         bowerBase + '',
         */
