@@ -20,7 +20,7 @@
 
 namespace DummyRootNamespaceHttp\Controllers\Crud;
 
-use DummyRootNamespace\User;
+use DummyRootNamespaceUser;
 use BlackfyreStudio\CRUD\Master;
 use BlackfyreStudio\CRUD\Planner\FilterPlanner;
 use BlackfyreStudio\CRUD\Planner\FormPlanner;

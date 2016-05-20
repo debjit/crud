@@ -38,7 +38,7 @@ return [
      * Company information in the footer
      */
     'company'=>[
-        'name'=>'BlacfyreStudio',
+        'name'=>'BlackfyreStudio',
         'link'=>'https://github.com/BlackfyreStudio'
     ],
 
