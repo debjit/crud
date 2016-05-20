@@ -14,7 +14,7 @@ Contributions are welcome! Either as ideas or (preferably) pull requests :smile:
 * [x] Laravel 5.1 LTS support
 * [x] Working Scaffold command
 * [x] Index view
-  * [ ] Bulk actions (Delete)
+  * [x] Bulk actions (Delete)
   * [ ] Boolean field actions per row
   * [ ] Filters
   * [ ] Scopes
