@@ -79,7 +79,7 @@ class MenuBuilder
 
         $html = '';
         $html .= '<ul class="sidebar-menu" id="side-menu">';
-        $html .= sprintf('<li><a href="%s"><i class="fa fa-dashboard fa-fw"></i>  <span>%s</span></a></li>', route('crud.home'), trans('crud::views.dashboard.title'));
+        $html .= sprintf('<li><a href="%s"><i class="fa fa-dashboard"></i> <span>%s</span></a></li>', route('crud.home'), trans('crud::views.dashboard.title'));
         $html .= $menuBuilder->buildMenu($menuBuilder->items);
         $html .= '</ul>';
         return $html;
@@ -119,7 +119,7 @@ class MenuBuilder
 
                 if (array_key_exists('children',$value)) {
                     $html .= '<li>';
-                    $html .= sprintf('<a href="#">%s%s<i class="fa fa-angle-left pull-right"></i></a>', $icon, $value['title']);
+                    $html .= sprintf('<a href="#">%s <span>%s</span><i class="fa fa-angle-left pull-right"></i></a>', $icon, $value['title']);
                     $html .= '<ul class="treeview-menu">';
                     $html .= $this->buildMenu($value['children']);
                     $html .= '</ul>';
@@ -161,7 +161,7 @@ class MenuBuilder
                     $custom = implode(' ', $custom);
                 }
 
-                $html .= sprintf('<li><a href="%s" %s>%s<span>%s</span></a></li>', $url, $custom, $icon, $value['title']);
+                $html .= sprintf('<li><a href="%s" %s>%s <span>%s</span></a></li>', $url, $custom, $icon, $value['title']);
             }
 
 

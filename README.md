@@ -13,6 +13,8 @@ Contributions are welcome! Either as ideas or (preferably) pull requests :smile:
 
 * [x] Laravel 5.1 LTS support
 * [x] Working Scaffold command
+* [ ] Logout
+* [ ] Password change
 * [x] Index view
   * [x] Bulk actions (Delete)
   * [ ] Boolean field actions per row
