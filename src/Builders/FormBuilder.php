@@ -329,7 +329,7 @@ class FormBuilder extends BaseBuilder
 
         /* Model update hook */
         if (method_exists($this->getPlanner()->getCRUDMasterInstance(), 'update')) {
-            $this->getPlanner()->getCRUDMasterInstance()->update($this->getInput(), $model);
+            $this->getPlanner()->getCRUDMasterInstance()->update($this->getInput(), $model::find($this->getIdentifier()));
         } else {
             $model::find($this->getIdentifier())
                 ->update($this->getInput());
