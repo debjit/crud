@@ -88,7 +88,7 @@
             <div class="col-sm-{{ $MasterInstance->getFilterBuilder()->getResult()->getFields() ? 8 : 12 }}">
                 <div class="box">
                     <div class="box-header">
-                        <div class="box-tools">
+                        <div class="box-tools pull-right">
                             <a class="btn btn-success" href="{{ route('crud.create', $ModelName) }}">
                                 <i class="fa fa-plus"></i>
                                 {{ trans('crud::index.button.create-new', ['model' => $MasterInstance->getModelSingularName()]) }}
