@@ -21211,7 +21211,7 @@ function _init() {
         var $e = $(this);
 
         new SimpleMDE({
-            element: element,
+            element: $e[0],
             spellChecker: $e.attr('data-spell') ? true : false
         });
     });
