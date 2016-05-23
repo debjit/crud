@@ -26,9 +26,9 @@
 
         var $e = $(this);
 
-        new SimpleMDE({
+        var mde = new SimpleMDE({
             element: $e[0],
-            spellChecker: $e.attr('data-spell') ? true : false
+            hideIcons: ['fullscreen','side-by-side']
         });
     });
 
