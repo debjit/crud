@@ -61,7 +61,7 @@ class MultipleOptionsField extends RelationField
                 $id = $this->getMasterInstance()->getFormBuilder()->getIdentifier();
                 $values = [];
                 if ($id !== null) {
-                    foreach ($baseModel::find($id)->{$relatedModel->getTable()} as $item) {
+                    foreach ($baseModel::find($id)->{$this->getName()} as $item) {
                         $values[$item->{$primaryKey}] = $item->{$primaryKey};
                     }
                 }
