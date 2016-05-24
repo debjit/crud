@@ -21,7 +21,7 @@ return [
                 'user-signed-in' => 'User logged in.'
             ],
             'sign-out' => [
-                'user-signed-out' => 'User signed out.'
+                'user-signed-out' => 'Signed out.'
             ]
         ]
     ],

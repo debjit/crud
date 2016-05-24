@@ -28,6 +28,11 @@
     'uses' => 'BlackfyreStudio\CRUD\Controllers\Auth\AuthController@startSession'
 ]);
 
+\Route::get(\Config::get('crud.uri') . '/logout', [
+    'as' => 'crud.logout',
+    'uses' => 'BlackfyreStudio\CRUD\Controllers\Auth\AuthController@loginPage'
+]);
+
 \Route::group([
     'prefix' => \Config::get('crud.uri'),
     'middleware' => ['crudAuth']

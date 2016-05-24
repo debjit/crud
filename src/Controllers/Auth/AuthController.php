@@ -71,14 +71,14 @@ class AuthController extends Controller
             ];
 
             if (Auth::attempt($data, Input::has('remember'))) {
-                Session::flash('message.success', trans('crud::messages.success.messages.user-signed-in'));
+                Session::flash('message.success', trans('crud::messages.success.messages.sign-in.user-signed-in'));
                 return redirect()->intended(route('crud.home'));
             }
 
-            Session::flash('message.error', trans('crud::messages.error.messages.sign-in.user-not-found'));
+            Session::flash('message.error', trans('crud::messages.error.sign-in.user-not-found'));
 
         } else {
-            Session::flash('message.error', trans('crud::messages.error.messages.sign-in.user-not-found'));
+            Session::flash('message.error', trans('crud::messages.error.sign-in.user-not-found'));
         }
 
         return redirect(route('crud.login'));
@@ -89,6 +89,8 @@ class AuthController extends Controller
      */
     public function destroySession()
     {
-
+        Auth::logout();
+        Session::flash('message.success', trans('crud::messages.success.messages.sign-out.user-signed-out'));
+        return redirect()->intended(route('crud.login'));
     }
 }
