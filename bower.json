@@ -44,7 +44,8 @@
     "fullcalendar": "~2.3.1",
     "pace": "~1.0.2",
     "markdown": "~0.5.0",
-    "simplemde": "~1.10.1"
+    "simplemde": "~1.10.1",
+    "bootstrap-timepicker": "^0.5.2"
   },
   "resolutions": {
     "jquery": ">= 2.1.0"

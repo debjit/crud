@@ -199,6 +199,15 @@ class FormPlanner extends BasePlanner
     }
 
     /**
+     * @param string $name
+     * @return \BlackfyreStudio\CRUD\Fields\DateField
+     */
+    public function date($name = '')
+    {
+        return $this->call('date', $name);
+    }
+
+    /**
      * Check if this mapper has tabs.
      *
      * @access public

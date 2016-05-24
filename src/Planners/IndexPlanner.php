@@ -81,4 +81,13 @@ class IndexPlanner extends BasePlanner
     {
         return $this->call('BelongsToMany', $name);
     }
+
+    /**
+     * @param string $name
+     * @return \BlackfyreStudio\CRUD\Fields\DateField
+     */
+    public function date($name = '')
+    {
+        return $this->call('date', $name);
+    }
 }

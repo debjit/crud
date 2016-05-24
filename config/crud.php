@@ -62,7 +62,10 @@ return [
     'date_format' => [
         'date'     => 'Y-m-d',
         'time'     => 'H:i:s',
-        'datetime' => 'Y-m-d H:i:s'
+        'datetime' => 'Y-m-d H:i:s',
+        'js' => [
+            'date'=> 'yyyy-mm-dd'
+        ]
     ],
 
     'export-types' => [

@@ -46,6 +46,8 @@ var paths = {
         bowerBase + 'iCheck/icheck.js',
         bowerBase + 'simplemde/dist/simplemde.min.js',
         bowerBase + 'select2/dist/js/select2.full.js',
+        bowerBase + 'bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
+        bowerBase + 'bootstrap-timepicker/js/bootstrap-timepicker.js',
         /*
         bowerBase + '',
         */
