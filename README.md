@@ -37,7 +37,7 @@ Contributions are welcome! Either as ideas or (preferably) pull requests :smile:
   * [x] Markdown
   * [ ] CKEditor
   * [x] Tags
-  * [ ] Date
+  * [x] Date
   * [ ] Time
   * [ ] Date & Time
 * [x] Auth management

@@ -26,6 +26,15 @@ namespace BlackfyreStudio\CRUD\Fields;
  */
 class DateField extends BaseField
 {
+
+    /**
+     * @return string
+     */
+    public function getValue()
+    {
+        return date(\Config::get('crud.date_format.date'),strtotime($this->value));
+    }
+    
     /**
      * Render the field.
      *
@@ -37,7 +46,7 @@ class DateField extends BaseField
         switch ($this->getContext()) {
             default:
             case $this::CONTEXT_INDEX:
-                return date(\Config::get('crud.date_format.date'),strtotime($this->getValue()));
+                return $this->getValue();
                 break;
             case $this::CONTEXT_FILTER:
             case $this::CONTEXT_FORM:
