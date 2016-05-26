@@ -28,8 +28,11 @@
     <!-- Main Footer -->
     <footer class="main-footer">
         <!-- Default to the left -->
-        <strong>Copyright &copy; 2015 <a target="_blank" href="{{Config::get('crud.company.link')}}">{{Config::get('crud.company.name')}}</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; {{Config::get('crud.company.year',date('Y'))}} <a target="_blank" href="{{Config::get('crud.company.link','https://github.com/BlackfyreStudio')}}">{{Config::get('crud.company.name','BlackFyre Studio')}}</a>.</strong> All rights reserved.
     </footer>
+
+    @if(Config::get('crud.right-menu',false))
+
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
@@ -63,6 +66,7 @@
     <!-- Add the sidebar's background. This div must be placed
          immediately after the control sidebar -->
     <div class='control-sidebar-bg'></div>
+    @endif
 </div><!-- ./wrapper -->
 
 @include('crud::partials._footer')
