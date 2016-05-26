@@ -89,10 +89,12 @@
                 <div class="box">
                     <div class="box-header">
                         <div class="box-tools pull-right">
+                            @if(\Auth::user()->hasPermission($ModelName . '.create'))
                             <a class="btn btn-success" href="{{ route('crud.create', $ModelName) }}">
                                 <i class="fa fa-plus"></i>
                                 {{ trans('crud::index.button.create-new', ['model' => $MasterInstance->getModelSingularName()]) }}
                             </a>
+                            @endif
                             <a class="btn btn-primary" href="#" data-toggle="control-sidebar"><i
                                         class="fa fa-gears"></i> Options</a>
                         </div>
@@ -103,7 +105,9 @@
                         <table class="table table-hover">
                             <thead>
                             <tr>
+                                @if(\Auth::user()->hasPermission($ModelName . '.delete'))
                                 <th width="20"></th>
+                                @endif
                                 @foreach ($MasterInstance->getIndexPlanner()->getFields() as $field)
                                     <th>
                                         <a href="{{ route('crud.index', [$ModelName, '_order_by' => $field->getName(), '_order' => Input::get('_order') === 'ASC' ? 'DESC' : 'ASC']) }}">
@@ -115,23 +119,31 @@
                                     </th>
                                 @endforeach
 
+                                @if(\Auth::user()->hasPermission($ModelName . '.edit'))
                                 <th></th>
+                                @endif
                             </tr>
                             </thead>
                             <tbody>
                             @foreach ($MasterInstance->getIndexBuilder()->getResult() as $item)
                                 <tr>
+
+                                    @if(\Auth::user()->hasPermission($ModelName . '.delete'))
                                     <td><input type="checkbox" name="delete[{{ $item->getIdentifier() }}]"></td>
+                                    @endif
+
                                     @foreach ($item->getFields() as $field)
                                         <td>{!! $field->render() !!}</td>
                                     @endforeach
 
+                                    @if(\Auth::user()->hasPermission($ModelName . '.edit'))
                                     <td align="right">
                                         <a href="{{ route('crud.edit', [$ModelName, $item->getIdentifier()]) }}"
                                            class="btn btn-xs btn-warning">
                                             <i class="fa fa-edit"></i> {{ trans('crud::index.button.edit') }}
                                         </a>
                                     </td>
+                                    @endif
 
                                 </tr>
                             @endforeach

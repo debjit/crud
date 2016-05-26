@@ -161,11 +161,14 @@ class MenuBuilder
                     $custom = implode(' ', $custom);
                 }
 
-                $html .= sprintf('<li><a href="%s" %s>%s <span>%s</span></a></li>', $url, $custom, $icon, $value['title']);
+                if (array_key_exists('class',$value) && \Auth::user()->hasPermission($value . '.read')) {
+                    $html .= sprintf('<li><a href="%s" %s>%s <span>%s</span></a></li>', $url, $custom, $icon, $value['title']);
+                } else {
+                    $html .= sprintf('<li><a href="%s" %s>%s <span>%s</span></a></li>', $url, $custom, $icon, $value['title']);
+                }
             }
-
-
         }
+
         return $html;
     }
 }
