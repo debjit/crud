@@ -46,6 +46,7 @@ class AuthProvider extends ServiceProvider
      */
     public function boot(GateContract $gate)
     {
+        /* TODO: Update GATE... the current setup isn't working with laravel/framework@v5.1.35 */
         parent::registerPolicies($gate);
 
         if (Schema::hasTable('permissions') && Schema::hasTable('roles')) {

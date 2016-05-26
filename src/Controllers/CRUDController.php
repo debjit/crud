@@ -66,7 +66,7 @@ class CRUDController extends OriginController
     public function index($modelName = '')
     {
 
-        if (Gate::denies($modelName . '.read')) {
+        if (!\Auth::user()->hasPermission($modelName . '.read')) {
             return view('crud::errors.403');
         }
 
@@ -89,7 +89,7 @@ class CRUDController extends OriginController
      */
     public function create($modelName = '')
     {
-        if (Gate::denies($modelName . '.create')) {
+        if (!\Auth::user()->hasPermission($modelName . '.create')) {
             return view('crud::errors.403');
         }
 
@@ -111,7 +111,7 @@ class CRUDController extends OriginController
      */
     public function store($modelName = '')
     {
-        if (Gate::denies($modelName . '.create')) {
+        if (!\Auth::user()->hasPermission($modelName . '.create')) {
             return view('crud::errors.403');
         }
 
@@ -147,7 +147,7 @@ class CRUDController extends OriginController
      */
     public function edit($modelName, $id)
     {
-        if (Gate::denies($modelName . '.update')) {
+        if (!\Auth::user()->hasPermission($modelName . '.update')) {
             return view('crud::errors.403');
         }
 
@@ -170,7 +170,7 @@ class CRUDController extends OriginController
      */
     public function update($modelName, $id)
     {
-        if (Gate::denies($modelName . '.update')) {
+        if (!\Auth::user()->hasPermission($modelName . '.update')) {
             return view('crud::errors.403');
         }
 
@@ -208,7 +208,7 @@ class CRUDController extends OriginController
      */
     public function multiDestroy($modelName)
     {
-        if (Gate::denies($modelName . '.delete')) {
+        if (!\Auth::user()->hasPermission($modelName . '.delete')) {
             return view('crud::errors.403');
         }
 

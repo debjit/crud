@@ -23,7 +23,12 @@ namespace BlackfyreStudio\CRUD\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
+ * BlackfyreStudio\CRUD\Models\Permission
  * Class Permission
+ * @mixin \Eloquent
+ * @property integer $id
+ * @property string $name
+ * @property string $slug
  * @package BlackfyreStudio\CRUD\Models
  */
 class Permission extends Model
