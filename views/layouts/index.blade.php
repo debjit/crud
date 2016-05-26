@@ -152,16 +152,19 @@
                     </div>
                     <div class="box-footer clearfix">
                         <div class="row">
+                            @if(\Auth::user()->hasPermission($ModelName . '.delete'))
                             <div class="col-sm-6">
                                 <a href="{{ route('crud.modal.delete', $ModelName) }}" class="btn btn-danger"
                                    data-toggle="modal" data-target="#field-modal">
                                     <i class="fa fa-trash"></i> {{ trans('crud::index.button.delete-selected', ['model' => $MasterInstance->getModelPluralName()]) }}
                                 </a>
                             </div>
+                            @endif
+                            <div class="col-sm-6 text-right">
+                                {{ $MasterInstance->getIndexBuilder()->getPaginator()->render() }}
+                            </div>
                         </div>
-                        <div class="col-sm-6 text-right">
-                            {{ $MasterInstance->getIndexBuilder()->getPaginator()->render() }}
-                        </div>
+
                     </div>
                     {!! CRUDForm::close() !!}
                 </div>

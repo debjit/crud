@@ -118,12 +118,30 @@ class MenuBuilder
                 }
 
                 if (array_key_exists('children',$value)) {
-                    $html .= '<li>';
-                    $html .= sprintf('<a href="#">%s <span>%s</span><i class="fa fa-angle-left pull-right"></i></a>', $icon, $value['title']);
-                    $html .= '<ul class="treeview-menu">';
-                    $html .= $this->buildMenu($value['children']);
-                    $html .= '</ul>';
-                    $html .= '</li>';
+
+                    $willBeVisible = 0;
+
+                    foreach ($value['children'] as $element) {
+                        if (array_key_exists('class',$element)) {
+
+                            if (\Auth::user()->hasPermission($element['class'] . '.read')) {
+                                $willBeVisible++;
+                            }
+
+
+                        } else {
+                            $willBeVisible++;
+                        }
+                    }
+
+                    if ($willBeVisible > 0) {
+                        $html .= '<li>';
+                        $html .= sprintf('<a href="#">%s <span>%s</span><i class="fa fa-angle-left pull-right"></i></a>', $icon, $value['title']);
+                        $html .= '<ul class="treeview-menu">';
+                        $html .= $this->buildMenu($value['children']);
+                        $html .= '</ul>';
+                        $html .= '</li>';
+                    }
                     continue;
                 }
 
@@ -161,8 +179,13 @@ class MenuBuilder
                     $custom = implode(' ', $custom);
                 }
 
-                if (array_key_exists('class',$value) && \Auth::user()->hasPermission($value . '.read')) {
-                    $html .= sprintf('<li><a href="%s" %s>%s <span>%s</span></a></li>', $url, $custom, $icon, $value['title']);
+                if (array_key_exists('class',$value)) {
+
+                    if (\Auth::user()->hasPermission($value['class'] . '.read')) {
+                        $html .= sprintf('<li><a href="%s" %s>%s <span>%s</span></a></li>', $url, $custom, $icon, $value['title']);
+                    }
+
+
                 } else {
                     $html .= sprintf('<li><a href="%s" %s>%s <span>%s</span></a></li>', $url, $custom, $icon, $value['title']);
                 }
