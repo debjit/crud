@@ -274,7 +274,7 @@ class FormBuilder extends BaseBuilder
 
         /* Model after create hook */
         if (method_exists($admin, 'afterCreate')) {
-            $result = $admin->afterCreate($this->getInput());
+            $result = $admin->afterCreate($this->getInput(), $model);
             if ($result instanceof RedirectResponse) {
                 $result->send();
             }
