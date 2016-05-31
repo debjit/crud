@@ -190,10 +190,6 @@ class CRUDController extends OriginController
         Session::flash('message.success', trans('crud::messages.success.model-updated', [
             'model' => $model->getModelSingularName()
         ]));
-        // afterUpdate hook
-        if (method_exists($model, 'afterUpdate')) {
-            return $model->afterUpdate(Redirect::route('crud.index', $modelName));
-        }
 
         return Redirect::route('crud.index', $modelName);
     }
