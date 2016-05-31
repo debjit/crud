@@ -336,12 +336,12 @@ class FormBuilder extends BaseBuilder
         }
         /* Field post update */
         foreach ($this->getPlanner()->getFields() as $field) {
-            $field->postSubmitHook($this->getInput(),$model);
+            $field->postSubmitHook($this->getInput(),$model::find($this->getIdentifier()));
         }
 
         /* Model after update hook */
         if (method_exists($admin, 'afterUpdate')) {
-            $result = $admin->afterUpdate($this->getInput(), $model);
+            $result = $admin->afterUpdate($this->getInput(), $model::find($this->getIdentifier()));
             if ($result instanceof RedirectResponse) {
                 $result->send();
             }
