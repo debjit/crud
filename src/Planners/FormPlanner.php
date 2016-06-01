@@ -119,7 +119,16 @@ class FormPlanner extends BasePlanner
 
     /**
      * @param string $name
-     * @return \BlackfyreStudio\CRUD\Fields\
+     * @return \BlackfyreStudio\CRUD\Fields\FileField
+     */
+    public function file($name = '')
+    {
+        return $this->call('image', $name);
+    }
+
+    /**
+     * @param string $name
+     * @return \BlackfyreStudio\CRUD\Fields\ImageField
      */
     public function image($name = '')
     {

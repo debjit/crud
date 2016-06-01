@@ -30,8 +30,8 @@ Contributions are welcome! Either as ideas or (preferably) pull requests :smile:
   * [x] Belongs to
   * [x] Belongs to many
   * [x] Multiple options (Checkbox list)
-  * [ ] File (DropzoneJS)
-  * [ ] Image
+  * [x] File
+  * [x] Image
   * [ ] Image Crop
   * [x] Numbers
   * [x] Markdown
