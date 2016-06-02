@@ -12,33 +12,33 @@
 return [
 
     'title' => [
-        'edit-model' => 'Edit :model',
-        'create-model' => 'Create new :model'
+        'edit-model'   => 'Edit :model',
+        'create-model' => 'Create new :model',
     ],
 
     'button' => [
         'back-to-index' => 'Back to :model',
-        'save' => 'Save :model'
+        'save'          => 'Save :model',
     ],
 
     'modal' => [
-        'loading' => 'Loading...'
+        'loading' => 'Loading...',
     ],
 
     'login' => [
-        'remember-me' => 'Remember me',
-        'forgot-password'=>'I\'ve forgotten my password',
-        'email' => [
-            'title' => 'Email',
-            'placeholder' => 'Email'
+        'remember-me'     => 'Remember me',
+        'forgot-password' => 'I\'ve forgotten my password',
+        'email'           => [
+            'title'       => 'Email',
+            'placeholder' => 'Email',
         ],
         'password' => [
-            'title' => 'Password',
-            'placeholder' => 'Password'
+            'title'       => 'Password',
+            'placeholder' => 'Password',
         ],
         'submit' => [
-            'title' => 'Sign-in'
-        ]
-    ]
+            'title' => 'Sign-in',
+        ],
+    ],
 
 ];

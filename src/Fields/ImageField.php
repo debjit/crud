@@ -1,7 +1,7 @@
 <?php
 /**
  *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
- *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,6 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
 namespace BlackfyreStudio\CRUD\Fields;
 
 use Illuminate\Database\Eloquent\Model;
@@ -25,13 +24,13 @@ use Intervention\Image\Exception\NotReadableException;
 use InterventionImage;
 
 /**
- * Class ImageField
- * @package BlackfyreStudio\CRUD\Fields
+ * Class ImageField.
  */
 class ImageField extends FileField
 {
     /**
      * Holds the image sizes.
+     *
      * @var array
      */
     protected $sizes = [];
@@ -39,21 +38,20 @@ class ImageField extends FileField
     /**
      * Set the image sizes.
      *
-     * @param  array $sizes
+     * @param array $sizes
      *
-     * @access public
      * @return ImageField
      */
     public function sizes(array $sizes)
     {
         $this->sizes = $sizes;
+
         return $this;
     }
 
     /**
      * Get the image sizes.
      *
-     * @access public
      * @return array
      */
     public function getSizes()
@@ -64,57 +62,48 @@ class ImageField extends FileField
     /**
      * Render the field.
      *
-     * @access public
      * @return mixed|string
      */
     public function render()
     {
         switch ($this->getContext()) {
             case BaseField::CONTEXT_INDEX:
-                return '<img src="' . asset($this->getValue()) . '" class="img-responsive">';
+                return '<img src="'.asset($this->getValue()).'" class="img-responsive">';
                 break;
             case BaseField::CONTEXT_FILTER:
             case BaseField::CONTEXT_FORM:
                 return view('crud::fields.image', [
-                    'field' => $this
+                    'field' => $this,
                 ]);
                 break;
             default:
-                return null;
+                return;
                 break;
         }
     }
 
-
     /**
      * Upload the image.
      *
-     * @param  array $input
-     *
+     * @param array $input
      * @param Model $model
-     * @access public
      */
-    public function postSubmitHook($input,$model)
+    public function postSubmitHook($input, $model)
     {
-
         $imageName = $this->getValue();
 
         $images = [
-            'original'=> sprintf('%s/%s', $this->getLocation(), $imageName)
+            'original' => sprintf('%s/%s', $this->getLocation(), $imageName),
         ];
 
 
         foreach ($this->getSizes() as $size) {
-
-            
             try {
                 $image = InterventionImage::make(sprintf('%s/%s', $this->getLocation(), $imageName));
-                
             } catch (NotReadableException $e) {
-                
                 continue;
             }
-            
+
             switch ($size[2]) {
                 case 'resize':
                     $image->resize($size[0], $size[1], function ($constraint) {
@@ -129,20 +118,18 @@ class ImageField extends FileField
                     break;
             }
 
-            if (array_key_exists(3,$size)) {
-                $saveLocation = sprintf('%s/%s', $this->getLocation(), $size[3] . '-' . $imageName);
+            if (array_key_exists(3, $size)) {
+                $saveLocation = sprintf('%s/%s', $this->getLocation(), $size[3].'-'.$imageName);
                 $images[$size[3]] = $saveLocation;
             } else {
-                $saveLocation = sprintf('%s/%s', $this->getLocation(), $size[0] . 'x' . $size[1] . '-' . $imageName);
-                $images[$size[0] . 'x' . $size[1]] = $saveLocation;
+                $saveLocation = sprintf('%s/%s', $this->getLocation(), $size[0].'x'.$size[1].'-'.$imageName);
+                $images[$size[0].'x'.$size[1]] = $saveLocation;
             }
 
             $image->save(public_path($saveLocation));
-
         }
 
         $model->{$this->getName()} = $images;
         $model->save();
-
     }
 }

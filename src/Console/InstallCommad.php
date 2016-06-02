@@ -1,7 +1,7 @@
 <?php
 /**
  *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
- *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,16 +17,15 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
 namespace BlackfyreStudio\CRUD\Console;
 
 use Illuminate\Console\Command;
 
 /**
- * Class InstallCommand
- * @package BlackfyreStudio\CRUD\Console
+ * Class InstallCommand.
  */
-class InstallCommand extends Command {
+class InstallCommad extends Command
+{
     /**
      * The console command name.
      *
@@ -43,9 +42,9 @@ class InstallCommand extends Command {
 
     /**
      * Create a new command instance.
-     *
      */
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
@@ -58,16 +57,16 @@ class InstallCommand extends Command {
     {
         $this->call('clear-compiled');
         $this->info('Publishing CSS, JS, Fonts and images required to work');
-        $this->call('vendor:publish',[
-            '--provider'=>'BlackfyreStudio\CRUD\CRUDProvider',
-            '--tag'=>'public'
+        $this->call('vendor:publish', [
+            '--provider' => 'BlackfyreStudio\CRUD\CRUDProvider',
+            '--tag'      => 'public',
         ]);
 
 
         $this->info('Publishing config file');
-        $this->call('vendor:publish',[
-            '--provider'=>'BlackfyreStudio\CRUD\CRUDProvider',
-            '--tag'=>'config'
+        $this->call('vendor:publish', [
+            '--provider' => 'BlackfyreStudio\CRUD\CRUDProvider',
+            '--tag'      => 'config',
         ]);
 
 
@@ -83,23 +82,21 @@ class InstallCommand extends Command {
         */
 
         if ($this->confirm('Do you want to create an administrator?')) {
-          $email = $this->ask('The Administrator\'s email address?');
+            $email = $this->ask('The Administrator\'s email address?');
 
-          $this->call('crud:admin', [
-            'email'=>$email
+            $this->call('crud:admin', [
+            'email' => $email,
             ]);
         }
 
         $this->info('Creating default controllers');
-        $this->call('crud:controller-stub',[
-            'name'=>'Role'
+        $this->call('crud:controller-stub', [
+            'name' => 'Role',
         ]);
-        $this->call('crud:controller-stub',[
-            'name'=>'User'
+        $this->call('crud:controller-stub', [
+            'name' => 'User',
         ]);
 
         $this->call('optimize');
-
     }
-
 }

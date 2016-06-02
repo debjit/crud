@@ -1,7 +1,7 @@
 <?php
 /**
  *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
- *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,6 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
 namespace BlackfyreStudio\CRUD\Console;
 
 use BlackfyreStudio\CRUD\Models\Role;
@@ -25,8 +24,7 @@ use Illuminate\Console\Command;
 use Illuminate\Database\QueryException;
 
 /**
- * Class CreateRoleCommand
- * @package BlackfyreStudio\CRUD\Console
+ * Class CreateRoleCommand.
  */
 class CreateRoleCommand extends Command
 {
@@ -50,7 +48,6 @@ class CreateRoleCommand extends Command
 
     /**
      * Create a new command instance.
-     *
      */
     public function __construct()
     {
@@ -64,7 +61,6 @@ class CreateRoleCommand extends Command
      */
     public function fire()
     {
-
         $role = new Role();
 
         $name = camel_case($this->argument('name'));
@@ -80,7 +76,7 @@ class CreateRoleCommand extends Command
         try {
             $role->save();
         } catch (QueryException $e) {
-            $this->error('The ' . $name . ' role exists');
+            $this->error('The '.$name.' role exists');
         }
     }
 }

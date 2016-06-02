@@ -1,7 +1,7 @@
 <?php
 /**
  *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
- *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,12 +17,10 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
 namespace BlackfyreStudio\CRUD\Fields;
 
 /**
- * Class MarkdownField
- * @package BlackfyreStudio\CRUD\Fields
+ * Class MarkdownField.
  */
 class MarkdownField extends BaseField
 {
@@ -37,14 +35,14 @@ class MarkdownField extends BaseField
         switch ($this->getContext()) {
             default:
             case $this::CONTEXT_INDEX:
-                return null;
+                return;
                 break;
             case $this::CONTEXT_FILTER:
                 return $this->getValue();
                 break;
             case $this::CONTEXT_FORM:
                 return view('crud::fields.textarea', [
-                    'field' => $this
+                    'field' => $this,
                 ]);
                 break;
         }

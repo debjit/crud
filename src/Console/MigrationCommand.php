@@ -1,7 +1,7 @@
 <?php
 /**
  *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
- *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,20 +17,17 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
-
 namespace BlackfyreStudio\CRUD\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**
- * Class MigrationCommand
- * @package BlackfyreStudio\CRUD\Console
+ * Class MigrationCommand.
  */
-class MigrationCommand extends Command {
+class MigrationCommand extends Command
+{
     /**
      * The console command name.
      *
@@ -47,9 +44,9 @@ class MigrationCommand extends Command {
 
     /**
      * Create a new command instance.
-     *
      */
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
@@ -61,15 +58,14 @@ class MigrationCommand extends Command {
     public function fire()
     {
         $name = $this->argument('name');
-        $tableName = 'crud_' . Str::lower($name);
+        $tableName = 'crud_'.Str::lower($name);
 
 
-        $this->call('make:migration',[
-            'name'=>'create_' . Str::plural($tableName) . '_table',
-            '--create'=>$tableName,
-            '--table'=>$tableName
+        $this->call('make:migration', [
+            'name'     => 'create_'.Str::plural($tableName).'_table',
+            '--create' => $tableName,
+            '--table'  => $tableName,
         ]);
-
     }
 
     /**

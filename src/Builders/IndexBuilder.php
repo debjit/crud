@@ -1,7 +1,7 @@
 <?php
 /**
  *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
- *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,6 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
 namespace BlackfyreStudio\CRUD\Builders;
 
 use BlackfyreStudio\CRUD\Fields\BaseField;
@@ -28,19 +27,18 @@ use Illuminate\Pagination\Paginator;
 use Input;
 
 /**
- * Class IndexBuilder
- * @package BlackfyreStudio\CRUD\Builders
+ * Class IndexBuilder.
  */
 class IndexBuilder extends BaseBuilder
 {
-
     /**
      * @var array
      */
     protected $result = [];
 
     /**
-     * Holds the paginator object
+     * Holds the paginator object.
+     *
      * @var Paginator
      */
     protected $paginator;
@@ -48,7 +46,6 @@ class IndexBuilder extends BaseBuilder
     /**
      * Returns the list result.
      *
-     * @access public
      * @return array
      */
     public function getResult()
@@ -59,19 +56,20 @@ class IndexBuilder extends BaseBuilder
     /**
      * Sets the list result.
      *
-     * @param  array $result
+     * @param array $result
      *
-     * @access public
      * @return IndexBuilder
      */
     public function setResult(array $result)
     {
         $this->result = $result;
+
         return $this;
     }
 
     /**
      * Get the paginator object.
+     *
      * @return Paginator
      */
     public function getPaginator()
@@ -82,14 +80,14 @@ class IndexBuilder extends BaseBuilder
     /**
      * Set the paginator object.
      *
-     * @param  Paginator $paginator
+     * @param Paginator $paginator
      *
-     * @access public
      * @return IndexBuilder
      */
     public function setPaginator($paginator)
     {
         $this->paginator = $paginator;
+
         return $this;
     }
 
@@ -98,7 +96,7 @@ class IndexBuilder extends BaseBuilder
      */
     public function build()
     {
-        /**
+        /*
          * @var BaseField $field
          * @var BaseField $clone
          * @var \Illuminate\Database\Eloquent\Model $items
@@ -108,7 +106,7 @@ class IndexBuilder extends BaseBuilder
         $model = $this->getModel();
 
         $items = $model::with([]);
-        $primaryKey = (new $model)->getKeyName();
+        $primaryKey = (new $model())->getKeyName();
 
         // Field ordering
         if (Input::has('_order_by')) {
@@ -120,7 +118,7 @@ class IndexBuilder extends BaseBuilder
             if (empty($value) || substr($key, 0, 1) === '_' || $key === 'page') {
                 continue;
             }
-            $items->where($key, 'LIKE', '%' . $value . '%');
+            $items->where($key, 'LIKE', '%'.$value.'%');
         }
 
         // Result scopes

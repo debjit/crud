@@ -1,7 +1,7 @@
 <?php
 /**
  *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
- *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,6 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
 namespace BlackfyreStudio\CRUD\Console;
 
 use BlackfyreStudio\CRUD\Models\Permission;
@@ -26,8 +25,7 @@ use Illuminate\Console\Command;
 use Illuminate\Database\QueryException;
 
 /**
- * Class CreatePermissionsCommand
- * @package BlackfyreStudio\CRUD\Console
+ * Class CreatePermissionsCommand.
  */
 class CreatePermissionsCommand extends Command
 {
@@ -51,7 +49,6 @@ class CreatePermissionsCommand extends Command
 
     /**
      * Create a new command instance.
-     *
      */
     public function __construct()
     {
@@ -69,36 +66,31 @@ class CreatePermissionsCommand extends Command
             'C' => 'Create',
             'R' => 'Read',
             'U' => 'Update',
-            'D' => 'Delete'
+            'D' => 'Delete',
         ];
 
         $requests = str_split(strtoupper($this->option('only')));
 
         foreach ($requests as $permissionTo) {
             $permission = new Permission();
-            $permission->name = $this->argument('name') . '.' . strtolower($permissions[$permissionTo]);
-            $permission->label = $permissions[strtoupper($permissionTo)] . ' ' . $this->argument('name');
+            $permission->name = $this->argument('name').'.'.strtolower($permissions[$permissionTo]);
+            $permission->label = $permissions[strtoupper($permissionTo)].' '.$this->argument('name');
             $permission->save();
 
             if (!is_null($this->option('assign'))) {
                 if (is_numeric($this->option('assign'))) {
-
                     try {
 
                         /** @var Role $role */
                         $role = Role::findOrFail($this->option('assign'));
                         $role->givePermission($permission);
-
                     } catch (QueryException $e) {
                         $this->error('Role not found!');
                     }
-
-
                 } else {
                     $this->error('The supplied role id is not a number!');
                 }
             }
-
         }
     }
 }

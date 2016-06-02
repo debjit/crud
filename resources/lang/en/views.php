@@ -10,6 +10,6 @@
 
 return [
     'dashboard' => [
-        'title' => 'Dashboard'
-    ]
+        'title' => 'Dashboard',
+    ],
 ];

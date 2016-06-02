@@ -1,7 +1,7 @@
 <?php
 /**
  *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
- *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,13 +17,10 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
 namespace BlackfyreStudio\CRUD;
 
-
 /**
- * Class crudRoles
- * @package BlackfyreStudio\CRUD
+ * Class crudRoles.
  */
 trait crudRoles
 {
@@ -32,18 +29,18 @@ trait crudRoles
      */
     public function roles()
     {
-        /** @var \Illuminate\Database\Eloquent\Model $this */
+        /* @var \Illuminate\Database\Eloquent\Model $this */
         return $this->belongsToMany(Models\Role::class);
     }
 
-
     /**
      * @param string|Models\Role $role
+     *
      * @return mixed
      */
     public function hasRole($role)
     {
-        /** @var \Illuminate\Database\Eloquent\Model $this */
+        /* @var \Illuminate\Database\Eloquent\Model $this */
         if (is_string($role)) {
             return $this->roles->contains('name', $role);
         }
@@ -53,11 +50,12 @@ trait crudRoles
 
     /**
      * @param string|Models\Role $role
+     *
      * @return \Illuminate\Database\Eloquent\Model
      */
     public function assignRole($role)
     {
-        /** @var \App\User $this */
+        /* @var \App\User $this */
         if (is_string($role)) {
             return $this->roles()->save(
                 Models\Role::where(['name' => $role])->firstOrFail()
@@ -69,12 +67,12 @@ trait crudRoles
 
     /**
      * @param string|Models\Permission $permission
+     *
      * @return bool
      */
     public function hasPermission($permission)
     {
         /** @var \App\User $this */
-
         if ($this->roles->contains('root', 1)) {
             return true;
         }
@@ -82,18 +80,13 @@ trait crudRoles
         $retVal = false;
 
         if (is_string($permission)) {
-
             foreach ($this->roles as $role) {
                 /** @var Models\Role $role */
-
                 if ($role->permissions->contains('name', $permission)) {
                     $retVal = true;
                 }
             }
-
-
         } elseif (is_object($permission)) {
-
             foreach ($this->roles as $role) {
                 /** @var Models\Role $role */
 
@@ -109,12 +102,11 @@ trait crudRoles
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isRoot()
     {
-        /** @var \App\User $this */
+        /* @var \App\User $this */
         return $this->roles->contains('root', 1);
     }
-
 }

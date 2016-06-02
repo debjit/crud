@@ -1,7 +1,7 @@
 <?php
 /**
  *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
- *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,22 +17,22 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
 namespace BlackfyreStudio\CRUD\Results;
 
 /**
- * Class BaseResult
- * @package BlackfyreStudio\CRUD\Results
+ * Class BaseResult.
  */
 abstract class BaseResult
 {
     /**
      * Holds the item identifier (normally the id).
-     * @var integer
+     *
+     * @var int
      */
     protected $identifier;
     /**
      * Holds the resources fields.
+     *
      * @var array
      */
     protected $fields = [];
@@ -40,22 +40,21 @@ abstract class BaseResult
     /**
      * Set the identifier.
      *
-     * @param  integer $identifier
+     * @param int $identifier
      *
-     * @access public
      * @return BaseResult
      */
     public function setIdentifier($identifier)
     {
         $this->identifier = $identifier;
+
         return $this;
     }
 
     /**
      * Get the identifier.
      *
-     * @access public
-     * @return integer
+     * @return int
      */
     public function getIdentifier()
     {
@@ -65,22 +64,21 @@ abstract class BaseResult
     /**
      * Add a field to the result.
      *
-     * @param  string $key
-     * @param  string $field
+     * @param string $key
+     * @param string $field
      *
-     * @access public
      * @return BaseResult
      */
     public function addField($key, $field)
     {
         $this->fields[$key] = $field;
+
         return $this;
     }
 
     /**
      * Get the fields.
      *
-     * @access public
      * @return array
      */
     public function getFields()
@@ -91,8 +89,8 @@ abstract class BaseResult
     /**
      * Get a field.
      *
-     * @access public
      * @param $key
+     *
      * @return string
      */
     public function getField($key)

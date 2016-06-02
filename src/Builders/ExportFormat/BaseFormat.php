@@ -1,7 +1,7 @@
 <?php
 /**
  *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
- *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,29 +17,31 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
 namespace BlackfyreStudio\CRUD\Builders\ExportFormat;
+
 use BlackfyreStudio\CRUD\Builders\IndexBuilder;
 use Response;
 
 /**
- * Class BaseFormat
- * @package BlackfyreStudio\CRUD\Builders\ExportFormat
+ * Class BaseFormat.
  */
 abstract class BaseFormat
 {
     /**
      * Holds the content-type.
+     *
      * @var null
      */
     protected $contentType;
     /**
      * Holds the filename.
+     *
      * @var string
      */
     protected $filename;
     /**
      * Holds the ListBuilder object.
+     *
      * @var IndexBuilder
      */
     protected $indexBuilder;
@@ -55,7 +57,6 @@ abstract class BaseFormat
     /**
      * Get the ListBuilder object.
      *
-     * @access public
      * @return IndexBuilder
      */
     public function getIndexBuilder()
@@ -66,37 +67,35 @@ abstract class BaseFormat
     /**
      * Set the ListBuilder instance.
      *
-     * @param  IndexBuilder $indexBuilder
+     * @param IndexBuilder $indexBuilder
      *
-     * @access public
      * @return $this
      */
     public function setIndexBuilder($indexBuilder)
     {
         $this->indexBuilder = $indexBuilder;
+
         return $this;
     }
 
     /**
      * Create the download response.
      *
-     * @param  string $result
+     * @param string $result
      *
-     * @access public
      * @return \Illuminate\Http\Response
      */
     public function createResponse($result)
     {
         return Response::make($result, 200, [
-            'Content-Type' => $this->getContentType(),
-            'Content-Disposition' => sprintf('attachment; filename="%s"', $this->getFilename())
+            'Content-Type'        => $this->getContentType(),
+            'Content-Disposition' => sprintf('attachment; filename="%s"', $this->getFilename()),
         ]);
     }
 
     /**
      * Get the content-type.
      *
-     * @access public
      * @return null
      */
     public function getContentType()
@@ -107,21 +106,20 @@ abstract class BaseFormat
     /**
      * Set the content-type.
      *
-     * @param  string $contentType
+     * @param string $contentType
      *
-     * @access public
      * @return BaseFormat
      */
     public function setContentType($contentType)
     {
         $this->contentType = $contentType;
+
         return $this;
     }
 
     /**
      * Get the download filename.
      *
-     * @access public
      * @return string
      */
     public function getFilename()
@@ -132,14 +130,14 @@ abstract class BaseFormat
     /**
      * Set the download filename.
      *
-     * @param  string $filename
+     * @param string $filename
      *
-     * @access public
      * @return BaseFormat
      */
     public function setFilename($filename)
     {
         $this->filename = $filename;
+
         return $this;
     }
 }

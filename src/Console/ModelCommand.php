@@ -1,7 +1,7 @@
 <?php
 /**
  *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
- *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,18 +17,14 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
 namespace BlackfyreStudio\CRUD\Console;
 
 use Illuminate\Console\GeneratorCommand;
-use Illuminate\Support\Str;
 use Schema;
 use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
 
 /**
- * Class ModelCommand
- * @package BlackfyreStudio\CRUD\Console
+ * Class ModelCommand.
  */
 class ModelCommand extends GeneratorCommand
 {
@@ -60,8 +56,6 @@ class ModelCommand extends GeneratorCommand
      */
     protected $exclude = ['id', 'password'];
 
-
-
     /**
      * Get the stub file for the generator.
      *
@@ -69,13 +63,14 @@ class ModelCommand extends GeneratorCommand
      */
     protected function getStub()
     {
-        return __DIR__ . '/../stubs/model.stub';
+        return __DIR__.'/../stubs/model.stub';
     }
 
     /**
      * Build the model class with the given name.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return string
      */
     protected function buildClass($name)
@@ -90,7 +85,8 @@ class ModelCommand extends GeneratorCommand
     /**
      * Replace the table for the given stub.
      *
-     * @param  string $stub
+     * @param string $stub
+     *
      * @return $this
      */
     protected function replaceTable(&$stub, $table)
@@ -105,7 +101,8 @@ class ModelCommand extends GeneratorCommand
     /**
      * Replace the fillable for the given stub.
      *
-     * @param  string $stub
+     * @param string $stub
+     *
      * @return $this
      */
     protected function replaceFillable(&$stub, $table)
@@ -119,7 +116,7 @@ class ModelCommand extends GeneratorCommand
             });
             // Add quotes
             array_walk($columns, function (&$value) {
-                $value = "'" . $value . "'";
+                $value = "'".$value."'";
             });
             // CSV format
             $columns = implode(',', $columns);
@@ -132,7 +129,6 @@ class ModelCommand extends GeneratorCommand
         return $this;
     }
 
-
     /**
      * Get the console command options.
      *
@@ -142,7 +138,7 @@ class ModelCommand extends GeneratorCommand
     {
         return [
             ['table', null, InputOption::VALUE_OPTIONAL, 'The table name.', null],
-            ['fillable', null, InputOption::VALUE_NONE, 'The fillable columns.', null]
+            ['fillable', null, InputOption::VALUE_NONE, 'The fillable columns.', null],
         ];
     }
 }

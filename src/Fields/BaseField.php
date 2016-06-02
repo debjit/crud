@@ -1,7 +1,7 @@
 <?php
 /**
  *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
- *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,28 +17,26 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
 namespace BlackfyreStudio\CRUD\Fields;
 
 use Closure;
 use Illuminate\Support\Str;
 
 /**
- * Class BaseField
- * @package BlackfyreStudio\CRUD\Fields
+ * Class BaseField.
  */
 abstract class BaseField
 {
     /**
-     * Constant for the list view context
+     * Constant for the list view context.
      */
     const CONTEXT_INDEX = 'list';
     /**
-     * Constant for the form view context
+     * Constant for the form view context.
      */
     const CONTEXT_FORM = 'form';
     /**
-     * Constant for the filter view context
+     * Constant for the filter view context.
      */
     const CONTEXT_FILTER = 'filter';
 
@@ -48,71 +46,84 @@ abstract class BaseField
     protected $MasterInstance;
 
     /**
-     * This holds the context in which the field will appear in
+     * This holds the context in which the field will appear in.
+     *
      * @var string
      */
     protected $context;
 
     /**
      * Holds the row id.
+     *
      * @var int
      */
     protected $rowId;
     /**
      * Holds the field name.
+     *
      * @var string
      */
     protected $name;
     /**
      * Holds the field value.
+     *
      * @var string
      */
     protected $value;
     /**
      * Holds the field label.
+     *
      * @var null|string
      */
     protected $label;
     /**
      * Holds the field description.
+     *
      * @var null|string
      */
     protected $description;
     /**
      * Holds the field attributes.
-     * As we use Twitter Bootstrap the 'form-control' class is mandatory
+     * As we use Twitter Bootstrap the 'form-control' class is mandatory.
+     *
      * @var array
      */
     protected $attributes = [
-        'class' => 'form-control'
+        'class' => 'form-control',
     ];
     /**
      * Whether or not to render a "multiple" field.
+     *
      * @var bool
      */
     protected $isMultiple = false;
     /**
      * Holds the multiple limit.
-     * @var boolean
+     *
+     * @var bool
      */
     protected $multipleLimit;
     /**
      * Holds the field tab name.
+     *
      * @var null|string
      */
     protected $tab;
     /**
      * Holds the field position (left|right).
+     *
      * @var string
      */
     protected $position = 'left';
     /**
      * Holds the field before filter.
+     *
      * @var null|callable
      */
     protected $before;
     /**
      * Holds the field after filter.
+     *
      * @var null|callable
      */
     protected $after;
@@ -122,7 +133,7 @@ abstract class BaseField
     protected $saving;
 
     /**
-     * @param string $name
+     * @param string                       $name
      * @param \BlackfyreStudio\CRUD\Master $master
      */
     public function __construct($name, $master)
@@ -148,7 +159,7 @@ abstract class BaseField
     }
 
     /**
-     * Hook function to be run before form submitting
+     * Hook function to be run before form submitting.
      */
     public function preSubmitHook()
     {
@@ -156,7 +167,8 @@ abstract class BaseField
     }
 
     /**
-     * Hook function to be run after form submitting
+     * Hook function to be run after form submitting.
+     *
      * @param $input
      * @param $model
      */
@@ -175,11 +187,13 @@ abstract class BaseField
 
     /**
      * @param int $rowId
+     *
      * @return $this
      */
     public function setRowId($rowId)
     {
         $this->rowId = $rowId;
+
         return $this;
     }
 
@@ -193,11 +207,13 @@ abstract class BaseField
 
     /**
      * @param string $context
+     *
      * @return $this
      */
     public function setContext($context)
     {
         $this->context = $context;
+
         return $this;
     }
 
@@ -211,11 +227,13 @@ abstract class BaseField
 
     /**
      * @param string $value
+     *
      * @return $this
      */
     public function setValue($value)
     {
         $this->value = $value;
+
         return $this;
     }
 
@@ -233,11 +251,13 @@ abstract class BaseField
 
     /**
      * @param null|string $label
+     *
      * @return $this
      */
     public function setLabel($label)
     {
         $this->label = $label;
+
         return $this;
     }
 
@@ -251,11 +271,13 @@ abstract class BaseField
 
     /**
      * @param string $name
+     *
      * @return $this
      */
     public function setName($name)
     {
         $this->name = strtolower($name);
+
         return $this;
     }
 
@@ -269,17 +291,21 @@ abstract class BaseField
 
     /**
      * @param null|string $description
+     *
      * @return $this
      */
     public function setDescription($description)
     {
         $this->description = $description;
+
         return $this;
     }
 
     /**
-     * Get the specified attribute value, returns null if the value doesn't exists
+     * Get the specified attribute value, returns null if the value doesn't exists.
+     *
      * @param $attribute
+     *
      * @return null
      */
     public function getAttribute($attribute)
@@ -287,13 +313,15 @@ abstract class BaseField
         if ($this->hasAttribute($attribute)) {
             return $this->attributes[$attribute];
         } else {
-            return null;
+            return;
         }
     }
 
     /**
-     * Check if a field has the specified attribute
+     * Check if a field has the specified attribute.
+     *
      * @param string $attribute
+     *
      * @return bool
      */
     public function hasAttribute($attribute = '')
@@ -304,7 +332,6 @@ abstract class BaseField
     /**
      * Return all the field attributes.
      *
-     * @access public
      * @return array
      */
     public function getAttributes()
@@ -313,8 +340,10 @@ abstract class BaseField
     }
 
     /**
-     * Set the field as a multiple field, can be cloned on the front-end up to the set limits
+     * Set the field as a multiple field, can be cloned on the front-end up to the set limits.
+     *
      * @param null|int $limit
+     *
      * @return $this
      */
     public function setMultiple($limit = null)
@@ -329,14 +358,17 @@ abstract class BaseField
     }
 
     /**
-     * Set attributes for the field, like class, id, data-*
+     * Set attributes for the field, like class, id, data-*.
+     *
      * @param string $attribute
      * @param string $value
+     *
      * @return $this
      */
     public function setAttribute($attribute, $value)
     {
-        $this->attributes[$attribute] = (string)$value;
+        $this->attributes[$attribute] = (string) $value;
+
         return $this;
     }
 
@@ -358,18 +390,19 @@ abstract class BaseField
 
     /**
      * @param int $limit
+     *
      * @return $this
      */
     public function setMultipleLimit($limit)
     {
         $this->setAttribute('data-multiple-limit', $limit)->multipleLimit = $limit;
+
         return $this;
     }
 
     /**
      * Get the field tab.
      *
-     * @access public
      * @return null|string
      */
     public function getTab()
@@ -380,21 +413,20 @@ abstract class BaseField
     /**
      * Set the field tab.
      *
-     * @param  string $tab
+     * @param string $tab
      *
-     * @access public
      * @return $this
      */
     public function setTab($tab)
     {
         $this->tab = $tab;
+
         return $this;
     }
 
     /**
      * Get the field position.
      *
-     * @access public
      * @return string
      */
     public function getPosition()
@@ -405,21 +437,20 @@ abstract class BaseField
     /**
      * Set the field position.
      *
-     * @param  string $position
+     * @param string $position
      *
-     * @access public
      * @return BaseField
      */
     public function setPosition($position)
     {
         $this->position = $position;
+
         return $this;
     }
 
     /**
      * Check if this field has a before filter.
      *
-     * @access public
      * @return bool
      */
     public function hasBefore()
@@ -430,7 +461,6 @@ abstract class BaseField
     /**
      * Get the before filter.
      *
-     * @access public
      * @return callable|null
      */
     public function getBefore()
@@ -440,11 +470,13 @@ abstract class BaseField
 
     /**
      * @param Closure $callback
+     *
      * @return $this
      */
     public function saving(Closure $callback)
     {
         $this->saving = $callback;
+
         return $this;
     }
 
@@ -463,5 +495,4 @@ abstract class BaseField
     {
         return $this->saving;
     }
-
 }

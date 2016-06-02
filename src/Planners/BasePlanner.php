@@ -1,7 +1,7 @@
 <?php
 /**
  *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
- *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,6 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
 namespace BlackfyreStudio\CRUD\Planner;
 
 use BlackfyreStudio\CRUD\Exceptions\PlannerException;
@@ -25,8 +24,7 @@ use BlackfyreStudio\CRUD\Fields\BaseField;
 use Illuminate\Support\Str;
 
 /**
- * Class BasePlanner
- * @package BlackfyreStudio\CRUD\Planner
+ * Class BasePlanner.
  */
 class BasePlanner
 {
@@ -58,6 +56,7 @@ class BasePlanner
     /**
      * @param string $type
      * @param string $name
+     *
      * @return BaseField
      */
     protected function call($type = '', $name = '')
@@ -70,8 +69,8 @@ class BasePlanner
             throw new PlannerException('The field name reference is missing');
         }
 
-        /** @var BaseField $field */
-        $type = '\\BlackfyreStudio\\CRUD\\Fields\\' . Str::studly($type) . 'Field';
+        /* @var BaseField $field */
+        $type = '\\BlackfyreStudio\\CRUD\\Fields\\'.Str::studly($type).'Field';
         $field = new $type($name, $this->getCRUDMasterInstance());
 
         $this->fields[$name] = $field;
@@ -89,16 +88,19 @@ class BasePlanner
 
     /**
      * @param mixed $CRUDMasterInstance
+     *
      * @return $this
      */
     public function setCRUDMasterInstance($CRUDMasterInstance)
     {
         $this->CRUDMasterInstance = $CRUDMasterInstance;
+
         return $this;
     }
 
     /**
      * @param string $fieldName
+     *
      * @return bool
      */
     public function hasField($fieldName = '')

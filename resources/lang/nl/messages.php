@@ -11,20 +11,20 @@
 
 return [
 
-	'success' => [
-		'title'         => 'Voltooid!',
-		'model-created' => 'Nieuwe :model aangemaakt',
-		'model-updated' => ':model bewerkt',
-		'model-deleted' => ':count :model verwijderd'
-	],
+    'success' => [
+        'title'         => 'Voltooid!',
+        'model-created' => 'Nieuwe :model aangemaakt',
+        'model-updated' => ':model bewerkt',
+        'model-deleted' => ':count :model verwijderd',
+    ],
 
-	'warning' => [
-		'title' => 'Let op!'
-	],
+    'warning' => [
+        'title' => 'Let op!',
+    ],
 
-	'error' => [
-		'title'             => 'Oops!',
-		'validation-errors' => 'Validatie fouten'
-	]
+    'error' => [
+        'title'             => 'Oops!',
+        'validation-errors' => 'Validatie fouten',
+    ],
 
 ];

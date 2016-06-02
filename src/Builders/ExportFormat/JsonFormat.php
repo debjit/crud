@@ -1,7 +1,7 @@
 <?php
 /**
  *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
- *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,30 +17,31 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
+namespace BlackfyreStudio\CRUD\Builders\ExportFormat;
 
- namespace BlackfyreStudio\CRUD\Builders\ExportFormat;
-
- use BlackfyreStudio\CRUD\Results\IndexResult;
- use Response;
+use BlackfyreStudio\CRUD\Results\IndexResult;
+use Response;
 
  /**
-  * Class JsonFormat
-  * @package BlackfyreStudio\CRUD\Builders\ExportFormat
+  * Class JsonFormat.
   */
- class JsonFormat extends BaseFormat {
+ class JsonFormat extends BaseFormat
+ {
      /**
       * Holds the content type.
+      *
       * @var string
       */
      protected $contentType = 'text/plain';
 
      /**
-      * Create a response
+      * Create a response.
+      *
       * @return mixed
       */
      public function export()
      {
-         $this->filename = 'export-' . date('Y-m-d') . '.json';
+         $this->filename = 'export-'.date('Y-m-d').'.json';
 
          $result = [];
          /** @var IndexResult $item */
@@ -49,6 +50,7 @@
                  $result[$item->getIdentifier()][$field->getName()] = $field->getValue();
              }
          }
+
          return $this->createResponse(Response::json($result)->getContent());
      }
  }

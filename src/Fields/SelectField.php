@@ -1,7 +1,7 @@
 <?php
 /**
  *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
- *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,18 +17,16 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
 namespace BlackfyreStudio\CRUD\Fields;
 
-
 /**
- * Class SelectField
- * @package BlackfyreStudio\CRUD\Fields
+ * Class SelectField.
  */
 class SelectField extends BaseField
 {
     /**
      * Holds the select options.
+     *
      * @var array
      */
     protected $options = [];
@@ -36,21 +34,20 @@ class SelectField extends BaseField
     /**
      * Set the select options.
      *
-     * @param  array $options
+     * @param array $options
      *
-     * @access public
      * @return SelectField
      */
     public function setOptions(array $options)
     {
         $this->options = $options;
+
         return $this;
     }
 
     /**
-     * Get the select options
+     * Get the select options.
      *
-     * @access public
      * @return array
      */
     public function getOptions()
@@ -61,7 +58,6 @@ class SelectField extends BaseField
     /**
      * Render the field.
      *
-     * @access public
      * @return mixed|string
      */
     public function render()
@@ -74,10 +70,9 @@ class SelectField extends BaseField
                 break;
             case $this::CONTEXT_FORM:
                 return view('crud::fields.select', [
-                    'field' => $this
+                    'field' => $this,
                 ]);
                 break;
         }
-
     }
 }

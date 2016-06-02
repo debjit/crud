@@ -1,7 +1,7 @@
 <?php
 /**
  *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
- *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,6 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
 namespace BlackfyreStudio\CRUD\Controllers;
 
 use BlackfyreStudio\CRUD\Master;
@@ -25,12 +24,10 @@ use Illuminate\Console\AppNamespaceDetectorTrait;
 use Illuminate\Routing\Controller;
 
 /**
- * Class ModalController
- * @package BlackfyreStudio\CRUD\Controllers
+ * Class ModalController.
  */
 class ModalController extends Controller
 {
-
     use AppNamespaceDetectorTrait;
 
     /**
@@ -39,25 +36,25 @@ class ModalController extends Controller
     public function __construct()
     {
         $this->nameSpaceRoot = $this->getAppNamespace();
-        $this->nameSpace = $this->nameSpaceRoot . 'Http\\Controllers\\' . \Config::get('crud.directory') . '\\';
+        $this->nameSpace = $this->nameSpaceRoot.'Http\\Controllers\\'.\Config::get('crud.directory').'\\';
     }
 
     /**
      * Show the form for deleting a resource.
      *
-     * @param  string $modelName
+     * @param string $modelName
      *
-     * @access public
      * @return $this
      */
     public function delete($modelName)
     {
-        $modelNameWithNamespace = sprintf($this->nameSpace . '%sController', $modelName);;
+        $modelNameWithNamespace = sprintf($this->nameSpace.'%sController', $modelName);
 
         $master = Master::getInstance($modelNameWithNamespace)->buildForm();
+
         return view('crud::modals.delete', [
-            'name' => $modelName,
-            'model' => $master
+            'name'  => $modelName,
+            'model' => $master,
         ]);
     }
 }

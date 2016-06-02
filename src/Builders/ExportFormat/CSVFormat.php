@@ -1,7 +1,7 @@
 <?php
 /**
  *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
- *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,21 +17,18 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
 namespace BlackfyreStudio\CRUD\Builders\ExportFormat;
-
 
 use BlackfyreStudio\CRUD\Results\IndexResult;
 
 /**
- * Class CSVFormat
- * @package BlackfyreStudio\CRUD\Builders\ExportFormat
+ * Class CSVFormat.
  */
 class CSVFormat extends BaseFormat
 {
-
     /**
      * Holds the content-type.
+     *
      * @var string
      */
     protected $contentType = 'text/csv';
@@ -39,30 +36,29 @@ class CSVFormat extends BaseFormat
     /**
      * Create the json response.
      *
-     * @access public
      * @return mixed
      */
     public function export()
     {
-        $this->filename = 'export-' . date('Y-m-d') . '.csv';
+        $this->filename = 'export-'.date('Y-m-d').'.csv';
 
         $result = '';
         $fields = [];
 
 
         foreach ($this->getIndexBuilder()->getPlanner()->getFields() as $field) {
-
             $fields[] = $field->getLabel();
         }
-        $result .= implode(',', $fields) . PHP_EOL;
+        $result .= implode(',', $fields).PHP_EOL;
         /** @var IndexResult $item */
         foreach ($this->getIndexBuilder()->getResult() as $item) {
             $row = [];
             foreach ($item->getFields() as $field) {
                 $row[] = $field->getValue();
             }
-            $result .= implode(',', $row) . PHP_EOL;
+            $result .= implode(',', $row).PHP_EOL;
         }
+
         return $this->createResponse($result);
     }
 }

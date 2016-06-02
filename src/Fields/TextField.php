@@ -1,7 +1,7 @@
 <?php
 /**
  *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
- *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,19 +17,16 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
 namespace BlackfyreStudio\CRUD\Fields;
 
 /**
- * Class TextField
- * @package BlackfyreStudio\CRUD\Fields
+ * Class TextField.
  */
 class TextField extends BaseField
 {
     /**
      * Render the field.
      *
-     * @access public
      * @return mixed|string
      */
     public function render()
@@ -42,7 +39,7 @@ class TextField extends BaseField
             case $this::CONTEXT_FILTER:
             case $this::CONTEXT_FORM:
                 return view('crud::fields.text', [
-                    'field' => $this
+                    'field' => $this,
                 ]);
                 break;
         }

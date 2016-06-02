@@ -11,18 +11,18 @@
 
 return [
 
-	'title' => [
-		'edit-model'   => 'Modifier :model',
-		'create-model' => 'Ajouter un(e) :model'
-	],
+    'title' => [
+        'edit-model'   => 'Modifier :model',
+        'create-model' => 'Ajouter un(e) :model',
+    ],
 
-	'button' => [
-		'back-to-index' => 'Retour au :model',
-		'save'          => 'Enregistrer :model'
-	],
+    'button' => [
+        'back-to-index' => 'Retour au :model',
+        'save'          => 'Enregistrer :model',
+    ],
 
-	'modal' => [
-		'loading' => 'Chargement...'
-	]
+    'modal' => [
+        'loading' => 'Chargement...',
+    ],
 
 ];

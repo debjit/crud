@@ -1,7 +1,7 @@
 <?php
 /**
  *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
- *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,18 +17,16 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
-
 namespace BlackfyreStudio\CRUD\Fields;
 
 /**
- * Class MultipleOptionsField
- * @package BlackfyreStudio\CRUD\Fields
+ * Class MultipleOptionsField.
  */
 class MultipleOptionsField extends RelationField
 {
     /**
-     * Grid item width
+     * Grid item width.
+     *
      * @var array
      */
     protected $GridWidth = [
@@ -36,11 +34,9 @@ class MultipleOptionsField extends RelationField
         'sm' => 3,
     ];
 
-
     /**
      * Render the field.
      *
-     * @access public
      * @return mixed|string
      */
     public function render()
@@ -51,7 +47,7 @@ class MultipleOptionsField extends RelationField
         switch ($this->getContext()) {
             case BaseField::CONTEXT_FORM:
                 $baseModel = $this->getMasterInstance()->getModelFullName();
-                $baseModel = new $baseModel;
+                $baseModel = new $baseModel();
                 $primaryKey = $baseModel->getKeyName();
                 $relatedModel = $baseModel->{$this->getName()}()->getRelated();
                 $items = [];
@@ -65,6 +61,7 @@ class MultipleOptionsField extends RelationField
                         $values[$item->{$primaryKey}] = $item->{$primaryKey};
                     }
                 }
+
                 return view('crud::fields.multiple_options')
                     ->with('field', $this)
                     ->with('items', $items)
@@ -74,7 +71,7 @@ class MultipleOptionsField extends RelationField
             case BaseField::CONTEXT_INDEX:
             case BaseField::CONTEXT_FILTER:
             default:
-                return null;
+                return;
                 break;
         }
     }
@@ -82,17 +79,18 @@ class MultipleOptionsField extends RelationField
     /**
      * Override the getAttributes method to add the multiple attribute.
      *
-     * @access public
      * @return array
      */
     public function getAttributes()
     {
         $this->setAttribute('multiple', true);
+
         return $this->attributes;
     }
 
     /**
-     * Get grid item width
+     * Get grid item width.
+     *
      * @return array
      */
     public function getGridWidth()
@@ -101,7 +99,8 @@ class MultipleOptionsField extends RelationField
     }
 
     /**
-     * Set grid item width
+     * Set grid item width.
+     *
      * @param array $GridWidth
      */
     public function setGridWidth($GridWidth)
@@ -117,7 +116,7 @@ class MultipleOptionsField extends RelationField
         $collector = [];
 
         foreach ($this->GridWidth as $view => $size) {
-            $collector[] = 'col-' . $view . '-' . $size;
+            $collector[] = 'col-'.$view.'-'.$size;
         }
 
         return implode(' ', $collector);

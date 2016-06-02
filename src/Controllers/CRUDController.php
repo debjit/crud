@@ -1,7 +1,7 @@
 <?php
 /**
  *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
- *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,23 +17,20 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
 namespace BlackfyreStudio\CRUD\Controllers;
 
 use BlackfyreStudio\CRUD\Master;
 use Config;
-use Gate;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Routing\Controller as OriginController;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Console\AppNamespaceDetectorTrait;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Routing\Controller as OriginController;
 use Input;
 use Redirect;
 use Session;
 
 /**
- * Class CRUDController
- * @package BlackfyreStudio\CRUD\Controllers
+ * Class CRUDController.
  */
 class CRUDController extends OriginController
 {
@@ -54,19 +51,19 @@ class CRUDController extends OriginController
     public function __construct()
     {
         $this->nameSpaceRoot = $this->getAppNamespace();
-        $this->nameSpace = $this->nameSpaceRoot . 'Http\\Controllers\\' . Config::get('crud.directory') . '\\';
+        $this->nameSpace = $this->nameSpaceRoot.'Http\\Controllers\\'.Config::get('crud.directory').'\\';
     }
 
     /**
      * Display a listing of the resource.
      *
      * @param string $modelName
+     *
      * @return \Illuminate\View\View
      */
     public function index($modelName = '')
     {
-
-        if (!\Auth::user()->hasPermission($modelName . '.read')) {
+        if (!\Auth::user()->hasPermission($modelName.'.read')) {
             return view('crud::errors.403');
         }
 
@@ -76,8 +73,8 @@ class CRUDController extends OriginController
 
 
         return view($master->getViewIndex(), [
-            'ModelName' => $modelName,
-            'MasterInstance' => $master
+            'ModelName'      => $modelName,
+            'MasterInstance' => $master,
         ]);
     }
 
@@ -85,11 +82,12 @@ class CRUDController extends OriginController
      * Show the form for creating a new resource.
      *
      * @param string $modelName
+     *
      * @return \Illuminate\View\View
      */
     public function create($modelName = '')
     {
-        if (!\Auth::user()->hasPermission($modelName . '.create')) {
+        if (!\Auth::user()->hasPermission($modelName.'.create')) {
             return view('crud::errors.403');
         }
 
@@ -98,8 +96,8 @@ class CRUDController extends OriginController
         $master = Master::getInstance($modelNameWithNamespace)->buildForm();
 
         return view($master->getViewCreate(), [
-            'ModelName' => $modelName,
-            'MasterInstance' => $master
+            'ModelName'      => $modelName,
+            'MasterInstance' => $master,
         ]);
     }
 
@@ -107,11 +105,12 @@ class CRUDController extends OriginController
      * Store a newly created resource in storage.
      *
      * @param string $modelName
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store($modelName = '')
     {
-        if (!\Auth::user()->hasPermission($modelName . '.create')) {
+        if (!\Auth::user()->hasPermission($modelName.'.create')) {
             return view('crud::errors.403');
         }
 
@@ -122,13 +121,14 @@ class CRUDController extends OriginController
         // Check validation errors
         if (get_class($result) === 'Illuminate\Validation\Validator') {
             Session::flash('message.error', trans('crud::messages.error.validation-errors'));
+
             return Redirect::route('crud.create', [$modelName])
                 ->withInput()
                 ->withErrors($result);
         }
         // Set the flash message
         Session::flash('message.success', trans('crud::messages.success.model-created', [
-            'model' => $master->getModelSingularName()
+            'model' => $master->getModelSingularName(),
         ]));
         // afterStore hook
         if (method_exists($modelNameWithNamespace, 'afterStore')) {
@@ -142,12 +142,13 @@ class CRUDController extends OriginController
      * Show the form for editing the specified resource.
      *
      * @param $modelName
-     * @param  int $id
+     * @param int $id
+     *
      * @return \Illuminate\View\View
      */
     public function edit($modelName, $id)
     {
-        if (!\Auth::user()->hasPermission($modelName . '.update')) {
+        if (!\Auth::user()->hasPermission($modelName.'.update')) {
             return view('crud::errors.403');
         }
 
@@ -155,9 +156,9 @@ class CRUDController extends OriginController
         $master = Master::getInstance($modelNameWithNamespace)->buildForm($id);
 
         return view($master->getViewUpdate(), [
-            'ModelName' => $modelName,
+            'ModelName'      => $modelName,
             'MasterInstance' => $master,
-            'id' => $id
+            'id'             => $id,
         ]);
     }
 
@@ -165,12 +166,13 @@ class CRUDController extends OriginController
      * Update the specified resource in storage.
      *
      * @param string $modelName
-     * @param  int $id
+     * @param int    $id
+     *
      * @return $this|\Illuminate\Http\RedirectResponse
      */
     public function update($modelName, $id)
     {
-        if (!\Auth::user()->hasPermission($modelName . '.update')) {
+        if (!\Auth::user()->hasPermission($modelName.'.update')) {
             return view('crud::errors.403');
         }
 
@@ -182,13 +184,14 @@ class CRUDController extends OriginController
         // Check validation errors
         if (get_class($result) === 'Illuminate\Validation\Validator') {
             Session::flash('message.error', trans('crud::messages.error.validation-errors'));
+
             return Redirect::route('crud.edit', [$modelName, $id])
                 ->withInput()
                 ->withErrors($result);
         }
         // Set the flash message
         Session::flash('message.success', trans('crud::messages.success.model-updated', [
-            'model' => $model->getModelSingularName()
+            'model' => $model->getModelSingularName(),
         ]));
 
         return Redirect::route('crud.index', $modelName);
@@ -197,14 +200,14 @@ class CRUDController extends OriginController
     /**
      * Remove the specified resources from storage.
      *
-     * @access public
      *
      * @param $modelName
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function multiDestroy($modelName)
     {
-        if (!\Auth::user()->hasPermission($modelName . '.delete')) {
+        if (!\Auth::user()->hasPermission($modelName.'.delete')) {
             return view('crud::errors.403');
         }
 
@@ -225,12 +228,13 @@ class CRUDController extends OriginController
         // Set the flash message
         Session::flash('message.success', trans('crud::messages.success.model-deleted', [
             'count' => (count($items) > 1 ? 'multiple' : 'one'),
-            'model' => $model->getModelPluralName()
+            'model' => $model->getModelPluralName(),
         ]));
         // afterMultiDestroy hook
         if (method_exists($model, 'afterMultiDestroy')) {
             return $model->afterMultiDestroy(Redirect::route('crud.index', $modelName));
         }
+
         return Redirect::route('crud.index', $modelName);
     }
 
@@ -240,18 +244,17 @@ class CRUDController extends OriginController
      */
     public function export($name, $type)
     {
-
     }
 
     /**
      * @param string $modelName
+     *
      * @return string
      */
     private function setModelNamespace($modelName = '')
     {
-        $modelNameWithNamespace = sprintf($this->nameSpace . '%sController', $modelName);
+        $modelNameWithNamespace = sprintf($this->nameSpace.'%sController', $modelName);
 
         return $modelNameWithNamespace;
     }
-
 }

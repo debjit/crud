@@ -1,7 +1,7 @@
 <?php
 /**
  *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
- *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,43 +19,43 @@
  */
 
 return [
-    /**
+    /*
      * Package URI.
      * @var string
      */
-    'uri'=>'throne',
+    'uri' => 'throne',
 
-    /**
+    /*
      * The package main title.
      * @var string
      */
-    'title'=>[
-        'long'=>'BlackfyreStudio/CRUD',
-        'short'=>'CRUD'
+    'title' => [
+        'long'  => 'BlackfyreStudio/CRUD',
+        'short' => 'CRUD',
     ],
 
-    /**
+    /*
      * Company information in the footer
      */
-    'company'=>[
-        'name'=>'BlackfyreStudio',
-        'link'=>'https://github.com/BlackfyreStudio'
+    'company' => [
+        'name' => 'BlackfyreStudio',
+        'link' => 'https://github.com/BlackfyreStudio',
     ],
 
-    /**
+    /*
      * Set the template skin
      * @var string
      */
-    'template-skin'=>'skin-black',
+    'template-skin' => 'skin-black',
 
-    /**
+    /*
      * The directory where the crud controllers are located.
      * @var string
      */
-    'directory'=>'Crud',
+    'directory' => 'Crud',
 
 
-    /**
+    /*
      * Global date/time formatting.
      * @var array
      */
@@ -63,18 +63,18 @@ return [
         'date'     => 'Y-m-d',
         'time'     => 'H:i:s',
         'datetime' => 'Y-m-d H:i:s',
-        'js' => [
-            'date'=> 'yyyy-mm-dd'
-        ]
+        'js'       => [
+            'date' => 'yyyy-mm-dd',
+        ],
     ],
 
     'export-types' => [
         'json',
         'xml',
         'csv',
-        'xls'
+        'xls',
     ],
-    /**
+    /*
      * How to serialize `multiple` fields.
      *  - explode
      *  - json
@@ -82,29 +82,29 @@ return [
      */
     'multiple-serializer' => 'json',
 
-    /**
+    /*
      * Additional, custom assets. They will be loaded after the main files, with the asset() helper, so the same rules apply.
      */
     'assets' => [
         'stylesheets' => [],
-        'javascript' => []
+        'javascript'  => [],
     ],
-    'menu'=>[
+    'menu' => [
         [
-            'title'=>'Settings',
-            'icon'=>'gear',
-            'children'=>[
+            'title'    => 'Settings',
+            'icon'     => 'gear',
+            'children' => [
                 [
-                    'title'=>'User management',
-                    'class'=>'User',
-                    'icon'=>'user'
+                    'title' => 'User management',
+                    'class' => 'User',
+                    'icon'  => 'user',
                 ],
                 [
-                    'title'=>'Access Control',
-                    'class'=>'Role',
-                    'icon'=>'key'
+                    'title' => 'Access Control',
+                    'class' => 'Role',
+                    'icon'  => 'key',
                 ],
-            ]
-        ]
-    ]
+            ],
+        ],
+    ],
 ];

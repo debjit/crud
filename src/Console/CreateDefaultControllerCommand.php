@@ -1,6 +1,6 @@
 <?php
 /**
- *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@gmail.com>
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@gmail.com>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -16,9 +16,6 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
-
-
 namespace BlackfyreStudio\CRUD\Console;
 
 use Illuminate\Console\GeneratorCommand;
@@ -48,12 +45,13 @@ class CreateDefaultControllerCommand extends GeneratorCommand
     /**
      * Parse the name and format according to the root namespace.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return string
      */
     protected function parseName($name)
     {
-        return ucwords(camel_case($name)) . 'Controller';
+        return ucwords(camel_case($name)).'Controller';
     }
 
     /**
@@ -63,18 +61,19 @@ class CreateDefaultControllerCommand extends GeneratorCommand
      */
     protected function getStub()
     {
-        return __DIR__ . '/../stubs/' . $this->parseName($this->getNameInput()) . '.stub';
+        return __DIR__.'/../stubs/'.$this->parseName($this->getNameInput()).'.stub';
     }
 
     /**
      * Get the destination class path.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return string
      */
     protected function getPath($name)
     {
-        return './app/Http/Controllers/' . \Config::get('crud.directory') . '/' . str_replace('\\', '/', $name) . '.php';
+        return './app/Http/Controllers/'.\Config::get('crud.directory').'/'.str_replace('\\', '/', $name).'.php';
     }
 
     /**
@@ -85,7 +84,7 @@ class CreateDefaultControllerCommand extends GeneratorCommand
     protected function getOptions()
     {
         return [
-            ['model', null, InputOption::VALUE_OPTIONAL, 'The name of the model this controller belongs to.', null]
+            ['model', null, InputOption::VALUE_OPTIONAL, 'The name of the model this controller belongs to.', null],
         ];
     }
 }

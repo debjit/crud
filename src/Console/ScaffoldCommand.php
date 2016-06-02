@@ -1,7 +1,7 @@
 <?php
 /**
  *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
- *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,17 +17,14 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
 namespace BlackfyreStudio\CRUD\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**
- * Class ScaffoldCommand
- * @package BlackfyreStudio\CRUD\Console
+ * Class ScaffoldCommand.
  */
 class ScaffoldCommand extends Command
 {
@@ -47,7 +44,6 @@ class ScaffoldCommand extends Command
 
     /**
      * Create a new command instance.
-     *
      */
     public function __construct()
     {
@@ -63,24 +59,24 @@ class ScaffoldCommand extends Command
     {
         $name = $this->argument('name');
         $modelName = Str::studly($this->argument('name'));
-        $tableName = 'crud_' . Str::lower($name);
+        $tableName = 'crud_'.Str::lower($name);
 
 
         $this->call('crud:migration', [
-            'name' => $name
+            'name' => $name,
         ]);
 
         $this->call('crud:model', [
-            'name' => $modelName,
-            '--table' => $tableName
+            'name'    => $modelName,
+            '--table' => $tableName,
         ]);
 
         $this->call('crud:controller', [
-            'name' => $modelName
+            'name' => $modelName,
         ]);
 
         $this->call('crud:permission', [
-            'name' => $modelName
+            'name' => $modelName,
         ]);
     }
 
