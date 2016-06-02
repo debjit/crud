@@ -124,7 +124,6 @@ class Master
      */
     protected $formBuilder;
 
-
     public function __construct()
     {
         if ($this->getModelBaseName() === null) {
