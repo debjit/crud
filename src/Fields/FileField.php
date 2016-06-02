@@ -85,7 +85,6 @@ class FileField extends BaseField
         return $this->originalName;
     }
 
-
     public function preSubmitHook()
     {
         $formBuilder = $this->getMasterInstance()->getFormBuilder();

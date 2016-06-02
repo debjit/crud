@@ -22,7 +22,7 @@ namespace BlackfyreStudio\CRUD\Builders\ExportFormat;
 use BlackfyreStudio\CRUD\Results\IndexResult;
 use Response;
 
- /**
+/**
   * Class JsonFormat.
   */
  class JsonFormat extends BaseFormat
