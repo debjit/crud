@@ -20,7 +20,7 @@
 namespace BlackfyreStudio\CRUD\Fields;
 
 /**
- * Class TextField.
+ * Class DateField.
  */
 class DateField extends BaseField
 {
@@ -29,7 +29,11 @@ class DateField extends BaseField
      */
     public function getValue()
     {
-        return date(\Config::get('crud.date_format.date'), strtotime($this->value));
+        if ($this->value == '') {
+            return $this->value;
+        } else {
+            return date(\Config::get('crud.date_format.date'), strtotime($this->value));
+        }
     }
 
     /**
