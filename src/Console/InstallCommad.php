@@ -24,7 +24,7 @@ use Illuminate\Console\Command;
 /**
  * Class InstallCommand.
  */
-class InstallCommad extends Command
+class InstallCommand extends Command
 {
     /**
      * The console command name.
