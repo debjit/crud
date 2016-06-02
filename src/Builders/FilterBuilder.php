@@ -23,7 +23,7 @@ use BlackfyreStudio\CRUD\Fields\BaseField;
 use BlackfyreStudio\CRUD\Results\FilterResult;
 use Input;
 
- /**
+/**
   * Class FilterBuilder.
   */
  class FilterBuilder extends BaseBuilder

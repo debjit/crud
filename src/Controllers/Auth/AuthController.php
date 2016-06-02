@@ -81,7 +81,6 @@ class AuthController extends Controller
         return redirect(route('crud.login'));
     }
 
-
     public function destroySession()
     {
         Auth::logout();

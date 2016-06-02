@@ -121,7 +121,7 @@ class FormBuilder extends BaseBuilder
         /** @var Model $primaryKey */
         $primaryKey = (new $model())->getKeyName();
 
-        /**
+        /*
          * Empty form.
          *
          * @var FormResult
@@ -220,7 +220,7 @@ class FormBuilder extends BaseBuilder
         $primaryKey = (new $model())->getKeyName();
         $this->setInput($input);
 
-        /**
+        /*
          * Field pre update.
          *
          * @var BaseField
