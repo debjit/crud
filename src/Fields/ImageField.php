@@ -75,7 +75,7 @@ class ImageField extends FileField
                 break;
             case BaseField::CONTEXT_FILTER:
             case BaseField::CONTEXT_FORM:
-                return view('crud::fields.file', [
+                return view('crud::fields.image', [
                     'field' => $this
                 ]);
                 break;
