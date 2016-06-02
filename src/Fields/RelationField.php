@@ -1,7 +1,7 @@
 <?php
 /**
  *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
- *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,23 +17,22 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
 namespace BlackfyreStudio\CRUD\Fields;
 
 /**
- * Class RelationField
- * @package BlackfyreStudio\CRUD\Fields
+ * Class RelationField.
  */
 abstract class RelationField extends BaseField
 {
-
     /**
      * Holds the display field name.
+     *
      * @var string
      */
     protected $displayField = null;
     /**
      * Whether or not to render actions next to this field.
+     *
      * @var bool
      */
     protected $inline = true;
@@ -41,21 +40,20 @@ abstract class RelationField extends BaseField
     /**
      * Set the display field name.
      *
-     * @param  string $displayField
+     * @param string $displayField
      *
-     * @access public
      * @return BelongsToField
      */
     public function display($displayField)
     {
         $this->displayField = $displayField;
+
         return $this;
     }
 
     /**
      * Get the display field name.
      *
-     * @access public
      * @return string
      */
     public function getDisplayField()
@@ -66,21 +64,20 @@ abstract class RelationField extends BaseField
     /**
      * Set inline rendering.
      *
-     * @param  boolean $inline
+     * @param bool $inline
      *
-     * @access public
      * @return BelongsToField
      */
     public function setInline($inline)
     {
-        $this->inline = (bool)$inline;
+        $this->inline = (bool) $inline;
+
         return $this;
     }
 
     /**
      * Get inline rendering.
      *
-     * @access public
      * @return BelongsToField
      */
     public function getInline()

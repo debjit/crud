@@ -1,7 +1,7 @@
 <?php
 /**
  *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
- *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,6 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
 namespace BlackfyreStudio\CRUD;
 
 use BlackfyreStudio\CRUD\Builders\ExportBuilder;
@@ -33,14 +32,11 @@ use Config;
 use Illuminate\Console\AppNamespaceDetectorTrait;
 use Illuminate\Support\Str;
 
-
 /**
- * Class Master
- * @package BlackfyreStudio\CRUD
+ * Class Master.
  */
 class Master
 {
-
     use AppNamespaceDetectorTrait;
 
     /**
@@ -89,6 +85,7 @@ class Master
     protected $indexBuilder;
     /**
      * Holds the number of items per page.
+     *
      * @var int
      */
     protected $perPage = 25;
@@ -114,24 +111,24 @@ class Master
     protected $exportTypes;
 
     /**
-     * Holds the FormPlanner class
+     * Holds the FormPlanner class.
+     *
      * @var FormPlanner
      */
     protected $formPlanner;
 
     /**
-     * Holds the FormBuilder class
+     * Holds the FormBuilder class.
+     *
      * @var FormBuilder
      */
     protected $formBuilder;
 
-    /**
-     *
-     */
+
     public function __construct()
     {
         if ($this->getModelBaseName() === null) {
-            $re = "/^(.*)\\\\(\\w*)Controller$/";
+            $re = '/^(.*)\\\\(\\w*)Controller$/';
             $modelName = preg_replace($re, '$2', get_called_class());
             $this->setModelBaseName($modelName);
         }
@@ -151,7 +148,7 @@ class Master
 
 
         if ($this->getModelFullName() === null) {
-            $this->setModelFullName($this->getModelNameSpace() . $this->getModelBaseName());
+            $this->setModelFullName($this->getModelNameSpace().$this->getModelBaseName());
         }
     }
 
@@ -212,14 +209,15 @@ class Master
     }
 
     /**
-     * Get a CRUD instance
+     * Get a CRUD instance.
      *
      * @param string $modelName
+     *
      * @return \BlackfyreStudio\CRUD\Master
      */
     public static function getInstance($modelName = '')
     {
-        $model = new $modelName;
+        $model = new $modelName();
 
         return $model;
     }
@@ -290,17 +288,16 @@ class Master
 
     /**
      * This function is called when configuring the list view.
+     *
      * @param IndexPlanner $planner
      */
     public function indexView(IndexPlanner $planner)
     {
-
     }
 
     /**
      * Configures the list fields and builds the list data from that.
      *
-     * @access public
      * @return $this
      */
     public function buildList()
@@ -313,6 +310,7 @@ class Master
         $this->getIndexBuilder()
             ->setModel($this->getModelFullName())
             ->build();
+
         return $this;
     }
 
@@ -320,22 +318,22 @@ class Master
      * Set the ListPlanner object.
      *
      * @param IndexPlanner $planner
-     * @return IndexPlanner
-     * @internal param IndexPlanner $mapper
      *
-     * @access public
+     * @return IndexPlanner
+     *
+     * @internal param IndexPlanner $mapper
      */
     public function setIndexPlanner(IndexPlanner $planner)
     {
         $this->indexPlanner = $planner;
         $planner->setCRUDMasterInstance($this);
+
         return $this;
     }
 
     /**
      * Returns the ListPlanner object.
      *
-     * @access public
      * @return IndexPlanner
      */
     public function getIndexPlanner()
@@ -345,11 +343,13 @@ class Master
 
     /**
      * @param IndexBuilder $builder
+     *
      * @return $this
      */
     public function setIndexBuilder(IndexBuilder $builder)
     {
         $this->indexBuilder = $builder;
+
         return $this;
     }
 
@@ -361,23 +361,22 @@ class Master
         return $this->indexBuilder;
     }
 
-
     /**
      * This function is called when configuring the form view.
+     *
      * @param FormPlanner $planner
      */
     public function formView(FormPlanner $planner)
     {
-
     }
 
     /**
      * This function is called when configuring the filter view.
+     *
      * @param FilterPlanner $planner
      */
     public function filters(FilterPlanner $planner)
     {
-
     }
 
     /**
@@ -390,18 +389,19 @@ class Master
 
     /**
      * @param int $perPage
+     *
      * @return $this
      */
     public function setPerPage($perPage)
     {
         $this->perPage = $perPage;
+
         return $this;
     }
 
     /**
      * Configures the filter fields and builds the filter data from that.
      *
-     * @access public
      * @return Master
      */
     public function buildFilters()
@@ -410,28 +410,28 @@ class Master
         $this->filters($this->getFilterPlanner());
         $this->setFilterBuilder(new FilterBuilder($this->getFilterPlanner()));
         $this->getFilterBuilder()->build();
+
         return $this;
     }
 
     /**
      * Set the ListPlanner object.
      *
-     * @param  FilterPlanner $mapper
+     * @param FilterPlanner $mapper
      *
-     * @access public
      * @return Master
      */
     public function setFilterPlanner(FilterPlanner $mapper)
     {
         $this->filterPlanner = $mapper;
         $mapper->setCRUDMasterInstance($this);
+
         return $this;
     }
 
     /**
      * Get the ListPlanner object.
      *
-     * @access public
      * @return FilterPlanner
      */
     public function getFilterPlanner()
@@ -442,21 +442,20 @@ class Master
     /**
      * Set the FilterBuilder object.
      *
-     * @param  FilterBuilder $filterBuilder
+     * @param FilterBuilder $filterBuilder
      *
-     * @access public
      * @return Master
      */
     public function setFilterBuilder($filterBuilder)
     {
         $this->filterBuilder = $filterBuilder;
+
         return $this;
     }
 
     /**
      * Get the FilterBuilder object.
      *
-     * @access public
      * @return FilterBuilder
      */
     public function getFilterBuilder()
@@ -468,8 +467,6 @@ class Master
      * This function is called when configuring the scopes view.
      *
      * @param ScopePlanner $planner
-     *
-     * @access public
      */
     public function scopes(ScopePlanner $planner)
     {
@@ -479,7 +476,6 @@ class Master
     /**
      * Configures the scopes and builds the scope data from that.
      *
-     * @access public
      * @return Master
      */
     public function buildScopes()
@@ -488,28 +484,28 @@ class Master
         $this->scopes($this->getScopePlanner());
         $this->setScopeBuilder(new FilterBuilder($this->getScopePlanner()));
         $this->getScopeBuilder()->build();
+
         return $this;
     }
 
     /**
      * Set the ScopePlanner object.
      *
-     * @param  ScopePlanner $mapper
+     * @param ScopePlanner $mapper
      *
-     * @access public
      * @return Master
      */
     public function setScopePlanner($mapper)
     {
         $this->scopePlanner = $mapper;
         $mapper->setCRUDMasterInstance($this);
+
         return $this;
     }
 
     /**
      * Get the ScopePlanner object.
      *
-     * @access public
      * @return ScopePlanner
      */
     public function getScopePlanner()
@@ -520,21 +516,20 @@ class Master
     /**
      * Set the ScopeBuilder object.
      *
-     * @param  FilterBuilder $scopeBuilder
+     * @param FilterBuilder $scopeBuilder
      *
-     * @access public
      * @return Master
      */
     public function setScopeBuilder($scopeBuilder)
     {
         $this->scopeBuilder = $scopeBuilder;
+
         return $this;
     }
 
     /**
      * Get the ScopeBuilder object.
      *
-     * @access public
      * @return FilterBuilder
      */
     public function getScopeBuilder()
@@ -545,21 +540,20 @@ class Master
     /**
      * Set the export types array.
      *
-     * @param  array $exportTypes
+     * @param array $exportTypes
      *
-     * @access public
      * @return Master
      */
     public function setExportTypes(array $exportTypes)
     {
         $this->exportTypes = $exportTypes;
+
         return $this;
     }
 
     /**
      * Get the export types array.
      *
-     * @access public
      * @return array
      */
     public function getExportTypes()
@@ -567,13 +561,13 @@ class Master
         if (isset($this->exportTypes)) {
             return $this->exportTypes;
         }
+
         return Config::get('crud.export-types');
     }
 
     /**
      * Get a new export builder instance.
      *
-     * @access public
      * @return ExportBuilder
      */
     public function getExportBuilder()
@@ -584,8 +578,8 @@ class Master
     /**
      * Configures the list fields and builds the list data from that.
      *
-     * @access public
      * @param null $identifier
+     *
      * @return $this
      */
     public function buildForm($identifier = null)
@@ -599,28 +593,28 @@ class Master
             ->setIdentifier($identifier)
             ->setContext($identifier === null ? FormBuilder::CONTEXT_CREATE : FormBuilder::CONTEXT_EDIT)
             ->build();
+
         return $this;
     }
 
     /**
      * Set the FormMapper object.
      *
-     * @param  FormPlanner $mapper
+     * @param FormPlanner $mapper
      *
-     * @access public
      * @return $this
      */
     public function setFormPlanner(FormPlanner $mapper)
     {
         $this->formPlanner = $mapper;
         $mapper->setCRUDMasterInstance($this);
+
         return $this;
     }
 
     /**
      * Get the FormPlanner object.
      *
-     * @access public
      * @return FormPlanner
      */
     public function getFormPlanner()
@@ -631,21 +625,20 @@ class Master
     /**
      * Set the FormBuilder object.
      *
-     * @param  FormBuilder $builder
+     * @param FormBuilder $builder
      *
-     * @access public
      * @return Master
      */
     public function setFormBuilder(FormBuilder $builder)
     {
         $this->formBuilder = $builder;
+
         return $this;
     }
 
     /**
      * Get the FormBuilder object.
      *
-     * @access public
      * @return FormBuilder
      */
     public function getFormBuilder()
@@ -656,13 +649,13 @@ class Master
     /**
      * Get the model table name.
      *
-     * @access public
      * @return mixed
      */
     public function getTable()
     {
         $model = $this->getModelFullName();
-        return (new $model)->getTable();
+
+        return (new $model())->getTable();
     }
 
     /**

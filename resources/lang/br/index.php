@@ -11,25 +11,25 @@
 
 return [
 
-	'list-title'        => 'Todos :model',
-	'filter-title'      => 'Busca :model',
-	'browsing-filtered' => 'Você esta visualizando resultados da pesquiza.',
-	'no-filter-results' => 'Nenhum resultado encontrado.',
-	'no-items-yet'      => 'Nenhum :model cadastrado.',
+    'list-title'        => 'Todos :model',
+    'filter-title'      => 'Busca :model',
+    'browsing-filtered' => 'Você esta visualizando resultados da pesquiza.',
+    'no-filter-results' => 'Nenhum resultado encontrado.',
+    'no-items-yet'      => 'Nenhum :model cadastrado.',
 
-	'button' => [
-		'create-new'      => 'Criar novo :model',
-		'reset-filters'   => 'Limpar filtros',
-		'edit'            => 'Editar',
-		'delete-selected' => 'Deletar :model selecionados',
-		'reset'           => 'Limpar',
-		'filter-submit'   => 'Buscar :model',
-		'overview'        => 'Overview'
-	],
+    'button' => [
+        'create-new'      => 'Criar novo :model',
+        'reset-filters'   => 'Limpar filtros',
+        'edit'            => 'Editar',
+        'delete-selected' => 'Deletar :model selecionados',
+        'reset'           => 'Limpar',
+        'filter-submit'   => 'Buscar :model',
+        'overview'        => 'Overview',
+    ],
 
-	'sidebar' => [
-		'scopes' => 'Scopes',
-		'export' => 'Export ...'
-	]
+    'sidebar' => [
+        'scopes' => 'Scopes',
+        'export' => 'Export ...',
+    ],
 
 ];

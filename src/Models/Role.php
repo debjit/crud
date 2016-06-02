@@ -1,7 +1,7 @@
 <?php
 /**
  *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
- *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,14 +17,12 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
 namespace BlackfyreStudio\CRUD\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Role
- * @package BlackfyreStudio\CRUD\Models
+ * Class Role.
  */
 class Role extends Model
 {
@@ -48,11 +46,10 @@ class Role extends Model
      * @var array
      */
     protected $casts = [
-        'name' => 'string',
+        'name'  => 'string',
         'label' => 'string',
-        'root' => 'boolean',
+        'root'  => 'boolean',
     ];
-
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -64,6 +61,7 @@ class Role extends Model
 
     /**
      * @param Permission $permission
+     *
      * @return Model
      */
     public function givePermission(Permission $permission)

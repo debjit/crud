@@ -1,7 +1,7 @@
 <?php
 /**
  *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
- *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,19 +17,18 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
 namespace BlackfyreStudio\CRUD\Planner;
 
 use BlackfyreStudio\CRUD\Scope\Scope;
 
 /**
- * Class ScopePlanner
- * @package BlackfyreStudio\CRUD\Planner
+ * Class ScopePlanner.
  */
 class ScopePlanner extends BasePlanner
 {
     /**
-     * Hold all the scopes
+     * Hold all the scopes.
+     *
      * @var array
      */
     protected $scopes = [];
@@ -47,7 +46,7 @@ class ScopePlanner extends BasePlanner
      */
     public function setScope($scope)
     {
-        /** @noinspection CallableParameterUseCaseInTypeContextInspection */
+        /* @noinspection CallableParameterUseCaseInTypeContextInspection */
         $scope = new Scope($scope);
         $this->scopes[] = $scope;
     }

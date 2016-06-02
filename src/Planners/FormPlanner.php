@@ -1,7 +1,7 @@
 <?php
 /**
  *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
- *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,17 +17,15 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
 namespace BlackfyreStudio\CRUD\Planner;
 
 use BlackfyreStudio\CRUD\Exceptions\PlannerException;
 use BlackfyreStudio\CRUD\Fields\BaseField;
-use Illuminate\Support\Str;
 use Closure;
+use Illuminate\Support\Str;
 
 /**
- * Class FormPlanner
- * @package BlackfyreStudio\CRUD\Planner
+ * Class FormPlanner.
  */
 class FormPlanner extends BasePlanner
 {
@@ -44,6 +42,7 @@ class FormPlanner extends BasePlanner
     /**
      * @param string $type
      * @param string $name
+     *
      * @return BaseField
      */
     protected function call($type = '', $name = '')
@@ -56,8 +55,8 @@ class FormPlanner extends BasePlanner
             throw new PlannerException('The field name reference is missing');
         }
 
-        /** @var BaseField $field */
-        $type = '\\BlackfyreStudio\\CRUD\\Fields\\' . Str::studly($type) . 'Field';
+        /* @var BaseField $field */
+        $type = '\\BlackfyreStudio\\CRUD\\Fields\\'.Str::studly($type).'Field';
         $field = new $type($name, $this->getCRUDMasterInstance());
 
         $this->fields[$name] = $field;
@@ -72,8 +71,10 @@ class FormPlanner extends BasePlanner
     }
 
     /**
-     * Create a simple string in the index view
+     * Create a simple string in the index view.
+     *
      * @param string $name
+     *
      * @return \BlackfyreStudio\CRUD\Fields\StringField
      */
     public function string($name = '')
@@ -83,6 +84,7 @@ class FormPlanner extends BasePlanner
 
     /**
      * @param string $name
+     *
      * @return \BlackfyreStudio\CRUD\Fields\TextField
      */
     public function text($name = '')
@@ -92,6 +94,7 @@ class FormPlanner extends BasePlanner
 
     /**
      * @param string $name
+     *
      * @return \BlackfyreStudio\CRUD\Fields\TextField
      */
     public function email($name = '')
@@ -101,6 +104,7 @@ class FormPlanner extends BasePlanner
 
     /**
      * @param $name
+     *
      * @return \BlackfyreStudio\CRUD\Fields\TextareaField
      */
     public function textarea($name)
@@ -110,6 +114,7 @@ class FormPlanner extends BasePlanner
 
     /**
      * @param string $name
+     *
      * @return \BlackfyreStudio\CRUD\Fields\BooleanField
      */
     public function boolean($name = '')
@@ -119,6 +124,7 @@ class FormPlanner extends BasePlanner
 
     /**
      * @param string $name
+     *
      * @return \BlackfyreStudio\CRUD\Fields\FileField
      */
     public function file($name = '')
@@ -128,6 +134,7 @@ class FormPlanner extends BasePlanner
 
     /**
      * @param string $name
+     *
      * @return \BlackfyreStudio\CRUD\Fields\ImageField
      */
     public function image($name = '')
@@ -137,6 +144,7 @@ class FormPlanner extends BasePlanner
 
     /**
      * @param string $name
+     *
      * @return \BlackfyreStudio\CRUD\Fields\SelectField
      */
     public function select($name = '')
@@ -146,6 +154,7 @@ class FormPlanner extends BasePlanner
 
     /**
      * @param string $name
+     *
      * @return \BlackfyreStudio\CRUD\Fields\BelongsToField
      */
     public function belongsTo($name = '')
@@ -155,6 +164,7 @@ class FormPlanner extends BasePlanner
 
     /**
      * @param string $name
+     *
      * @return \BlackfyreStudio\CRUD\Fields\BelongsToManyField
      */
     public function belongsToMany($name = '')
@@ -164,6 +174,7 @@ class FormPlanner extends BasePlanner
 
     /**
      * @param string $name
+     *
      * @return \BlackfyreStudio\CRUD\Fields\MultipleOptionsField
      */
     public function multipleOptions($name = '')
@@ -173,6 +184,7 @@ class FormPlanner extends BasePlanner
 
     /**
      * @param string $name
+     *
      * @return \BlackfyreStudio\CRUD\Fields\MarkdownField
      */
     public function markdown($name = '')
@@ -182,6 +194,7 @@ class FormPlanner extends BasePlanner
 
     /**
      * @param string $name
+     *
      * @return \BlackfyreStudio\CRUD\Fields\PasswordField
      */
     public function password($name = '')
@@ -191,6 +204,7 @@ class FormPlanner extends BasePlanner
 
     /**
      * @param string $name
+     *
      * @return \BlackfyreStudio\CRUD\Fields\NumericField
      */
     public function number($name = '')
@@ -200,6 +214,7 @@ class FormPlanner extends BasePlanner
 
     /**
      * @param string $name
+     *
      * @return \BlackfyreStudio\CRUD\Fields\TagField
      */
     public function tags($name = '')
@@ -209,6 +224,7 @@ class FormPlanner extends BasePlanner
 
     /**
      * @param string $name
+     *
      * @return \BlackfyreStudio\CRUD\Fields\DateField
      */
     public function date($name = '')
@@ -219,7 +235,6 @@ class FormPlanner extends BasePlanner
     /**
      * Check if this mapper has tabs.
      *
-     * @access public
      * @return bool
      */
     public function hasTabs()
@@ -230,7 +245,6 @@ class FormPlanner extends BasePlanner
     /**
      * Get the mapper tabs.
      *
-     * @access public
      * @return array
      */
     public function getTabs()
@@ -243,16 +257,16 @@ class FormPlanner extends BasePlanner
             }
             $tabs[Str::slug($field->getTab())] = $field->getTab();
         }
+
         return $tabs;
     }
 
     /**
      * Set the mapper current tab.
      *
-     * @param  string $name
-     * @param  string|callable $mapper
+     * @param string          $name
+     * @param string|callable $mapper
      *
-     * @access public
      * @return void
      */
     public function tab($name, $mapper)
@@ -274,10 +288,9 @@ class FormPlanner extends BasePlanner
     /**
      * Set the field position. (left|right).
      *
-     * @param  string $position
-     * @param  Closure $mapper
+     * @param string  $position
+     * @param Closure $mapper
      *
-     * @access public
      * @return void
      */
     public function position($position, Closure $mapper)
@@ -289,7 +302,6 @@ class FormPlanner extends BasePlanner
     /**
      * Get the field position.
      *
-     * @access public
      * @return string
      */
     public function getPosition()
@@ -300,9 +312,8 @@ class FormPlanner extends BasePlanner
     /**
      * Check for fields on a specific position.
      *
-     * @param  string $position
+     * @param string $position
      *
-     * @access public
      * @return bool
      */
     public function hasFieldsOnPosition($position)
@@ -314,6 +325,7 @@ class FormPlanner extends BasePlanner
                 $fieldsOnPosition = true;
             }
         }
+
         return $fieldsOnPosition;
     }
 }

@@ -1,7 +1,7 @@
 <?php
 /**
  *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
- *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,19 +17,19 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
 namespace BlackfyreStudio\CRUD\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * BlackfyreStudio\CRUD\Models\Permission
- * Class Permission
+ * Class Permission.
+ *
  * @mixin \Eloquent
- * @property integer $id
+ *
+ * @property int $id
  * @property string $name
  * @property string $slug
- * @package BlackfyreStudio\CRUD\Models
  */
 class Permission extends Model
 {
@@ -40,6 +40,4 @@ class Permission extends Model
     {
         return $this->belongsToMany(Role::class);
     }
-
-
 }

@@ -1,7 +1,7 @@
 <?php
 /**
  *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
- *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,18 +17,18 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
 namespace BlackfyreStudio\CRUD\Planner;
 
 /**
- * Class IndexPlanner
- * @package BlackfyreStudio\CRUD\Planner
+ * Class IndexPlanner.
  */
 class IndexPlanner extends BasePlanner
 {
     /**
-     * Create an identifier column in the index view. It's usually the record ID
+     * Create an identifier column in the index view. It's usually the record ID.
+     *
      * @param string $name
+     *
      * @return \BlackfyreStudio\CRUD\Fields\IdentifierField
      */
     public function identifier($name = '')
@@ -37,8 +37,10 @@ class IndexPlanner extends BasePlanner
     }
 
     /**
-     * Create a simple string in the index view
+     * Create a simple string in the index view.
+     *
      * @param string $name
+     *
      * @return \BlackfyreStudio\CRUD\Fields\StringField
      */
     public function string($name = '')
@@ -48,6 +50,7 @@ class IndexPlanner extends BasePlanner
 
     /**
      * @param string $name
+     *
      * @return \BlackfyreStudio\CRUD\Fields\BooleanField
      */
     public function boolean($name = '')
@@ -57,6 +60,7 @@ class IndexPlanner extends BasePlanner
 
     /**
      * @param string $name
+     *
      * @return \BlackfyreStudio\CRUD\Fields\BaseField
      */
     public function image($name = '')
@@ -66,6 +70,7 @@ class IndexPlanner extends BasePlanner
 
     /**
      * @param string $name
+     *
      * @return \BlackfyreStudio\CRUD\Fields\SelectField
      */
     public function select($name = '')
@@ -75,6 +80,7 @@ class IndexPlanner extends BasePlanner
 
     /**
      * @param string $name
+     *
      * @return \BlackfyreStudio\CRUD\Fields\BelongsToManyField
      */
     public function belongsToMany($name = '')
@@ -84,6 +90,7 @@ class IndexPlanner extends BasePlanner
 
     /**
      * @param string $name
+     *
      * @return \BlackfyreStudio\CRUD\Fields\DateField
      */
     public function date($name = '')

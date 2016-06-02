@@ -1,7 +1,7 @@
 <?php
 /**
  *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
- *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,6 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
 namespace BlackfyreStudio\CRUD;
 
 use BlackfyreStudio\CRUD\Models\Permission;
@@ -26,8 +25,7 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 use Illuminate\Support\Facades\Schema;
 
 /**
- * Class AuthProvider
- * @package BlackfyreStudio\CRUD
+ * Class AuthProvider.
  */
 class AuthProvider extends ServiceProvider
 {
@@ -41,7 +39,8 @@ class AuthProvider extends ServiceProvider
     /**
      * Register any application authentication / authorization services.
      *
-     * @param  \Illuminate\Contracts\Auth\Access\Gate $gate
+     * @param \Illuminate\Contracts\Auth\Access\Gate $gate
+     *
      * @return void
      */
     public function boot(GateContract $gate)
@@ -56,7 +55,7 @@ class AuthProvider extends ServiceProvider
 
             foreach ($this->getPermissions() as $permission) {
 
-                /** @var Permission $permission */
+                /* @var Permission $permission */
 
                 $gate->define($permission->name, function () use ($permission) {
                     return \Auth::user()->hasPermission($permission);

@@ -1,7 +1,7 @@
 <?php
 /**
  *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
- *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,20 +17,19 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
 namespace BlackfyreStudio\CRUD\Builders\ExportFormat;
 
 use BlackfyreStudio\CRUD\Results\IndexResult;
 use SimpleXMLElement;
 
 /**
- * Class XmlFormat
- * @package BlackfyreStudio\CRUD\Builders\ExportFormat
+ * Class XmlFormat.
  */
 class XmlFormat extends BaseFormat
 {
     /**
      * Holds the content type.
+     *
      * @var string
      */
     protected $contentType = 'text/xml';
@@ -38,13 +37,11 @@ class XmlFormat extends BaseFormat
     /**
      * Create the json response.
      *
-     * @access public
      * @return mixed
      */
     public function export()
     {
-
-        $this->filename = 'export-' . date('Y-m-d') . '.xml';
+        $this->filename = 'export-'.date('Y-m-d').'.xml';
 
         $result = [];
         /** @var IndexResult $item */
@@ -59,16 +56,16 @@ class XmlFormat extends BaseFormat
         }
         $xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><response/>');
         $this->arrayToXml($result, $xml);
+
         return $this->createResponse($xml->asXML());
     }
 
     /**
      * Create an xml representatation from an array.
      *
-     * @param  array $result
-     * @param  SimpleXMLElement $xml
+     * @param array            $result
+     * @param SimpleXMLElement $xml
      *
-     * @access public
      * @return void
      */
     protected function arrayToXml($result, &$xml)
@@ -76,9 +73,9 @@ class XmlFormat extends BaseFormat
         foreach ($result as $key => $value) {
             if (is_array($value)) {
                 if (!is_numeric($key)) {
-                    $subnode = $xml->addChild((string)$key);
+                    $subnode = $xml->addChild((string) $key);
                 } else {
-                    $subnode = $xml->addChild('item_' . $key);
+                    $subnode = $xml->addChild('item_'.$key);
                 }
                 $this->arrayToXml($value, $subnode);
             } else {

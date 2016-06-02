@@ -10,12 +10,10 @@
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-
 namespace BlackfyreStudio\CRUD\Fields;
 
 /**
- * Class FileField
- * @package BlackfyreStudio\CRUD\Fields
+ * Class FileField.
  */
 class FileField extends BaseField
 {
@@ -25,11 +23,13 @@ class FileField extends BaseField
 
     /**
      * @param $location
+     *
      * @return $this
      */
     public function location($location)
     {
         $this->location = $location;
+
         return $this;
     }
 
@@ -47,11 +47,13 @@ class FileField extends BaseField
 
     /**
      * @param $naming
+     *
      * @return $this
      */
     public function naming($naming)
     {
         $this->naming = $naming;
+
         return $this;
     }
 
@@ -65,11 +67,13 @@ class FileField extends BaseField
 
     /**
      * @param $name
+     *
      * @return $this
      */
     public function setOriginalName($name)
     {
         $this->originalName = $name;
+
         return $this;
     }
 
@@ -81,18 +85,15 @@ class FileField extends BaseField
         return $this->originalName;
     }
 
-    /**
-     *
-     */
+
     public function preSubmitHook()
     {
         $formBuilder = $this->getMasterInstance()->getFormBuilder();
 
         $fieldName = $this->getName();
-        
+
 
         if (\Input::hasFile($this->getName())) {
-
             $file = \Input::file($this->getName());
 
             $this->setOriginalName($file->getClientOriginalName());
@@ -103,16 +104,13 @@ class FileField extends BaseField
 
             $this->setValue($fileName);
 
-            $file->move(public_path($this->getLocation()),$fileName);
+            $file->move(public_path($this->getLocation()), $fileName);
 
             $value = sprintf('%s/%s', $this->getLocation(), $fileName);
 
             $formBuilder->setInputVariable($fieldName, $value);
-
         } else {
-
             $formBuilder->unsetInputVariable($this->getName());
-
         }
     }
 
@@ -121,26 +119,24 @@ class FileField extends BaseField
      */
     public function render()
     {
-
         switch ($this->getContext()) {
             case BaseField::CONTEXT_FILTER:
             case BaseField::CONTEXT_FORM:
-            return view('crud::fields.file',[
-                'field' => $this
+            return view('crud::fields.file', [
+                'field' => $this,
             ]);
                 break;
             case BaseField::CONTEXT_INDEX:
             default:
-                return null;
+                return;
                 break;
         }
-
-
     }
 
     /**
-     * @param string $name
+     * @param string      $name
      * @param string|null $extension
+     *
      * @return string
      */
     protected function handleNaming($name, $extension = null)

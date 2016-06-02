@@ -1,7 +1,7 @@
 <?php
 /**
  *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
- *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,16 +17,15 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
 namespace BlackfyreStudio\CRUD;
 
 use GrahamCampbell\Markdown\Facades\Markdown;
 use GrahamCampbell\Markdown\MarkdownServiceProvider;
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\Html\FormFacade;
 use Illuminate\Html\HtmlFacade;
 use Illuminate\Html\HtmlServiceProvider;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Foundation\AliasLoader;
 use Intervention\Image\Facades\Image;
 use Intervention\Image\ImageServiceProvider;
 use Maatwebsite\Excel\ExcelServiceProvider;
@@ -35,8 +34,7 @@ use Thomaswelton\LaravelGravatar\Facades\Gravatar;
 use Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider;
 
 /**
- * Class CRUDProvider
- * @package BlackfyreStudio\CRUD
+ * Class CRUDProvider.
  */
 class CRUDProvider extends ServiceProvider
 {
@@ -86,7 +84,8 @@ class CRUDProvider extends ServiceProvider
     }
 
     /**
-     * This method registers all the commands provided by the package
+     * This method registers all the commands provided by the package.
+     *
      * @return void
      */
     private function registerCommands()
@@ -136,7 +135,7 @@ class CRUDProvider extends ServiceProvider
             'command.crud.install',
             'command.crud.permission',
             'command.crud.model',
-            'command.crud.defaultcontrollers'
+            'command.crud.defaultcontrollers',
         ]);
     }
 
@@ -149,36 +148,36 @@ class CRUDProvider extends ServiceProvider
         /*
          * Setting up view for publishing
          */
-        $viewPath = __DIR__ . '/../views';
+        $viewPath = __DIR__.'/../views';
         $this->publishes([$viewPath => base_path('resources/views/vendor/crud')], 'views');
         $this->loadViewsFrom($viewPath, 'crud');
 
         /*
          * Setting up asset publishing (css, javascript, fonts, images, ...)
          */
-        $publicPath = __DIR__ . '/../public/';
+        $publicPath = __DIR__.'/../public/';
         $this->publishes([$publicPath => public_path('vendor/blackfyrestudio/crud')], 'public');
 
         /*
          * Setting up config files for publishing
          */
-        $configPath = __DIR__ . '/../config/crud.php';
+        $configPath = __DIR__.'/../config/crud.php';
         $this->publishes([$configPath => config_path('crud.php')], 'config');
         $this->mergeConfigFrom($configPath, 'crud');
 
         /*
          * Setting up migrations to be published
          */
-        $migrations = __DIR__ . '/Migrations/';
+        $migrations = __DIR__.'/Migrations/';
         $this->publishes([$migrations => base_path('database/migrations')], 'migrations');
 
         /*
          * Setting up translations
          */
-        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'crud');
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'crud');
 
         if (!$this->app->routesAreCached()) {
-            require __DIR__ . '/routes.php';
+            require __DIR__.'/routes.php';
         }
     }
 
@@ -190,14 +189,13 @@ class CRUDProvider extends ServiceProvider
     public function provides()
     {
         if ($this->app->environment() === 'local') {
-            return array([
+            return [[
                 'command.crud.scaffold',
                 'command.crud.migration',
-                'command.crud.model'
-            ]);
+                'command.crud.model',
+            ]];
         } else {
             return [];
         }
-
     }
 }

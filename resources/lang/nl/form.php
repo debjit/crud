@@ -11,18 +11,18 @@
 
 return [
 
-	'title' => [
-		'edit-model'   => 'Bewerk :model',
-		'create-model' => 'Maak nieuwe :model'
-	],
+    'title' => [
+        'edit-model'   => 'Bewerk :model',
+        'create-model' => 'Maak nieuwe :model',
+    ],
 
-	'button' => [
-		'back-to-index' => 'Terug naar :model',
-		'save'          => ':model opslaan'
-	],
+    'button' => [
+        'back-to-index' => 'Terug naar :model',
+        'save'          => ':model opslaan',
+    ],
 
-	'modal' => [
-		'loading' => 'Bezig met laden...'
-	]
+    'modal' => [
+        'loading' => 'Bezig met laden...',
+    ],
 
 ];

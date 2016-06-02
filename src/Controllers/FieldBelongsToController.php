@@ -1,7 +1,7 @@
 <?php
 /**
  *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
- *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,21 +17,17 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
 namespace BlackfyreStudio\CRUD\Controllers;
 
 use BlackfyreStudio\CRUD\Master;
 use Illuminate\Console\AppNamespaceDetectorTrait;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Str;
 
 /**
- * Class FieldBelongsToController
- * @package BlackfyreStudio\CRUD\Controllers
+ * Class FieldBelongsToController.
  */
 class FieldBelongsToController extends Controller
 {
-
     use AppNamespaceDetectorTrait;
 
     /**
@@ -40,27 +36,25 @@ class FieldBelongsToController extends Controller
     public function __construct()
     {
         $this->nameSpaceRoot = $this->getAppNamespace();
-        $this->nameSpace = $this->nameSpaceRoot . 'Http\\Controllers\\' . \Config::get('crud.directory') . '\\';
+        $this->nameSpace = $this->nameSpaceRoot.'Http\\Controllers\\'.\Config::get('crud.directory').'\\';
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @param  string $modelName
+     * @param string $modelName
      *
-     * @access public
      * @return \Illuminate\View\View
      */
     public function create($modelName)
     {
-
-        $modelNameWithNamespace = sprintf($this->nameSpace . '%sController', $modelName);;
+        $modelNameWithNamespace = sprintf($this->nameSpace.'%sController', $modelName);
 
         $master = Master::getInstance($modelNameWithNamespace)->buildForm();
 
         return view('crud::modals.belongs_to', [
-            'name' => $modelName,
-            'model' => $master
+            'name'  => $modelName,
+            'model' => $master,
         ]);
     }
 }

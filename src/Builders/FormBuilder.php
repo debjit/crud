@@ -1,7 +1,7 @@
 <?php
 /**
  *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
- *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,6 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
 namespace BlackfyreStudio\CRUD\Builders;
 
 use BlackfyreStudio\CRUD\Fields\BaseField;
@@ -30,18 +29,16 @@ use Illuminate\Http\RedirectResponse;
 use Validator;
 
 /**
- * Class FormBuilder
- * @package BlackfyreStudio\CRUD\Builders
+ * Class FormBuilder.
  */
 class FormBuilder extends BaseBuilder
 {
-
     /**
-     * Constant value for the create view
+     * Constant value for the create view.
      */
     const CONTEXT_CREATE = 'create';
     /**
-     * Constant value for the edit view
+     * Constant value for the edit view.
      */
     const CONTEXT_EDIT = 'edit';
 
@@ -52,11 +49,13 @@ class FormBuilder extends BaseBuilder
 
     /**
      * Holds the form result.
+     *
      * @var array
      */
     protected $result = [];
     /**
      * Holds the record identifier(id).
+     *
      * @var int
      */
     protected $identifier;
@@ -64,21 +63,20 @@ class FormBuilder extends BaseBuilder
     /**
      * Set the form identifier.
      *
-     * @param  int $identifier
+     * @param int $identifier
      *
-     * @access public
      * @return FormBuilder
      */
     public function setIdentifier($identifier)
     {
         $this->identifier = $identifier;
+
         return $this;
     }
 
     /**
      * Get the form identifier.
      *
-     * @access public
      * @return int
      */
     public function getIdentifier()
@@ -89,21 +87,20 @@ class FormBuilder extends BaseBuilder
     /**
      * Set the form context.
      *
-     * @param  FormBuilder $context
+     * @param FormBuilder $context
      *
-     * @access public
      * @return FormBuilder
      */
     public function setContext($context)
     {
         $this->context = $context;
+
         return $this;
     }
 
     /**
      * Get the form context.
      *
-     * @access public
      * @return mixed
      */
     public function getContext()
@@ -114,7 +111,6 @@ class FormBuilder extends BaseBuilder
     /**
      * Build the list data.
      *
-     * @access public
      * @return mixed|void
      */
     public function build()
@@ -123,11 +119,12 @@ class FormBuilder extends BaseBuilder
         $model = $this->getModel();
 
         /** @var Model $primaryKey */
-        $primaryKey = (new $model)->getKeyName();
+        $primaryKey = (new $model())->getKeyName();
 
         /**
-         * Empty form
-         * @var FormResult $result
+         * Empty form.
+         *
+         * @var FormResult
          */
         $result = new FormResult();
         if ($this->getIdentifier() === null) {
@@ -144,6 +141,7 @@ class FormBuilder extends BaseBuilder
                 $result->addField($name, $clone);
             }
             $this->setResult($result);
+
             return;
         }
         $items = $model::with([]);
@@ -155,7 +153,7 @@ class FormBuilder extends BaseBuilder
             $item = $this->getPlanner()->getCRUDMasterInstance()->modifyModelItem($item);
         }
 
-        $result = new FormResult;
+        $result = new FormResult();
         $result->setIdentifier($item->{$primaryKey});
 
         /** @var BaseField $field */
@@ -187,19 +185,19 @@ class FormBuilder extends BaseBuilder
      * Sets the form result.
      *
      * @param array|FormResult $result
+     *
      * @return FormBuilder
-     * @access public
      */
     public function setResult(FormResult $result)
     {
         $this->result = $result;
+
         return $this;
     }
 
     /**
      * Returns the form result.
      *
-     * @access public
      * @return array
      */
     public function getResult()
@@ -211,23 +209,23 @@ class FormBuilder extends BaseBuilder
      * Create a new model from input.
      *
      * @param array|\Input $input
+     *
      * @return FormBuilder
-     * @access public
      */
     public function create($input)
     {
         $mapper = $this->getPlanner();
         $admin = $mapper->getCRUDMasterInstance();
         $model = $this->getModel();
-        $primaryKey = (new $model)->getKeyName();
+        $primaryKey = (new $model())->getKeyName();
         $this->setInput($input);
 
         /**
-         * Field pre update
-         * @var BaseField $field
+         * Field pre update.
+         *
+         * @var BaseField
          */
         foreach ($mapper->getFields() as $field) {
-
             $field->preSubmitHook();
             $input = $this->getInput();
 
@@ -241,7 +239,6 @@ class FormBuilder extends BaseBuilder
                 $saving = $field->getSaving();
                 $this->setInputVariable($field->getName(), $saving($input[$field->getName()]));
             }
-
         }
 
         /* Model before create hook */
@@ -259,7 +256,7 @@ class FormBuilder extends BaseBuilder
 
         /* Model create hook */
         if (method_exists($admin, 'create')) {
-            $model = $admin->create($this->getInput(),$model);
+            $model = $admin->create($this->getInput(), $model);
         } else {
             $model = $model::create($this->getInput());
         }
@@ -288,7 +285,6 @@ class FormBuilder extends BaseBuilder
      *
      * @param array $input
      *
-     * @access public
      * @return FormBuilder
      */
     public function update($input)
@@ -336,7 +332,7 @@ class FormBuilder extends BaseBuilder
         }
         /* Field post update */
         foreach ($this->getPlanner()->getFields() as $field) {
-            $field->postSubmitHook($this->getInput(),$model::find($this->getIdentifier()));
+            $field->postSubmitHook($this->getInput(), $model::find($this->getIdentifier()));
         }
 
         /* Model after update hook */
@@ -346,13 +342,13 @@ class FormBuilder extends BaseBuilder
                 $result->send();
             }
         }
+
         return $this;
     }
 
     /**
      * Destroy a specific item.
      *
-     * @access public
      * @return FormBuilder
      */
     public function destroy()
@@ -378,6 +374,7 @@ class FormBuilder extends BaseBuilder
                 $result->send();
             }
         }
+
         return $this;
     }
 }

@@ -1,7 +1,7 @@
 <?php
 /**
  *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
- *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,59 +17,59 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
+namespace BlackfyreStudio\CRUD\Builders;
 
- namespace BlackfyreStudio\CRUD\Builders;
-
- use BlackfyreStudio\CRUD\Builders\ExportFormat\BaseFormat;
+use BlackfyreStudio\CRUD\Builders\ExportFormat\BaseFormat;
 
  /**
-  * Class ExportBuilder
-  * @package BlackfyreStudio\CRUD\Builders
+  * Class ExportBuilder.
   */
- class ExportBuilder {
-
+ class ExportBuilder
+ {
      /**
       * Holds the ListBuilder object.
+      *
       * @var IndexBuilder
       */
      protected $indexBuilder;
+
      /**
       * Set the ListBuilder instance.
       *
       * @param  IndexBuilder $indexBuilder
       *
-      * @access public
       * @return ExportBuilder
       */
      public function setIndexBuilder($indexBuilder)
      {
          $this->indexBuilder = $indexBuilder;
+
          return $this;
      }
+
      /**
       * Get the ListBuilder object.
       *
-      * @access public
       * @return IndexBuilder
       */
      public function getIndexBuilder()
      {
          return $this->indexBuilder;
      }
+
      /**
       * Create a new export based on the ListBuilder output.
       *
       * @param  string $type
       *
-      * @access public
       * @return mixed
       */
      public function export($type)
      {
          $format = sprintf('\\BlackfyreStudio\\CRUD\\Builders\\ExportFormat\\%sFormat', ucfirst($type));
 
-         /** @var BaseFormat $format */
-         return (new $format)
+         /* @var BaseFormat $format */
+         return (new $format())
          ->setIndexBuilder($this->getIndexBuilder())
          ->export();
      }

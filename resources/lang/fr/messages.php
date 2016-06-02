@@ -11,20 +11,20 @@
 
 return [
 
-	'success' => [
-		'title'         => 'Succès !',
-		'model-created' => 'Ajouter un(e) :model',
-		'model-updated' => 'Modifier un(e) :model',
-		'model-deleted' => 'Supprimer :count :model'
-	],
+    'success' => [
+        'title'         => 'Succès !',
+        'model-created' => 'Ajouter un(e) :model',
+        'model-updated' => 'Modifier un(e) :model',
+        'model-deleted' => 'Supprimer :count :model',
+    ],
 
-	'warning' => [
-		'title' => 'Attention !'
-	],
+    'warning' => [
+        'title' => 'Attention !',
+    ],
 
-	'error' => [
-		'title'             => 'Oops !',
-		'validation-errors' => 'Erreurs de validation'
-	]
+    'error' => [
+        'title'             => 'Oops !',
+        'validation-errors' => 'Erreurs de validation',
+    ],
 
 ];

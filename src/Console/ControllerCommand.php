@@ -1,7 +1,7 @@
 <?php
 /**
  *  This file is part of the BlackfyreStudio CRUD package which is a recreation of the Krafthaus Bauhaus package.
- *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>
+ *  Copyright (C) 2016. Galicz Miklós <galicz.miklos@blackfyre.ninja>.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,15 +17,13 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
 namespace BlackfyreStudio\CRUD\Console;
 
 use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
- * Class ControllerCommand
- * @package BlackfyreStudio\CRUD\Console
+ * Class ControllerCommand.
  */
 class ControllerCommand extends GeneratorCommand
 {
@@ -51,12 +49,13 @@ class ControllerCommand extends GeneratorCommand
     /**
      * Parse the name and format according to the root namespace.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return string
      */
     protected function parseName($name)
     {
-        return ucwords(camel_case($name)) . 'Controller';
+        return ucwords(camel_case($name)).'Controller';
     }
 
     /**
@@ -66,18 +65,19 @@ class ControllerCommand extends GeneratorCommand
      */
     protected function getStub()
     {
-        return __DIR__ . '/../stubs/controller.stub';
+        return __DIR__.'/../stubs/controller.stub';
     }
 
     /**
      * Get the destination class path.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return string
      */
     protected function getPath($name)
     {
-        return './app/Http/Controllers/' . \Config::get('crud.directory') . '/' . str_replace('\\', '/', $name) . '.php';
+        return './app/Http/Controllers/'.\Config::get('crud.directory').'/'.str_replace('\\', '/', $name).'.php';
     }
 
     /**
@@ -88,7 +88,7 @@ class ControllerCommand extends GeneratorCommand
     protected function getOptions()
     {
         return [
-            ['model', null, InputOption::VALUE_OPTIONAL, 'The name of the model this controller belongs to.', null]
+            ['model', null, InputOption::VALUE_OPTIONAL, 'The name of the model this controller belongs to.', null],
         ];
     }
 }
