@@ -9,4 +9,10 @@ namespace BlackfyreStudio\CRUD\Tests;
 
 class BaseBuilderTest extends \PHPUnit_Framework_TestCase
 {
+
+  public function testSomethingIsTrue()
+  {
+      $this->assertTrue(true);
+  }
+
 }
