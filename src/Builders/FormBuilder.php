@@ -248,7 +248,7 @@ class FormBuilder extends BaseBuilder
 
         /* Validate */
         if (property_exists($model, 'rulesOnCreate')) {
-            $validator = Validator::make($this->getInput(), $model::$rules);
+            $validator = Validator::make($this->getInput(), $model::$rulesOnCreate);
             if ($validator->fails()) {
                 return $validator;
             }
@@ -317,7 +317,7 @@ class FormBuilder extends BaseBuilder
 
         /* Validate */
         if (property_exists($model, 'rulesOnUpdate')) {
-            $validator = Validator::make($this->getInput(), $model::$rules);
+            $validator = Validator::make($this->getInput(), $model::$rulesOnUpdate);
             if ($validator->fails()) {
                 return $validator;
             }
