@@ -63,8 +63,8 @@ return [
         'date'     => 'Y-m-d', /* for PHP's date formatting */
         'time'     => 'H:i:s',
         'datetime' => 'Y-m-d H:i:s',
-        'js'       => [ /* For javascript date formatting, based on moment.js */
-            'date' => 'YYYY-MM-DD',
+        'js'       => [/* For javascript date formatting, based on moment.js */
+            'date'     => 'YYYY-MM-DD',
             'datetime' => 'YYYY-MM-DD HH:mm',
         ],
     ],

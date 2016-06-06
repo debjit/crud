@@ -100,9 +100,11 @@ class IndexPlanner extends BasePlanner
 
     /**
      * @param string $name
+     *
      * @return \BlackfyreStudio\CRUD\Fields\DateTimeField
      */
-    public function dateTime($name = '') {
+    public function dateTime($name = '')
+    {
         return $this->call('dateTime', $name);
     }
 }
