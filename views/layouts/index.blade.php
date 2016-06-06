@@ -101,7 +101,7 @@
                             <a class="btn btn-primary" href="#" data-toggle="control-sidebar"><i
                                         class="fa fa-gears"></i> Options</a>
                             @endif
-                            
+
                         </div>
                     </div>
                     {!! CRUDForm::open(['method' => 'POST', 'route' => ['crud.multi-destroy', $ModelName], 'id' => 'delete-multi-form']) !!}
