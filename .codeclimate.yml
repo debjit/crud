@@ -22,5 +22,3 @@ ratings:
   - "**.scss"
 exclude_paths:
 - public/**/*
-exclude-exts=.min.css
-ignore=adjoining-classes,box-model,ids,order-alphabetical,unqualified-attributes
