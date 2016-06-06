@@ -89,14 +89,19 @@
                 <div class="box">
                     <div class="box-header">
                         <div class="box-tools pull-right">
+
                             @if(\Auth::user()->hasPermission($ModelName . '.create'))
                             <a class="btn btn-success" href="{{ route('crud.create', $ModelName) }}">
                                 <i class="fa fa-plus"></i>
                                 {{ trans('crud::index.button.create-new', ['model' => $MasterInstance->getModelSingularName()]) }}
                             </a>
                             @endif
+
+                            @if(Config::get('crud.right-menu',false))
                             <a class="btn btn-primary" href="#" data-toggle="control-sidebar"><i
                                         class="fa fa-gears"></i> Options</a>
+                            @endif
+                            
                         </div>
                     </div>
                     {!! CRUDForm::open(['method' => 'POST', 'route' => ['crud.multi-destroy', $ModelName], 'id' => 'delete-multi-form']) !!}
