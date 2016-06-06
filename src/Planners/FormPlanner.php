@@ -232,13 +232,13 @@ class FormPlanner extends BasePlanner
         return $this->call('date', $name);
     }
 
-
-
     /**
      * @param string $name
+     *
      * @return \BlackfyreStudio\CRUD\Fields\DateTimeField
      */
-    public function dateTime($name = '') {
+    public function dateTime($name = '')
+    {
         return $this->call('dateTime', $name);
     }
 
