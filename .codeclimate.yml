@@ -11,6 +11,8 @@ engines:
     enabled: true
   phpmd:
     enabled: true
+    config:
+      rule-sets: "phpmd.xml"
   scss-lint:
     enabled: true
 ratings:
