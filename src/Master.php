@@ -149,8 +149,8 @@ class Master
         if ($this->getModelFullName() === null) {
             $this->setModelFullName($this->getModelNameSpace().$this->getModelBaseName());
         }
-        
-        $this->setPerPage(\Config::get('crud.items-per-page',25));
+
+        $this->setPerPage(\Config::get('crud.items-per-page', 25));
     }
 
     /**
