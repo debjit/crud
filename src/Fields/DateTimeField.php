@@ -17,11 +17,44 @@
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-namespace BlackfyreStudio\CRUD\Results;
+namespace BlackfyreStudio\CRUD\Fields;
 
 /**
- * Class IndexResult.
+ * Class DateField.
  */
-class ListResult extends BaseResult
+class DateTimeField extends BaseField
 {
+    /**
+     * @return string
+     */
+    public function getValue()
+    {
+        if ($this->value == '') {
+            return $this->value;
+        } else {
+            return date(\Config::get('crud.date_format.datetime'), strtotime($this->value));
+        }
+    }
+
+    /**
+     * Render the field.
+     *
+     * @return mixed|string
+     */
+    public function render()
+    {
+        switch ($this->getContext()) {
+            default:
+            case $this::CONTEXT_INDEX:
+                return $this->getValue();
+                break;
+            case $this::CONTEXT_FILTER:
+            case $this::CONTEXT_FORM:
+
+                return view('crud::fields.date_time', [
+                    'field' => $this,
+                ]);
+                break;
+        }
+    }
 }

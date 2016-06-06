@@ -15,12 +15,51 @@
     'use strict';
 
     // auto tab selection
+    $('[data-provide=datetimepicker]').each(function(element) {
+
+        var $e = $(this);
+
+        var item = $e.datetimepicker({
+            format: $e.attr('data-date-format'),
+            icons: {
+                time: "fa fa-clock-o",
+                date: "fa fa-calendar",
+                up: "fa fa-arrow-up",
+                down: "fa fa-arrow-down",
+                previous: 'fa fa-chevron-left',
+                next: 'fa fa-chevron-right',
+                today: 'fa fa-crosshairs',
+                clear: 'fa fa-trash',
+                close: 'fa fa-remove'
+            },
+            sideBySide: true
+        });
+    });
+
+})(jQuery, window, document);
+
+(function ($, window, document) {
+
+    'use strict';
+
+    // auto tab selection
     $('[data-provide=datepicker]').each(function(element) {
 
         var $e = $(this);
 
-        var item = $e.datepicker({
-            format: $e.attr('data-date-format')
+        var item = $e.datetimepicker({
+            format: $e.attr('data-date-format'),
+            icons: {
+                time: "fa fa-clock-o",
+                date: "fa fa-calendar",
+                up: "fa fa-arrow-up",
+                down: "fa fa-arrow-down",
+                previous: 'fa fa-chevron-left',
+                next: 'fa fa-chevron-right',
+                today: 'fa fa-crosshairs',
+                clear: 'fa fa-trash',
+                close: 'fa fa-remove'
+            }
         });
     });
 

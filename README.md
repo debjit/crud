@@ -44,7 +44,7 @@ Contributions are welcome! Either as ideas or (preferably) pull requests :smile:
   * [x] Tags
   * [x] Date
   * [ ] Time
-  * [ ] Date & Time
+  * [x] Date & Time
 * [x] Auth management
    * [x] Roles
 * [x] IDE Support (with laravel-ide-helper, main angle on PHPStorm) 

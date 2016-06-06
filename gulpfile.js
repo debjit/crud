@@ -37,6 +37,7 @@ var paths = {
     ],
     scripts: [
         bowerBase + 'jquery/dist/jquery.js',
+        bowerBase + 'moment/min/moment-with-locales.js',
         bowerBase + 'bootstrap/dist/js/bootstrap.js',/*
         bowerBase + 'datatables/media/js/jquery.dataTables.js',
         bowerBase + 'datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.js',
@@ -46,8 +47,7 @@ var paths = {
         bowerBase + 'iCheck/icheck.js',
         bowerBase + 'simplemde/dist/simplemde.min.js',
         bowerBase + 'select2/dist/js/select2.full.js',
-        bowerBase + 'bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
-        bowerBase + 'bootstrap-timepicker/js/bootstrap-timepicker.js',
+        bowerBase + 'eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js',
         /*
         bowerBase + '',
         */

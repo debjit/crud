@@ -60,11 +60,12 @@ return [
      * @var array
      */
     'date_format' => [
-        'date'     => 'Y-m-d',
+        'date'     => 'Y-m-d', /* for PHP's date formatting */
         'time'     => 'H:i:s',
         'datetime' => 'Y-m-d H:i:s',
-        'js'       => [
-            'date' => 'yyyy-mm-dd',
+        'js'       => [ /* For javascript date formatting, based on moment.js */
+            'date' => 'YYYY-MM-DD',
+            'datetime' => 'YYYY-MM-DD HH:mm',
         ],
     ],
 

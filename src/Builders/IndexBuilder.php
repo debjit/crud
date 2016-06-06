@@ -23,6 +23,7 @@ use BlackfyreStudio\CRUD\Fields\BaseField;
 use BlackfyreStudio\CRUD\Results\IndexResult;
 use BlackfyreStudio\CRUD\Util\Value;
 use Config;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\Paginator;
 use Input;
 
@@ -105,6 +106,7 @@ class IndexBuilder extends BaseBuilder
 
         $model = $this->getModel();
 
+        /** @var Model $items */
         $items = $model::with([]);
         $primaryKey = (new $model())->getKeyName();
 
@@ -127,23 +129,30 @@ class IndexBuilder extends BaseBuilder
         }
 
         $items = $items->paginate($indexPlanner->getCRUDMasterInstance()->getPerPage());
+        
         $this->setPaginator($items);
+        
         $result = [];
+        
         foreach ($items as $item) {
             $row = new IndexResult();
             $row->setIdentifier($item->{$primaryKey});
+            
             foreach ($indexPlanner->getFields() as $field) {
                 $clone = clone $field;
                 $name = $clone->getName();
                 $value = $item->{$name};
+                
                 if ($clone->hasBefore()) {
                     $before = $clone->getBefore();
                     $value = $before($value);
                 }
+                
                 if ($clone->checkIfMultiple()) {
                     $value = Value::decode(Config::get('crud.multiple-serializer'), $value);
                     $value = implode(', ', $value);
                 }
+                
                 $clone
                 ->setContext(BaseField::CONTEXT_INDEX)
                 ->setRowId($item->{$primaryKey})
@@ -151,8 +160,10 @@ class IndexBuilder extends BaseBuilder
 
                 $row->addField($name, $clone);
             }
+            
             $result[] = $row;
         }
+        
         $this->setResult($result);
     }
 }
