@@ -48,6 +48,7 @@ var paths = {
         bowerBase + 'simplemde/dist/simplemde.min.js',
         bowerBase + 'select2/dist/js/select2.full.js',
         bowerBase + 'eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js',
+        bowerBase + 'bootstrap-maxlength/src/bootstrap-maxlength.js',
         /*
         bowerBase + '',
         */
