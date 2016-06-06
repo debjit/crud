@@ -83,6 +83,8 @@ return [
      */
     'multiple-serializer' => 'json',
 
+    'items-per-page' => 25,
+
     /*
      * Additional, custom assets. They will be loaded after the main files, with the asset() helper, so the same rules apply.
      */
