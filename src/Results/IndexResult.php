@@ -20,7 +20,7 @@
 namespace BlackfyreStudio\CRUD\Results;
 
 /**
- * Class IndexResult
+ * Class IndexResult.
  */
 class IndexResult extends BaseResult
 {
