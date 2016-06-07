@@ -99,7 +99,7 @@ class ImageField extends FileField
                 ],
             ];
 
-            $originalSize = public_path($images['original']['src']);
+            $originalSize = getimagesize(public_path($images['original']['src']));
 
             $images['original']['width'] = $originalSize[0];
             $images['original']['height'] = $originalSize[1];
