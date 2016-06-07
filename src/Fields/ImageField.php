@@ -95,7 +95,7 @@ class ImageField extends FileField
 
             $images = [
                 'original' => [
-                    'src' => sprintf('%s/%s', $this->getLocation(), $imageName)
+                    'src' => sprintf('%s/%s', $this->getLocation(), $imageName),
                 ],
             ];
 
