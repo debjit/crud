@@ -57,7 +57,7 @@
                             </div>
                             <div id="collapse-{{$size}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-{{$size}}">
                                 <div class="panel-body">
-                                    <img src="{{ asset($image) }}" title="{{$size}}" class="img-responsive">
+                                    <img src="{{ asset($image['src']) }}" title="{{$size}}" class="img-responsive">
                                 </div>
                             </div>
                         </div>
@@ -71,7 +71,7 @@
                     @foreach($field->getValue() as $size=>$image)
                         <div class="row">
                             <div class="col-sm-12">
-                                <img src="{{ asset($image) }}" title="{{$size}}" class="img-responsive">
+                                <img src="{{ asset($image['src']) }}" title="{{$size}}" class="img-responsive">
                             </div>
                         </div>
                     @endforeach

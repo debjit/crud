@@ -95,9 +95,15 @@ class ImageField extends FileField
             $imageName = $this->getValue();
 
             $images = [
-                'original' => sprintf('%s/%s', $this->getLocation(), $imageName),
+                'original' => [
+                    'src' => sprintf('%s/%s', $this->getLocation(), $imageName)
+                ],
             ];
 
+            $originalSize = public_path($images['original']['src']);
+
+            $images['original']['width'] = $originalSize[0];
+            $images['original']['height'] = $originalSize[1];
 
             foreach ($this->getSizes() as $size) {
                 try {
@@ -122,10 +128,14 @@ class ImageField extends FileField
 
                 if (array_key_exists(3, $size)) {
                     $saveLocation = sprintf('%s/%s', $this->getLocation(), $size[3].'-'.$imageName);
-                    $images[$size[3]] = $saveLocation;
+                    $images[$size[3]]['src'] = $saveLocation;
+                    $images[$size[3]]['width'] = $size[0];
+                    $images[$size[3]]['height'] = $size[1];
                 } else {
                     $saveLocation = sprintf('%s/%s', $this->getLocation(), $size[0].'x'.$size[1].'-'.$imageName);
-                    $images[$size[0].'x'.$size[1]] = $saveLocation;
+                    $images[$size[0].'x'.$size[1]]['src'] = $saveLocation;
+                    $images[$size[0].'x'.$size[1]]['width'] = $size[0];
+                    $images[$size[0].'x'.$size[1]]['height'] = $size[1];
                 }
 
                 $image->save(public_path($saveLocation));
