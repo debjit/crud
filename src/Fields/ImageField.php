@@ -90,13 +90,12 @@ class ImageField extends FileField
      */
     public function postSubmitHook($input, $model)
     {
-
-        if (array_key_exists($this->name,$input)) {
+        if (array_key_exists($this->name, $input)) {
             $imageName = $this->getValue();
 
             $images = [
                 'original' => [
-                    'src' => sprintf('%s/%s', $this->getLocation(), $imageName)
+                    'src' => sprintf('%s/%s', $this->getLocation(), $imageName),
                 ],
             ];
 
