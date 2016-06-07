@@ -243,7 +243,7 @@ class FormBuilder extends BaseBuilder
 
         /* Model before create hook */
         if (method_exists($admin, 'beforeCreate')) {
-            $admin->beforeCreate($input);
+            $this->setInput($admin->beforeCreate($input));
         }
 
         /* Validate */
@@ -312,7 +312,7 @@ class FormBuilder extends BaseBuilder
 
         /* Model before update hook */
         if (method_exists($admin, 'beforeUpdate')) {
-            $admin->beforeUpdate($input);
+            $this->setInput($admin->beforeUpdate($input));
         }
 
         /* Validate */
