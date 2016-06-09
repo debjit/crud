@@ -73,7 +73,7 @@ class MenuBuilder
         $menuBuilder = new self();
 
         $html = '';
-        $html .= '<ul class="sidebar-menu" id="side-menu">';
+        $html .= '<ul class="nav navbar-nav">';
         $html .= sprintf('<li><a href="%s"><i class="fa fa-dashboard"></i> <span>%s</span></a></li>', route('crud.home'), trans('crud::views.dashboard.title'));
         $html .= $menuBuilder->buildMenu($menuBuilder->items);
         $html .= '</ul>';
@@ -121,9 +121,9 @@ class MenuBuilder
                     }
 
                     if ($willBeVisible > 0) {
-                        $html .= '<li>';
-                        $html .= sprintf('<a href="#">%s <span>%s</span><i class="fa fa-angle-left pull-right"></i></a>', $icon, $value['title']);
-                        $html .= '<ul class="treeview-menu">';
+                        $html .= '<li class="dropdown">';
+                        $html .= sprintf('<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">%s %s <span class="caret"></span></a>', $icon, $value['title']);
+                        $html .= '<ul class="dropdown-menu" role="menu">';
                         $html .= $this->buildMenu($value['children']);
                         $html .= '</ul>';
                         $html .= '</li>';

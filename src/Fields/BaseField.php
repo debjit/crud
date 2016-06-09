@@ -91,6 +91,15 @@ abstract class BaseField
     protected $attributes = [
         'class' => 'form-control',
     ];
+
+    /**
+     * Holds the container attributes.
+     * As we use Twitter Bootstrap the 'form-control' class is mandatory.
+     *
+     * @var array
+     */
+    protected $containerAttributes = [];
+
     /**
      * Whether or not to render a "multiple" field.
      *
@@ -495,4 +504,76 @@ abstract class BaseField
     {
         return $this->saving;
     }
+
+    /**
+     * Render the HTML attributes for blade usage outside the form generator's scope
+     * @return string
+     */
+    public function renderContainerAttributes() {
+
+        $render = [];
+
+        foreach ($this->containerAttributes as $name=>$value) {
+
+
+            if (is_string($name)) {
+
+                /* We're dealing with a regular attribute */
+                $render[] = $name . '="' . $value . '"';
+
+            } else {
+
+                /* Special attribute, like: nowrap, disabled, ... */
+                $render[] = $value;
+
+            }
+
+        }
+
+        return implode(' ',$render);
+
+    }
+
+    /**
+     * @return array
+     */
+    public function getContainerAttributes()
+    {
+        return $this->containerAttributes;
+    }
+
+    /**
+     * @param array $containerAttributes
+     */
+    public function setContainerAttributes($containerAttributes)
+    {
+        $this->containerAttributes = $containerAttributes;
+    }
+
+    /**
+     * Get specific container attribute
+     * 
+     * @param string $index Which attribute to get
+     * @return array
+     */
+    public function getContainerAttribute($index)
+    {
+        return $this->containerAttributes[$index];
+    }
+
+    /**
+     * Set specific container attribute
+     * 
+     * @param string $index
+     * @param string|integer|boolean $value
+     */
+    public function setContainerAttribute($index, $value)
+    {
+        if ($value === null) {
+            $this->containerAttributes[] = $index;
+        } else {
+            $this->containerAttributes[$index] = $value;
+        }
+    }
+    
 }

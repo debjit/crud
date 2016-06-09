@@ -1,73 +1,83 @@
-@include('crud::partials._header')
+<!doctype html>
+<html lang="{{Config::get('app.locale')}}">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{Config::get('crud.title.long')}}</title>
 
-<div class="wrapper">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-    @include('crud::partials._nav')
+    <link href="{{asset('vendor/blackfyrestudio/crud/styles/package.css')}}" rel="stylesheet">
 
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        @yield('subheader')
+    @foreach (Config::get('crud.assets.stylesheets') as $stylesheet)
+        <link rel="stylesheet" href="{{ asset($stylesheet) }}">
+    @endforeach
 
-        <!-- Main content -->
-        <section class="content">
+</head>
+<body>
 
-            <!-- Session notifications -->
-            <div class="row">
-                <div class="col-xs-12">
-                    @include('crud::partials._session-messages')
-                </div>
-            </div>
-
-            <!-- Page Content -->
-            @yield('content')
-
-        </section><!-- /.content -->
-    </div><!-- /.content-wrapper -->
-
-    <!-- Main Footer -->
-    <footer class="main-footer">
-        <!-- Default to the left -->
-        <strong>Copyright &copy; {{Config::get('crud.company.year',date('Y'))}} <a target="_blank" href="{{Config::get('crud.company.link','https://github.com/BlackfyreStudio')}}">{{Config::get('crud.company.name','BlackFyre Studio')}}</a>.</strong> All rights reserved.
-    </footer>
-
-    @if(Config::get('crud.right-menu',false))
-
-
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-        <!-- Create the tabs -->
-        <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-            <li class="active"><a href="#control-sidebar-filter-tab" data-toggle="tab"><i class="fa fa-filter"></i></a></li>
-            <li><a href="#control-sidebar-scopes-tab" data-toggle="tab"><i class="fa fa-crosshairs"></i></a></li>
-            <li><a href="#control-sidebar-export-tab" data-toggle="tab"><i class="fa fa-download"></i></a></li>
-        </ul>
-        <!-- Tab panes -->
-        <div class="tab-content">
-            <!-- Home tab content -->
-            <div class="tab-pane active" id="control-sidebar-filter-tab">
-                <h3 class="control-sidebar-heading">Filters</h3>
-                @yield('filters')
-                <a href="#" class="btn btn-info btn-block" data-toggle="control-sidebar">Close</a>
-            </div><!-- /.tab-pane -->
-            <!-- Settings tab content -->
-            <div class="tab-pane" id="control-sidebar-scopes-tab">
-                <h3 class="control-sidebar-heading">Scopes</h3>
-                @yield('scopes')
-                <a href="#" class="btn btn-info btn-block" data-toggle="control-sidebar">Close</a>
-            </div><!-- /.tab-pane -->
-            <div class="tab-pane" id="control-sidebar-export-tab">
-                <h3 class="control-sidebar-heading">Export</h3>
-                @yield('export')
-                <a href="#" class="btn btn-info btn-block" data-toggle="control-sidebar">Close</a>
-            </div><!-- /.tab-pane -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-primary" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">{{Config::get('crud.title.long')}}</a>
         </div>
-    </aside><!-- /.control-sidebar -->
-    <!-- Add the sidebar's background. This div must be placed
-         immediately after the control sidebar -->
-    <div class='control-sidebar-bg'></div>
-    @endif
-</div><!-- ./wrapper -->
+        <div id="navbar-primary" class="collapse navbar-collapse">
+            {{-- Menu generator comes here --}}
 
-@include('crud::partials._footer')
+            {!! BlackfyreStudio\CRUD\Builders\MenuBuilder::build() !!}
 
+            {{--
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">Home</a></li>
+                <li><a href="/ui-kit.html">UI Kit</a></li>
+                <li><a href="/form-special.html">Form elements</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">REST <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="/crud-index.html">Index</a></li>
+                        <li><a href="/crud-index-empty.html">Index (Empty)</a></li>
+                        <li><a href="/crud-form.html">Form</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+            --}}
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img class="user-image" src="{{CRUDGravatar::src(Auth::user()->email,18)}}" />{{Auth::user()->name}} <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="/pwd-change.html">Change password</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="/login.html"><i class="fa fa-fw fa-warning"></i> Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+
+@yield('content')
+
+
+<footer class="footer">
+    <div class="container">
+        <p><strong>Copyright &copy; {{Config::get('crud.company.year',date('Y'))}} <a target="_blank" href="{{Config::get('crud.company.link','https://github.com/BlackfyreStudio')}}">{{Config::get('crud.company.name','BlackFyre Studio')}}</a>.</strong> All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="{{asset('vendor/blackfyrestudio/crud/scripts/package.js')}}"></script>
+
+@foreach (Config::get('crud.assets.javascript') as $javascript)
+    <script src="{{ asset($javascript) }}"></script>
+@endforeach
+
+</body>
+</html>
