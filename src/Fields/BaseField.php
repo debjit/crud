@@ -506,32 +506,27 @@ abstract class BaseField
     }
 
     /**
-     * Render the HTML attributes for blade usage outside the form generator's scope
+     * Render the HTML attributes for blade usage outside the form generator's scope.
+     *
      * @return string
      */
-    public function renderContainerAttributes() {
-
+    public function renderContainerAttributes()
+    {
         $render = [];
 
-        foreach ($this->containerAttributes as $name=>$value) {
-
-
+        foreach ($this->containerAttributes as $name => $value) {
             if (is_string($name)) {
 
                 /* We're dealing with a regular attribute */
-                $render[] = $name . '="' . $value . '"';
-
+                $render[] = $name.'="'.$value.'"';
             } else {
 
                 /* Special attribute, like: nowrap, disabled, ... */
                 $render[] = $value;
-
             }
-
         }
 
-        return implode(' ',$render);
-
+        return implode(' ', $render);
     }
 
     /**
@@ -551,9 +546,10 @@ abstract class BaseField
     }
 
     /**
-     * Get specific container attribute
-     * 
+     * Get specific container attribute.
+     *
      * @param string $index Which attribute to get
+     *
      * @return array
      */
     public function getContainerAttribute($index)
@@ -562,10 +558,10 @@ abstract class BaseField
     }
 
     /**
-     * Set specific container attribute
-     * 
-     * @param string $index
-     * @param string|integer|boolean $value
+     * Set specific container attribute.
+     *
+     * @param string          $index
+     * @param string|int|bool $value
      */
     public function setContainerAttribute($index, $value)
     {
@@ -575,5 +571,4 @@ abstract class BaseField
             $this->containerAttributes[$index] = $value;
         }
     }
-    
 }
