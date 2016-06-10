@@ -219,7 +219,7 @@ class CRUDController extends OriginController
 
 
         if (count($items) === 0) {
-            return response()->json(['result'=>false]);
+            return response()->json(['result' => false]);
         }
 
         foreach ($items as $id) {
@@ -244,9 +244,9 @@ class CRUDController extends OriginController
         }
 
         return response()->json([
-            'result'=>true,
-            'count' => (count($items) > 1 ? 'multiple' : 'one'),
-            'model' => $modelDescriptor->getModelPluralName(),
+            'result' => true,
+            'count'  => (count($items) > 1 ? 'multiple' : 'one'),
+            'model'  => $modelDescriptor->getModelPluralName(),
         ]);
     }
 
