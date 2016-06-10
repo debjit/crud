@@ -64,7 +64,7 @@ class TagField extends BaseField
     {
         $this->setAttribute('multiple', true);
         $this->setAttribute('class', 'form-control');
-        $this->setAttribute('data-provide','tags');
+        $this->setAttribute('data-provide', 'tags');
 
         switch ($this->getContext()) {
             default:

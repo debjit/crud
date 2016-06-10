@@ -44,7 +44,7 @@ class IdentifierField extends BaseField
                 $this->attributes['class'] = str_replace('form-control', '', $this->attributes['class']);
 
                 return view('crud::fields.identifier', [
-                    'field'=>$this
+                    'field' => $this,
                 ]);
                 break;
             default:
