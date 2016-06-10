@@ -33,29 +33,16 @@
 
             {!! BlackfyreStudio\CRUD\Builders\MenuBuilder::build() !!}
 
-            {{--
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="/">Home</a></li>
-                <li><a href="/ui-kit.html">UI Kit</a></li>
-                <li><a href="/form-special.html">Form elements</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">REST <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="/crud-index.html">Index</a></li>
-                        <li><a href="/crud-index-empty.html">Index (Empty)</a></li>
-                        <li><a href="/crud-form.html">Form</a></li>
-                    </ul>
-                </li>
 
-            </ul>
-            --}}
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img class="user-image" src="{{CRUDGravatar::src(Auth::user()->email,18)}}" />{{Auth::user()->name}} <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
+                        {{--
                         <li><a href="/pwd-change.html">Change password</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="/login.html"><i class="fa fa-fw fa-warning"></i> Logout</a></li>
+                        --}}
+                        <li><a href="{{route('crud.logout')}}"><i class="fa fa-fw fa-warning"></i> Logout</a></li>
                     </ul>
                 </li>
             </ul>

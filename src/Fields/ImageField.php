@@ -66,20 +66,9 @@ class ImageField extends FileField
      */
     public function render()
     {
-        switch ($this->getContext()) {
-            case BaseField::CONTEXT_INDEX:
-                return '<img src="'.asset($this->getValue()).'" class="img-responsive">';
-                break;
-            case BaseField::CONTEXT_FILTER:
-            case BaseField::CONTEXT_FORM:
-                return view('crud::fields.image', [
-                    'field' => $this,
-                ]);
-                break;
-            default:
-                return;
-                break;
-        }
+        return view('crud::fields.image', [
+            'field' => $this,
+        ]);
     }
 
     /**

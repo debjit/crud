@@ -1,23 +1,21 @@
 @extends('crud::master')
 
 
-@section('filters')
-    @if ($MasterInstance->getFilterBuilder()->getResult()->getFields())
-        @include($MasterInstance->getView('filter'))
-        @else
-        <p>{{trans('crud::index.no-filters')}}</p>
-    @endif
-@stop
-
-
 @section('content')
 
+    <div class="container-fluid breadcrumb-container">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li><a href="{{URL::route('crud.home')}}"><i
+                                class="fa fa-dashboard"></i> {{trans('crud::views.dashboard.title')}}</a></li>
+                <li class="active">{{ trans('crud::index.list-title', ['model' => $MasterInstance->getModelPluralName()]) }}</li>
+            </ol>
+        </div>
+    </div>
+
     <div class="container">
-        <ol class="breadcrumb">
-            <li><a href="{{URL::route('crud.home')}}"><i
-                            class="fa fa-dashboard"></i> {{trans('crud::views.dashboard.title')}}</a></li>
-            <li class="active">{{ trans('crud::index.list-title', ['model' => $MasterInstance->getModelPluralName()]) }}</li>
-        </ol>
+
+        @include('crud::partials._session-messages')
 
 
         @if (count($MasterInstance->getIndexBuilder()->getResult()) === 0)
