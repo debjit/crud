@@ -104,7 +104,7 @@
                         </div>
                     @endif
 
-                    {!! CRUDForm::open(['method' => 'POST', 'route' => ['crud.multi-destroy', $ModelName], 'id' => 'delete-multi-form']) !!}
+                    {!! CRUDForm::open(['method' => 'POST', 'route' => ['crud.multi-destroy', $ModelName], 'id' => 'destroyer']) !!}
 
                     <div class="table-responsive">
 
@@ -121,7 +121,7 @@
                                         <a href="{{ route('crud.index', [$ModelName, '_order_by' => $field->getName(), '_order' => Input::get('_order') === 'ASC' ? 'DESC' : 'ASC']) }}">
                                             {{ $field->getLabel() }}
                                             @if (Input::has('_order_by') && Input::get('_order_by') === $field->getName())
-                                                <i class="fa fa-sort-{{ Input::get('_order') === 'DESC' ? 'up' : 'down' }}"></i>
+                                                <i class="fa fa-sort-{{ Input::get('_order') === 'DESC' ? 'down' : 'up' }}"></i>
                                             @endif
                                         </a>
                                     </th>
@@ -142,7 +142,7 @@
                                     @if(\Auth::user()->hasPermission($ModelName . '.delete'))
                                         <td>
                                             <label>
-                                                <input type="checkbox"  class="deleter" name="delete[{{ $item->getIdentifier() }}]">
+                                                <input type="checkbox" class="deleter" name="delete[]" value="{{ $item->getIdentifier() }}">
                                             </label>
                                         </td>
                                     @endif
@@ -197,10 +197,10 @@
                     <div class="row">
                         <div class="col-sm-6">
                             @if(\Auth::user()->hasPermission($ModelName . '.delete'))
-                            <a href="{{ route('crud.modal.delete', $ModelName) }}" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Deleting..."
+                            <button type="submit" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Deleting..."
                                     class="btn btn-danger btn-sm btn-deleter" disabled><i class="fa fa-fw fa-trash"></i>
                                 {{ trans('crud::index.button.delete-selected', ['model' => $MasterInstance->getModelPluralName()]) }}
-                            </a>
+                            </button>
                             @endif
                         </div>
                         <div class="col-sm-6">

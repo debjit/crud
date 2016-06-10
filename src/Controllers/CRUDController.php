@@ -22,6 +22,7 @@ namespace BlackfyreStudio\CRUD\Controllers;
 use BlackfyreStudio\CRUD\Master;
 use Config;
 use Illuminate\Console\AppNamespaceDetectorTrait;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as OriginController;
@@ -208,34 +209,45 @@ class CRUDController extends OriginController
     public function multiDestroy($modelName)
     {
         if (!\Auth::user()->hasPermission($modelName.'.delete')) {
-            return view('crud::errors.403');
+            abort(403);
         }
 
         $items = Input::get('delete');
-        $modelNameWithNamespace = $this->setModelNamespace($modelName);
-        $model = Master::getInstance($modelNameWithNamespace);
+        $controllerName = $this->setModelNamespace($modelName);
+        $modelDescriptor = Master::getInstance($controllerName);
+        $modelNameWithNamespace = $modelDescriptor->getModelFullName();
+
 
         if (count($items) === 0) {
-            return Redirect::route('crud.index', $modelName);
+            return response()->json(['result'=>false]);
         }
 
+        foreach ($items as $id) {
+
+            /** @var Model $model */
+            $model = $modelNameWithNamespace::find($id);
+            $model->delete();
+        }
+
+        /*
         foreach ($items as $id => $item) {
             $model->buildForm($id)
                 ->getFormBuilder()
                 ->destroy();
         }
+        */
 
-        // Set the flash message
-        Session::flash('message.success', trans('crud::messages.success.model-deleted', [
-            'count' => (count($items) > 1 ? 'multiple' : 'one'),
-            'model' => $model->getModelPluralName(),
-        ]));
+
         // afterMultiDestroy hook
-        if (method_exists($model, 'afterMultiDestroy')) {
-            return $model->afterMultiDestroy(Redirect::route('crud.index', $modelName));
+        if (method_exists($modelDescriptor, 'afterMultiDestroy')) {
+            return $modelDescriptor->afterMultiDestroy(Redirect::route('crud.index', $modelName));
         }
 
-        return Redirect::route('crud.index', $modelName);
+        return response()->json([
+            'result'=>true,
+            'count' => (count($items) > 1 ? 'multiple' : 'one'),
+            'model' => $modelDescriptor->getModelPluralName(),
+        ]);
     }
 
     /**

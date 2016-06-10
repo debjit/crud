@@ -21,6 +21,7 @@
 return [
     /*
      * Package URI.
+     * You can change admin address with this option, the default is 'throne'
      * @var string
      */
     'uri' => 'throne',
@@ -29,10 +30,7 @@ return [
      * The package main title.
      * @var string
      */
-    'title' => [
-        'long'  => 'BlackfyreStudio/CRUD',
-        'short' => 'CRUD',
-    ],
+    'title' => 'BlackfyreStudio/CRUD',
 
     /*
      * Company information in the footer
@@ -80,6 +78,9 @@ return [
      */
     'multiple-serializer' => 'json',
 
+    /*
+     * How many items should be present on a paginated index page
+     */
     'items-per-page' => 25,
 
     /*
