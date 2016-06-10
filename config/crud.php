@@ -43,13 +43,8 @@ return [
     ],
 
     /*
-     * Set the template skin
-     * @var string
-     */
-    'template-skin' => 'skin-black',
-
-    /*
-     * The directory where the crud controllers are located.
+     * The directory where the crud controllers are located in the app folder.
+     * The default is app\Http\Controllers\Crud
      * @var string
      */
     'directory' => 'Crud',
@@ -69,12 +64,14 @@ return [
         ],
     ],
 
+
+    /*
+     * Valid types to be exported: json, xml, csv, xls
+     * This is still in development
+     */
     'export-types' => [
-        'json',
-        'xml',
-        'csv',
-        'xls',
     ],
+
     /*
      * How to serialize `multiple` fields.
      *  - explode
@@ -92,6 +89,16 @@ return [
         'stylesheets' => [],
         'javascript'  => [],
     ],
+
+
+    /*
+     * The menu items are configured here, please refer to the documentation at https://github.com/BlackfyreStudio/crud/wiki/Creating-a-menu-structure
+     * 
+     * ---------------------------------------------------
+     * IMPORTANT: currently only 1 sub-level is supported!
+     * ---------------------------------------------------
+     *
+     */
     'menu' => [
         [
             'title'    => 'Settings',
