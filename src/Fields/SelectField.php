@@ -24,6 +24,13 @@ namespace BlackfyreStudio\CRUD\Fields;
  */
 class SelectField extends BaseField
 {
+
+    public function __construct($name, \BlackfyreStudio\CRUD\Master $master)
+    {
+        parent::__construct($name, $master);
+        $this->setAttribute('data-provide','select');
+    }
+
     /**
      * Holds the select options.
      *

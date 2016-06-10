@@ -12,7 +12,7 @@
                 <div class="row" data-multiply>
                     <div class="col-sm-11">
 
-                        <div class="input-group date" data-provide="datetimepicker" data-date-format="{{ \Config::get('crud.date_format.js.datetime','YYYY-MM-DD HH:mm') }}">
+                        <div class="input-group date" data-provide="datepicker" data-format="{{ \Config::get('crud.date_format.js.datetime','YYYY-MM-DD HH:mm') }}">
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
@@ -36,7 +36,7 @@
             @endforeach
         @else
 
-            <div class="input-group date" data-provide="datetimepicker" data-date-format="{{ \Config::get('crud.date_format.js.datetime','YYYY-MM-DD HH:mm') }}">
+            <div class="input-group date" data-provide="datepicker" data-format="{{ \Config::get('crud.date_format.js.datetime','YYYY-MM-DD HH:mm') }}">
                 <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                 </div>
