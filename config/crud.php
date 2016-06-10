@@ -93,7 +93,7 @@ return [
 
     /*
      * The menu items are configured here, please refer to the documentation at https://github.com/BlackfyreStudio/crud/wiki/Creating-a-menu-structure
-     * 
+     *
      * ---------------------------------------------------
      * IMPORTANT: currently only 1 sub-level is supported!
      * ---------------------------------------------------
