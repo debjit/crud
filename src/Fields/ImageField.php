@@ -66,20 +66,9 @@ class ImageField extends FileField
      */
     public function render()
     {
-        switch ($this->getContext()) {
-            case BaseField::CONTEXT_INDEX:
-                return '<img src="'.asset($this->getValue()).'" class="img-responsive">';
-                break;
-            case BaseField::CONTEXT_FILTER:
-            case BaseField::CONTEXT_FORM:
-                return view('crud::fields.image', [
-                    'field' => $this,
-                ]);
-                break;
-            default:
-                return;
-                break;
-        }
+        return view('crud::fields.image', [
+            'field' => $this,
+        ]);
     }
 
     /**
@@ -90,46 +79,58 @@ class ImageField extends FileField
      */
     public function postSubmitHook($input, $model)
     {
-        $imageName = $this->getValue();
+        if (array_key_exists($this->name, $input)) {
+            $imageName = $this->getValue();
 
-        $images = [
-            'original' => sprintf('%s/%s', $this->getLocation(), $imageName),
-        ];
+            $images = [
+                'original' => [
+                    'src' => sprintf('%s/%s', $this->getLocation(), $imageName),
+                ],
+            ];
 
+            $originalSize = getimagesize(public_path($images['original']['src']));
 
-        foreach ($this->getSizes() as $size) {
-            try {
-                $image = InterventionImage::make(sprintf('%s/%s', $this->getLocation(), $imageName));
-            } catch (NotReadableException $e) {
-                continue;
+            $images['original']['width'] = $originalSize[0];
+            $images['original']['height'] = $originalSize[1];
+
+            foreach ($this->getSizes() as $size) {
+                try {
+                    $image = InterventionImage::make(sprintf('%s/%s', $this->getLocation(), $imageName));
+                } catch (NotReadableException $e) {
+                    continue;
+                }
+
+                switch ($size[2]) {
+                    case 'resize':
+                        $image->resize($size[0], $size[1], function ($constraint) {
+                            $constraint->aspectRatio();
+                        });
+                        break;
+                    case 'resizeCanvas':
+                        $image->resizeCanvas($size[0], $size[1], 'center');
+                        break;
+                    case 'fit':
+                        $image->fit($size[0], $size[1]);
+                        break;
+                }
+
+                if (array_key_exists(3, $size)) {
+                    $saveLocation = sprintf('%s/%s', $this->getLocation(), $size[3].'-'.$imageName);
+                    $images[$size[3]]['src'] = $saveLocation;
+                    $images[$size[3]]['width'] = $size[0];
+                    $images[$size[3]]['height'] = $size[1];
+                } else {
+                    $saveLocation = sprintf('%s/%s', $this->getLocation(), $size[0].'x'.$size[1].'-'.$imageName);
+                    $images[$size[0].'x'.$size[1]]['src'] = $saveLocation;
+                    $images[$size[0].'x'.$size[1]]['width'] = $size[0];
+                    $images[$size[0].'x'.$size[1]]['height'] = $size[1];
+                }
+
+                $image->save(public_path($saveLocation));
             }
 
-            switch ($size[2]) {
-                case 'resize':
-                    $image->resize($size[0], $size[1], function ($constraint) {
-                        $constraint->aspectRatio();
-                    });
-                    break;
-                case 'resizeCanvas':
-                    $image->resizeCanvas($size[0], $size[1], 'center');
-                    break;
-                case 'fit':
-                    $image->fit($size[0], $size[1]);
-                    break;
-            }
-
-            if (array_key_exists(3, $size)) {
-                $saveLocation = sprintf('%s/%s', $this->getLocation(), $size[3].'-'.$imageName);
-                $images[$size[3]] = $saveLocation;
-            } else {
-                $saveLocation = sprintf('%s/%s', $this->getLocation(), $size[0].'x'.$size[1].'-'.$imageName);
-                $images[$size[0].'x'.$size[1]] = $saveLocation;
-            }
-
-            $image->save(public_path($saveLocation));
+            $model->{$this->getName()} = $images;
+            $model->save();
         }
-
-        $model->{$this->getName()} = $images;
-        $model->save();
     }
 }

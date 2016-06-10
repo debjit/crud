@@ -20,6 +20,14 @@
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         <strong>{{ trans('crud::messages.error.title') }}</strong>
         {{ Session::get('message.error') }}
+
+        @if (count($errors) > 0)
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        @endif
     </div>
 @endif
 

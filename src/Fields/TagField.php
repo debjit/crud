@@ -63,7 +63,8 @@ class TagField extends BaseField
     public function render()
     {
         $this->setAttribute('multiple', true);
-        $this->setAttribute('class', 'form-control select2');
+        $this->setAttribute('class', 'form-control');
+        $this->setAttribute('data-provide', 'tags');
 
         switch ($this->getContext()) {
             default:

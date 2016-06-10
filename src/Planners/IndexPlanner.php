@@ -61,7 +61,7 @@ class IndexPlanner extends BasePlanner
     /**
      * @param string $name
      *
-     * @return \BlackfyreStudio\CRUD\Fields\BaseField
+     * @return \BlackfyreStudio\CRUD\Fields\ImageField
      */
     public function image($name = '')
     {

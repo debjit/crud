@@ -29,13 +29,13 @@ class MarkdownField extends BaseField
      */
     public function render()
     {
-        $this->setAttribute('data-provide', 'markdown');
+        $this->setAttribute('data-provide', 'simplemde');
         $this->setAttribute('data-iconlibrary', 'fa');
 
         switch ($this->getContext()) {
             default:
             case $this::CONTEXT_INDEX:
-                return;
+                return '';
                 break;
             case $this::CONTEXT_FILTER:
                 return $this->getValue();

@@ -27,6 +27,7 @@ return [
         'reset'           => 'Reset',
         'filter-submit'   => 'Filter :model',
         'overview'        => 'Overview',
+        'open-gallery'    => 'Open gallery',
     ],
 
     'sidebar' => [

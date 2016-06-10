@@ -1,65 +1,60 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html class="no-js" lang="">
 <head>
-    <meta charset="UTF-8">
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{Config::get('crud.title')}}</title>
 
-    <title>{{Config::get('crud.title.long')}} | Login</title>
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
 
-    <!-- Bootstrap Core CSS -->
-    <link href="{{asset('vendor/blackfyrestudio/crud/styles/crud.css')}}" rel="stylesheet">
+    <link href="{{asset('vendor/blackfyrestudio/crud/styles/login.css')}}" rel="stylesheet">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
 </head>
-<body class="login-page">
-<div class="login-box">
-    <div class="login-logo">
-        {{Config::get('crud.title.long')}}
-    </div>
-    <!-- /.login-logo -->
-    <div class="login-box-body">
-        <p class="login-box-msg">Sign in to start your session</p>
+<body>
+<!--[if lt IE 10]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
 
-        @include('crud::partials._session-messages')
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-md-offset-4">
+            <h1 class="text-center login-title">Sign in to continue</h1>
+            <div class="account-wall">
+                <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
+                     alt="">
+                @include('crud::partials._session-messages')
 
-        {!! CRUDForm::open(['route'=>'crud.session-start']) !!}
-            <div class="form-group has-feedback">
-                <input name="email" type="email" class="form-control" placeholder="{{trans('crud::form.login.email.placeholder')}}"/>
-                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-            </div>
-            <div class="form-group has-feedback">
-                <input name="password" type="password" class="form-control" placeholder="{{trans('crud::form.login.password.placeholder')}}"/>
-                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-            </div>
-            <div class="row">
-                <div class="col-xs-8">
-                    <div class="checkbox icheck">
-                        <label>
-                            <input name="remember" value="1" type="checkbox"> {{trans('crud::form.login.remember-me')}}
-                        </label>
-                    </div>
+                {!! CRUDForm::open(['route'=>'crud.session-start','class'=>'form-signin']) !!}
+
+
+                {!! CRUDForm::email('email',null,['class'=>'form-control','required','autofocus','placeholder'=>'Email','id'=>'email']) !!}
+                {!! CRUDForm::password('password',['class'=>'form-control','required','placeholder'=>'Password']) !!}
+
+                {!! CRUDForm::submit('Sign in',['class'=>'btn btn-lg btn-primary btn-block']) !!}
+
+
+                <div class="checkbox pull-left">
+                    <label class="">
+                {!! CRUDForm::checkbox('remember') !!} Remember me
+                    </label>
                 </div>
-                <!-- /.col -->
-                <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">{{trans('crud::form.login.submit.title')}}</button>
-                </div>
-                <!-- /.col -->
+
+                <span class="clearfix"></span>
+
+
+                {{--
+                    <a title="Forgot your password?" href="#" class="pull-right need-help">Need help? </a><span class="clearfix"></span>
+                --}}
+                {!! CRUDForm::close() !!}
+
             </div>
-        {!! CRUDForm::close() !!}
-
-        <a href="#">{{trans('crud::form.login.forgot-password')}}</a><br>
-
+        </div>
     </div>
-    <!-- /.login-box-body -->
 </div>
-<!-- /.login-box -->
 
-<script src="{{asset('vendor/blackfyrestudio/crud/scripts/crud.js')}}"></script>
+<script src="{{asset('vendor/blackfyrestudio/crud/scripts/login.js')}}"></script>
+
 </body>
 </html>
