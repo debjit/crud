@@ -84,11 +84,11 @@ abstract class RelationField extends BaseField
     {
         return $this;
     }
-    
+
     public function __construct($name, \BlackfyreStudio\CRUD\Master $master)
     {
         parent::__construct($name, $master);
-        $this->setAttribute('data-provide','select');
+        $this->setAttribute('data-provide', 'select');
     }
 
     /**
