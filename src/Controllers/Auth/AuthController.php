@@ -95,43 +95,40 @@ class AuthController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function showPasswordChange() {
+    public function showPasswordChange()
+    {
         return view('crud::layouts.pwd-change');
     }
-
 
     /**
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function changePassword() {
-
+    public function changePassword()
+    {
         if (Input::has('original') && Input::has('password') && Input::has('password_confirmation')) {
-
             if (\Hash::check(Input::get('original'), Auth::user()->getAuthPassword())) {
-
                 if (Input::get('password') === Input::get('password_confirmation')) {
-
                     Auth::user()->fill([
-                        'password'=> \Hash::make(Input::get('password'))
+                        'password' => \Hash::make(Input::get('password')),
                     ])->save();
 
                     Session::flash('message.success', trans('crud::messages.success.messages.pwd-change.changed'));
-                    return redirect()->intended(route('crud.home'));
 
+                    return redirect()->intended(route('crud.home'));
                 } else {
                     Session::flash('message.error', trans('crud::messages.error.messages.pwd-change.no-match'));
+
                     return redirect()->intended(route('crud.auth.pwd-change'));
                 }
-
             } else {
                 Session::flash('message.error', trans('crud::messages.error.messages.pwd-change.invalid-original'));
+
                 return redirect()->intended(route('crud.auth.pwd-change'));
             }
-
         } else {
             Session::flash('message.error', trans('crud::messages.error.messages.pwd-change.fields-missing'));
+
             return redirect()->intended(route('crud.auth.pwd-change'));
         }
-
     }
 }

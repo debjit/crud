@@ -42,10 +42,10 @@ return [
                 'user-not-found'   => 'User not found',
             ],
             'pwd-change' => [
-                'validation-error' => 'Validation error.',
-                'fields-missing'   => 'User not found',
+                'validation-error'   => 'Validation error.',
+                'fields-missing'     => 'User not found',
                 'invalid-original'   => 'Supplied original password doesn\'t match the current one!',
-                'no-match'   => 'The supplied new passwords don\'t match!',
+                'no-match'           => 'The supplied new passwords don\'t match!',
             ],
         ],
     ],
