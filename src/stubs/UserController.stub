@@ -63,7 +63,8 @@ class UserController extends Master
             ->setLabel(trans('crud::user.email'));
 
         $planner->password('password')
-            ->setLabel(trans('crud::user.password'));
+            ->setLabel(trans('crud::user.password'))
+            ->setDescription('If you don\'t want to update the password, leave the field blank.');
 
         $planner->belongsToMany('roles')
             ->setLabel(trans('crud::user.roles'))
