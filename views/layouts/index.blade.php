@@ -22,8 +22,6 @@
 
             {{-- No content --}}
 
-            @include('crud::partials._session-messages')
-
             <div class="row">
                 <div class="col-sm-4 col-sm-offset-4">
                     <div class="panel panel-primary">
@@ -93,8 +91,6 @@
                             </div>
                         </div>
                     </div>
-
-                    @include('crud::partials._session-messages')
 
                     @if (Input::has('_filtering'))
                         <div class="alert alert-warning">
