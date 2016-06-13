@@ -41,6 +41,15 @@
         'uses' => 'BlackfyreStudio\CRUD\Controllers\DashboardController@index',
     ]);
 
+    \Route::get('auth/pwd-change', [
+        'as'   => 'crud.auth.pwd-change',
+        'uses' => 'BlackfyreStudio\CRUD\Controllers\Auth\AuthController@showPasswordChange',
+    ]);
+
+    \Route::post('auth/pwd-change', [
+        'uses' => 'BlackfyreStudio\CRUD\Controllers\Auth\AuthController@changePassword',
+    ]);
+
     /* TODO: visit again if it could be done with dynamic resource routes */
 
     \Route::get('index/{model}', [

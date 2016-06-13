@@ -38,10 +38,8 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img class="user-image" src="{{CRUDGravatar::src(Auth::user()->email,18)}}" />{{Auth::user()->name}} <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        {{--
-                        <li><a href="/pwd-change.html">Change password</a></li>
+                        <li><a href="{{route('crud.auth.pwd-change')}}"><i class="fa fa-fw fa-key"></i> Change password</a></li>
                         <li role="separator" class="divider"></li>
-                        --}}
                         <li><a href="{{route('crud.logout')}}"><i class="fa fa-fw fa-warning"></i> Logout</a></li>
                     </ul>
                 </li>

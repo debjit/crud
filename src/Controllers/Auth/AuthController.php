@@ -81,11 +81,57 @@ class AuthController extends Controller
         return redirect(route('crud.login'));
     }
 
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroySession()
     {
         Auth::logout();
         Session::flash('message.success', trans('crud::messages.success.messages.sign-out.user-signed-out'));
 
         return redirect()->intended(route('crud.login'));
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showPasswordChange() {
+        return view('crud::layouts.pwd-change');
+    }
+
+
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function changePassword() {
+
+        if (Input::has('original') && Input::has('password') && Input::has('password_confirmation')) {
+
+            if (\Hash::check(Input::get('original'), Auth::user()->getAuthPassword())) {
+
+                if (Input::get('password') === Input::get('password_confirmation')) {
+
+                    Auth::user()->fill([
+                        'password'=> \Hash::make(Input::get('password'))
+                    ])->save();
+
+                    Session::flash('message.success', trans('crud::messages.success.messages.pwd-change.changed'));
+                    return redirect()->intended(route('crud.home'));
+
+                } else {
+                    Session::flash('message.error', trans('crud::messages.error.messages.pwd-change.no-match'));
+                    return redirect()->intended(route('crud.auth.pwd-change'));
+                }
+
+            } else {
+                Session::flash('message.error', trans('crud::messages.error.messages.pwd-change.invalid-original'));
+                return redirect()->intended(route('crud.auth.pwd-change'));
+            }
+
+        } else {
+            Session::flash('message.error', trans('crud::messages.error.messages.pwd-change.fields-missing'));
+            return redirect()->intended(route('crud.auth.pwd-change'));
+        }
+
     }
 }

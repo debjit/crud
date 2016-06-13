@@ -2,6 +2,8 @@
 
 @section('content')
 
+    {{--
+
     <div class="container-fluid breadcrumb-container">
         <div class="container">
             <ol class="breadcrumb">
@@ -9,6 +11,7 @@
             </ol>
         </div>
     </div>
+    --}}
 
     <div class="container">
 
