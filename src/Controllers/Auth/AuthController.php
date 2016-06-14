@@ -73,9 +73,9 @@ class AuthController extends Controller
                 return redirect()->intended(route('crud.home'));
             }
 
-            Session::flash('message.error', trans('crud::messages.error.sign-in.user-not-found'));
+            Session::flash('message.error', trans('crud::messages.error.messages.sign-in.user-not-found'));
         } else {
-            Session::flash('message.error', trans('crud::messages.error.sign-in.user-not-found'));
+            Session::flash('message.error', trans('crud::messages.error.messages.sign-in.user-not-found'));
         }
 
         return redirect(route('crud.login'));
