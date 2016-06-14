@@ -123,7 +123,7 @@
                                     </th>
                                 @endforeach
 
-                                @if(\Auth::user()->hasPermission($ModelName . '.edit'))
+                                @if(\Auth::user()->hasPermission($ModelName . '.update'))
                                 <th></th>
                                 @endif
 
@@ -147,7 +147,7 @@
                                         <td {{$field->renderContainerAttributes()}}>{!! $field->render() !!}</td>
                                     @endforeach
 
-                                    @if(\Auth::user()->hasPermission($ModelName . '.edit'))
+                                    @if(\Auth::user()->hasPermission($ModelName . '.update'))
                                         <td align="right">
                                             <a href="{{ route('crud.edit', [$ModelName, $item->getIdentifier()]) }}"
                                                class="btn btn-xs btn-warning">
@@ -179,7 +179,7 @@
                                     </th>
                                 @endforeach
 
-                                @if(\Auth::user()->hasPermission($ModelName . '.edit'))
+                                @if(\Auth::user()->hasPermission($ModelName . '.update'))
                                     <th></th>
                                 @endif
 
