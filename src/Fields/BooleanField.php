@@ -41,7 +41,7 @@ class BooleanField extends BaseField
     }
 
     /**
-     * The field should always have a value, either true or false
+     * The field should always have a value, either true or false.
      */
     public function preSubmitHook()
     {
