@@ -19,6 +19,8 @@
  */
 namespace BlackfyreStudio\CRUD\Fields;
 
+use Input;
+
 /**
  * Class BooleanField.
  */
@@ -31,15 +33,22 @@ class BooleanField extends BaseField
      */
     public function render()
     {
-        switch ($this->getContext()) {
-            default:
-            case $this::CONTEXT_INDEX:
-                return $this->getValue();
-                break;
-            case $this::CONTEXT_FILTER:
-            case $this::CONTEXT_FORM:
-                return;
-                break;
+        $this->setAttribute('data-provide', 'toggle');
+
+        return view('crud::fields.boolean', [
+            'field' => $this,
+        ]);
+    }
+
+    /**
+     * The field should always have a value, either true or false
+     */
+    public function preSubmitHook()
+    {
+        $formBuilder = $this->getMasterInstance()->getFormBuilder();
+
+        if (!Input::has($this->getName())) {
+            $formBuilder->setInputVariable($this->getName(), 0);
         }
     }
 }

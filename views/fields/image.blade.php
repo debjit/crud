@@ -51,7 +51,7 @@
 
                     @endforeach
                 </div>
-            
+
                 @if ($field->getDescription())
                     <p class="help-block">{{ $field->getDescription() }}</p>
                 @endif
