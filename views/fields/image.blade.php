@@ -51,8 +51,16 @@
 
                     @endforeach
                 </div>
+            
+                @if ($field->getDescription())
+                    <p class="help-block">{{ $field->getDescription() }}</p>
+                @endif
             @else
                 {!!  CRUDForm::file($field->getName(), $field->getAttributes()) !!}
+
+                @if ($field->getDescription())
+                    <p class="help-block">{{ $field->getDescription() }}</p>
+                @endif
 
                 @if ($field->getValue() !== null && is_array($field->getValue()))
                     <button data-provide="gallery" data-target="#gallery-{{$field->getName()}}" class="btn btn-primary btn-xs" style="margin-top: 10px" title="{{trans('crud::index.button.open-gallery')}}"><i class="fa fa-fw fa-picture-o"></i> Preview uploaded</button>
