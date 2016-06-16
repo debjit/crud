@@ -19,8 +19,6 @@
  */
 namespace BlackfyreStudio\CRUD\Fields;
 
-use Input;
-
 /**
  * Class BooleanField.
  */
@@ -45,8 +43,7 @@ class BooleanField extends BaseField
      */
     public function preSubmitHook($input)
     {
-
-        if (!array_key_exists($this->getName(),$input)) {
+        if (!array_key_exists($this->getName(), $input)) {
             $input[$this->getName()] = 0;
         }
 
