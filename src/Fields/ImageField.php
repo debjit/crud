@@ -77,7 +77,7 @@ class ImageField extends FileField
      * @param array $input
      * @param Model $model
      */
-    public function postSubmitHook($input, $model)
+    public function postSubmitHook($model)
     {
         if (array_key_exists($this->name, $input)) {
             $imageName = $this->getValue();

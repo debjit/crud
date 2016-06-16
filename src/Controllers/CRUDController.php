@@ -25,6 +25,7 @@ use Illuminate\Console\AppNamespaceDetectorTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as OriginController;
 use Input;
 use Redirect;
@@ -105,19 +106,20 @@ class CRUDController extends OriginController
     /**
      * Store a newly created resource in storage.
      *
+     * @param Request $request
      * @param string $modelName
-     *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store($modelName = '')
+    public function store(Request $request, $modelName = '')
     {
+
         if (!\Auth::user()->hasPermission($modelName.'.create')) {
             return view('crud::errors.403');
         }
 
         $modelNameWithNamespace = $this->setModelNamespace($modelName);
         $master = Master::getInstance($modelNameWithNamespace);
-        $result = $master->buildForm()->getFormBuilder()->create(Input::all());
+        $result = $master->buildForm()->getFormBuilder()->create($request);
 
         // Check validation errors
         if (get_class($result) === 'Illuminate\Validation\Validator') {
@@ -166,12 +168,12 @@ class CRUDController extends OriginController
     /**
      * Update the specified resource in storage.
      *
+     * @param Request $request
      * @param string $modelName
-     * @param int    $id
-     *
+     * @param int $id
      * @return $this|\Illuminate\Http\RedirectResponse
      */
-    public function update($modelName, $id)
+    public function update(Request $request, $modelName, $id)
     {
         if (!\Auth::user()->hasPermission($modelName.'.update')) {
             return view('crud::errors.403');

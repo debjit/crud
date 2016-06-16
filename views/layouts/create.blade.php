@@ -1,24 +1,5 @@
 @extends('crud::master')
 
-{{--
-
-@section('sidebar')
-    <ul class="nav nav-sidebar">
-        <li>
-            <a href="{{ route('crud.index', $ModelName) }}">
-                <i class="fa fa-long-arrow-left"></i>
-                {{ trans('crud::form.button.back-to-index', ['model' => $MasterInstance->getModelPluralName()]) }}
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('crud.create', $ModelName) }}">
-                <i class="fa fa-plus"></i>
-                {{ trans('crud::index.button.create-new', ['model' => $MasterInstance->getModelSingularName()]) }}
-            </a>
-        </li>
-    </ul>
-@stop
---}}
 
 @section('content')
 

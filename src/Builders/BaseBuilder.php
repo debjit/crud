@@ -23,6 +23,7 @@ use BlackfyreStudio\CRUD\Planner\FilterPlanner;
 use BlackfyreStudio\CRUD\Planner\FormPlanner;
 use BlackfyreStudio\CRUD\Planner\IndexPlanner;
 use BlackfyreStudio\CRUD\Planner\ScopePlanner;
+use Illuminate\Http\Request;
 use Input;
 
 /**
@@ -109,9 +110,9 @@ abstract class BaseBuilder
     /**
      * Get the input array.
      *
-     * @return array
+     * @return Request
      */
-    public function getInput()
+    public function getRequest()
     {
         return $this->input;
     }
@@ -119,13 +120,13 @@ abstract class BaseBuilder
     /**
      * Set the input for the builder from the Laravel input object.
      *
-     * @param array $input
+     * @param Request $request
      *
      * @return BaseBuilder
      */
-    public function setInput($input)
+    public function setRequest($request)
     {
-        $this->input = $input;
+        $this->input = $request;
 
         return $this;
     }

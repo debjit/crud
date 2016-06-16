@@ -20,6 +20,7 @@
 namespace BlackfyreStudio\CRUD\Fields;
 
 use Closure;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 /**
@@ -169,22 +170,17 @@ abstract class BaseField
 
     /**
      * Hook function to be run before form submitting.
-     *
-     * @return array
      */
-    public function preSubmitHook($input)
+    public function preSubmitHook()
     {
         // intentionally left black
-        return $input;
     }
 
     /**
      * Hook function to be run after form submitting.
-     *
-     * @param $input
      * @param $model
      */
-    public function postSubmitHook($input, $model)
+    public function postSubmitHook($model)
     {
         // intentionally left blank
     }

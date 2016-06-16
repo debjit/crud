@@ -41,12 +41,21 @@ class BooleanField extends BaseField
     /**
      * The field should always have a value, either true or false.
      */
-    public function preSubmitHook($input)
+    public function preSubmitHook()
     {
+        
+        $request = $this->getMasterInstance()->getFormBuilder()->getRequest();
+
+        if (!$request->has($this->getName())) {
+            $request->offsetSet($this->getName(),0);
+        }
+
+        /*
         if (!array_key_exists($this->getName(), $input)) {
             $input[$this->getName()] = 0;
         }
 
         return $input;
+        */
     }
 }
