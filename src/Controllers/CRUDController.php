@@ -107,12 +107,12 @@ class CRUDController extends OriginController
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @param string $modelName
+     * @param string  $modelName
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request, $modelName = '')
     {
-
         if (!\Auth::user()->hasPermission($modelName.'.create')) {
             return view('crud::errors.403');
         }
@@ -169,8 +169,9 @@ class CRUDController extends OriginController
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param string $modelName
-     * @param int $id
+     * @param string  $modelName
+     * @param int     $id
+     *
      * @return $this|\Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $modelName, $id)

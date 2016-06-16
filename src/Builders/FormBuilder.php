@@ -226,14 +226,14 @@ class FormBuilder extends BaseBuilder
 
         /* Get the model's primary key */
         $primaryKey = (new $model())->getKeyName();
-        
+
         /* Set up the request object for sharing */
         $this->setRequest($request);
 
 
         /** @var BaseField $field */
         foreach ($planner->getFields() as $field) {
-            
+
             /* Modification on the request based on the field's settings */
             $field->preSubmitHook();
             $input = $this->getRequest();
