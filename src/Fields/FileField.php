@@ -115,7 +115,6 @@ class FileField extends BaseField
             unset($input[$fieldName]);
         }
         */
-
     }
 
     /**

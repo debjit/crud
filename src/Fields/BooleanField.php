@@ -43,11 +43,10 @@ class BooleanField extends BaseField
      */
     public function preSubmitHook()
     {
-        
         $request = $this->getMasterInstance()->getFormBuilder()->getRequest();
 
         if (!$request->has($this->getName())) {
-            $request->offsetSet($this->getName(),0);
+            $request->offsetSet($this->getName(), 0);
         }
 
         /*

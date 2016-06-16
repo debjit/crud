@@ -95,9 +95,9 @@ return [
      * Allowed file mime-types for uploading
      * A more or less complete list: https://www.sitepoint.com/web-foundations/mime-types-complete-list/
      */
-    'allowed-file-types'=>[
-        'image' => ['image/jpeg','image/pjpeg','image/png','image/gif'],
-        'general' => ['application/pdf']
+    'allowed-file-types' => [
+        'image'   => ['image/jpeg', 'image/pjpeg', 'image/png', 'image/gif'],
+        'general' => ['application/pdf'],
     ],
 
 
