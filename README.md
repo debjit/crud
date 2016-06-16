@@ -19,7 +19,7 @@ Contributions are welcome! Either as ideas or (preferably) pull requests :smile:
 * [x] Laravel 5.1 LTS support
 * [x] Working Scaffold command
 * [x] Logout
-* [ ] Password change
+* [x] Password change
 * [x] Index view
   * [x] Bulk actions (Delete)
   * [ ] Boolean field actions per row
@@ -37,14 +37,11 @@ Contributions are welcome! Either as ideas or (preferably) pull requests :smile:
   * [x] Multiple options (Checkbox list)
   * [x] File
   * [x] Image
-  * [ ] Image Crop
   * [x] Numbers
   * [x] Markdown
-  * [ ] CKEditor
   * [x] Tags
-  * [x] Date
-  * [ ] Time
   * [x] Date & Time
+  * [x] Boolean field (Toggle button)
 * [x] Auth management
    * [x] Roles
 * [x] IDE Support (with laravel-ide-helper, main angle on PHPStorm) 
