@@ -297,7 +297,6 @@ class FormBuilder extends BaseBuilder
         // Field pre update
         /** @var BaseField $field */
         foreach ($this->getPlanner()->getFields() as $field) {
-
             $this->setInput($field->preSubmitHook($this->getInput()));
 
             /* Is this a multiple field? */

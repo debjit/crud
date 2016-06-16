@@ -110,7 +110,6 @@ class FileField extends BaseField
             $formBuilder->setInputVariable($fieldName, $value);
 
             $input[$fieldName] = $value;
-
         } else {
             unset($input[$fieldName]);
         }
