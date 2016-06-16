@@ -85,7 +85,7 @@ class FileField extends BaseField
         return $this->originalName;
     }
 
-    public function preSubmitHook()
+    public function preSubmitHook($input)
     {
         $formBuilder = $this->getMasterInstance()->getFormBuilder();
 
@@ -108,9 +108,14 @@ class FileField extends BaseField
             $value = sprintf('%s/%s', $this->getLocation(), $fileName);
 
             $formBuilder->setInputVariable($fieldName, $value);
+
+            $input[$fieldName] = $value;
+
         } else {
-            $formBuilder->unsetInputVariable($this->getName());
+            unset($input[$fieldName]);
         }
+
+        return $input;
     }
 
     /**
@@ -121,9 +126,9 @@ class FileField extends BaseField
         switch ($this->getContext()) {
             case BaseField::CONTEXT_FILTER:
             case BaseField::CONTEXT_FORM:
-            return view('crud::fields.file', [
-                'field' => $this,
-            ]);
+                return view('crud::fields.file', [
+                    'field' => $this,
+                ]);
                 break;
             case BaseField::CONTEXT_INDEX:
             default:

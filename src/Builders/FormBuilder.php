@@ -297,7 +297,8 @@ class FormBuilder extends BaseBuilder
         // Field pre update
         /** @var BaseField $field */
         foreach ($this->getPlanner()->getFields() as $field) {
-            $field->preSubmitHook();
+
+            $this->setInput($field->preSubmitHook($this->getInput()));
 
             /* Is this a multiple field? */
             if ($field->checkIfMultiple()) {
@@ -312,7 +313,7 @@ class FormBuilder extends BaseBuilder
 
         /* Model before update hook */
         if (method_exists($admin, 'beforeUpdate')) {
-            $this->setInput($admin->beforeUpdate($input));
+            $this->setInput($admin->beforeUpdate($this->getInput()));
         }
 
         /* Validate */
@@ -330,6 +331,7 @@ class FormBuilder extends BaseBuilder
             $model::find($this->getIdentifier())
                 ->update($this->getInput());
         }
+
         /* Field post update */
         foreach ($this->getPlanner()->getFields() as $field) {
             $field->postSubmitHook($this->getInput(), $model::find($this->getIdentifier()));

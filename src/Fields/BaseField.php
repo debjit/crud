@@ -169,10 +169,12 @@ abstract class BaseField
 
     /**
      * Hook function to be run before form submitting.
+     * @return array
      */
-    public function preSubmitHook()
+    public function preSubmitHook($input)
     {
         // intentionally left black
+        return $input;
     }
 
     /**
