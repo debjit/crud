@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container">
+<div class="container sceneElement" data-transition="moveleft">
     <div class="row" style="margin-top: 30px">
         <div class="col-sm-8 col-sm-offset-2">
 

@@ -32,7 +32,7 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container sceneElement" data-transition="moveleft">
 
         @include('crud::partials._session-messages')
 

@@ -13,13 +13,13 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container sceneElement" data-transition="moveleft">
 
         @include('crud::partials._session-messages')
 
         @if ($MasterInstance->getFormPlanner()->hasFieldsOnPosition('right'))
 
-            {!! CRUDForm::open(['method' => 'PUT', 'route' => ['crud.update', $ModelName, $id], 'class' => 'form-horizontal', 'files' => true]) !!}
+            {!! CRUDForm::open(['method' => 'PUT', 'route' => ['crud.update', $ModelName, $id], 'class' => 'form-horizontal', 'files' => true, 'novalidate'=>true]) !!}
 
             {!! CRUDForm::hidden(\Illuminate\Support\Str::singular($MasterInstance->getTable()) . '_id',$id) !!}
 

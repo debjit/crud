@@ -17,6 +17,8 @@
 </head>
 <body>
 
+<div class="scene" id="content">
+
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -57,6 +59,8 @@
         <p><strong>Copyright &copy; {{Config::get('crud.company.year',date('Y'))}} <a target="_blank" href="{{Config::get('crud.company.link','https://github.com/BlackfyreStudio')}}">{{Config::get('crud.company.name','BlackFyre Studio')}}</a>.</strong> All rights reserved.</p>
     </div>
 </footer>
+
+</div>
 
 <script src="{{asset('vendor/blackfyrestudio/crud/scripts/package.js')}}"></script>
 
