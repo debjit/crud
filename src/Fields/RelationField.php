@@ -18,6 +18,7 @@
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 namespace BlackfyreStudio\CRUD\Fields;
+use BlackfyreStudio\CRUD\Master;
 
 /**
  * Class RelationField.
@@ -85,23 +86,23 @@ abstract class RelationField extends BaseField
         return $this;
     }
 
-    public function __construct($name, \BlackfyreStudio\CRUD\Master $master)
+    public function __construct($name, Master $master)
     {
         parent::__construct($name, $master);
         $this->setAttribute('data-provide', 'select');
     }
 
     /**
-     * @param $input
      * @param \Illuminate\Database\Eloquent\Model $baseModel
      */
-    public function postSubmitHook($input, $baseModel)
+    public function postSubmitHook($baseModel)
     {
         $model = $baseModel::find($this->getMasterInstance()->getFormBuilder()->getIdentifier());
+        $request = $this->getMasterInstance()->getFormBuilder()->getRequest();
         $pivot = $this->getName();
 
-        if (isset($input[$pivot])) {
-            $model->{$pivot}()->sync($input[$pivot]);
+        if ($request->has($pivot)) {
+            $model->{$pivot}()->sync($request->input($pivot));
         } else {
             $model->{$pivot}()->sync([]);
         }

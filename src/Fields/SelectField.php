@@ -18,13 +18,14 @@
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 namespace BlackfyreStudio\CRUD\Fields;
+use BlackfyreStudio\CRUD\Master;
 
 /**
  * Class SelectField.
  */
 class SelectField extends BaseField
 {
-    public function __construct($name, \BlackfyreStudio\CRUD\Master $master)
+    public function __construct($name, Master $master)
     {
         parent::__construct($name, $master);
         $this->setAttribute('data-provide', 'select');
