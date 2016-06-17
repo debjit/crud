@@ -67,7 +67,7 @@ class CreateRoleCommand extends Command
 
         $role->name = $name;
 
-        if (!is_null($this->option('label'))) {
+        if (! is_null($this->option('label'))) {
             $role->label = $this->option('label');
         }
 

@@ -112,7 +112,7 @@ class ModelCommand extends GeneratorCommand
             $columns = Schema::getColumnListing($table);
             // Exclude the unwanted columns
             $columns = array_filter($columns, function ($value) {
-                return !in_array($value, $this->exclude);
+                return ! in_array($value, $this->exclude);
             });
             // Add quotes
             array_walk($columns, function (&$value) {

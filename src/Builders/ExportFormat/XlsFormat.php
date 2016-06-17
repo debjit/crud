@@ -47,7 +47,7 @@ class XlsFormat extends BaseFormat
         foreach ($this->getIndexBuilder()->getResult() as $item) {
             foreach ($item->getFields() as $field) {
                 $value = $field->getValue();
-                if (!is_string($value)) {
+                if (! is_string($value)) {
                     $value = $value->toArray();
                 }
                 $result[$item->getIdentifier()][$field->getName()] = $value;

@@ -45,7 +45,7 @@ class BooleanField extends BaseField
     {
         $request = $this->getMasterInstance()->getFormBuilder()->getRequest();
 
-        if (!$request->has($this->getName())) {
+        if (! $request->has($this->getName())) {
             $request->offsetSet($this->getName(), 0);
         }
 

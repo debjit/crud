@@ -77,7 +77,7 @@ class CreatePermissionsCommand extends Command
             $permission->label = $permissions[strtoupper($permissionTo)].' '.$this->argument('name');
             $permission->save();
 
-            if (!is_null($this->option('assign'))) {
+            if (! is_null($this->option('assign'))) {
                 if (is_numeric($this->option('assign'))) {
                     try {
 

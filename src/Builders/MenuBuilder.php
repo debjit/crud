@@ -146,7 +146,7 @@ class MenuBuilder
                     }
 
                     if (array_key_exists('custom', $value) && is_array($value['custom'])) {
-                        if (!array_key_exists('target', $value['custom'])) {
+                        if (! array_key_exists('target', $value['custom'])) {
                             $value['custom']['target'] = '_blank';
                         }
                     } else {

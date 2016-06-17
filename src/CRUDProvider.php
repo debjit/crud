@@ -176,7 +176,7 @@ class CRUDProvider extends ServiceProvider
          */
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'crud');
 
-        if (!$this->app->routesAreCached()) {
+        if (! $this->app->routesAreCached()) {
             require __DIR__.'/routes.php';
         }
     }
