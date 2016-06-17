@@ -29,7 +29,6 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as OriginController;
 use Input;
 use Redirect;
-use Session;
 
 /**
  * Class CRUDController.
@@ -123,13 +122,11 @@ class CRUDController extends OriginController
 
         // Check validation errors
         if (get_class($result) === 'Illuminate\Validation\Validator') {
-
             return redirect()
-                ->route('crud.create',[$modelName])
-                ->with('message.error',trans('crud::messages.error.validation-errors'))
+                ->route('crud.create', [$modelName])
+                ->with('message.error', trans('crud::messages.error.validation-errors'))
                 ->withInput()
                 ->withErrors($result);
-
         }
 
         // afterStore hook
@@ -138,8 +135,8 @@ class CRUDController extends OriginController
         }
 
         return redirect()
-            ->route('crud.index',[$modelName])
-            ->with('message.success',trans('crud::messages.success.model-created', [
+            ->route('crud.index', [$modelName])
+            ->with('message.success', trans('crud::messages.success.model-created', [
                 'model' => $master->getModelSingularName(),
             ]));
     }
@@ -191,17 +188,15 @@ class CRUDController extends OriginController
 
         // Check validation errors
         if (get_class($result) === 'Illuminate\Validation\Validator') {
-
             return redirect()
-                ->route('crud.edit',[$modelName, $id])
-                ->with('message.error',trans('crud::messages.error.validation-errors'))
+                ->route('crud.edit', [$modelName, $id])
+                ->with('message.error', trans('crud::messages.error.validation-errors'))
                 ->withInput()
                 ->withErrors($result);
-
         }
 
         return redirect()
-            ->route('crud.index',[$modelName])
+            ->route('crud.index', [$modelName])
             ->with('message.success', trans('crud::messages.success.model-updated', [
                 'model' => $model->getModelSingularName(),
             ]));
