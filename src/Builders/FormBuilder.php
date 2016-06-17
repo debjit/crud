@@ -314,11 +314,11 @@ class FormBuilder extends BaseBuilder
             /* Is this a multiple field? */
             if ($field->checkIfMultiple()) {
                 $value = Value::encode(Config::get('crud::multiple-serializer'), $request->input($field->getName()));
-                $this->getRequest()->offsetSet($field->getName(),$value);
+                $this->getRequest()->offsetSet($field->getName(), $value);
             }
             if ($field->hasSaving()) {
                 $saving = $field->getSaving();
-                $this->getRequest()->offsetSet($field->getName(),$saving($request->input($field->getName())));
+                $this->getRequest()->offsetSet($field->getName(), $saving($request->input($field->getName())));
             }
         }
 

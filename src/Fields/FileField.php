@@ -87,23 +87,24 @@ class FileField extends BaseField
 
     /**
      * @param \Symfony\Component\HttpFoundation\File\UploadedFile $file
+     *
      * @return string
      */
-    public function slugifyFileName($file) {
+    public function slugifyFileName($file)
+    {
         $name = str_slug($file->getClientOriginalName());
-        $name = substr($name,0, (-1 * strlen($file->getClientOriginalExtension()))) . '.' . $file->getClientOriginalExtension();
+        $name = substr($name, 0, (-1 * strlen($file->getClientOriginalExtension()))).'.'.$file->getClientOriginalExtension();
+
         return $name;
     }
-    
+
     public function preSubmitHook()
     {
-        
         $request = $this->getMasterInstance()->getFormBuilder()->getRequest();
 
         $fieldName = $this->getName();
 
         if ($request->hasFile($fieldName)) {
-
             $file = $request->file($fieldName);
 
             $this->setOriginalName($this->slugifyFileName($file));
@@ -115,10 +116,9 @@ class FileField extends BaseField
             $file->move(public_path($this->getLocation()), $fileName);
 
             $value = sprintf('%s/%s', $this->getLocation(), $fileName);
-            
 
-            $request->offsetSet($fieldName,$value);
-            
+
+            $request->offsetSet($fieldName, $value);
         } else {
             $request->offsetUnset($fieldName);
         }

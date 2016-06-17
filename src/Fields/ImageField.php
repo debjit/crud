@@ -100,7 +100,6 @@ class ImageField extends FileField
             foreach ($this->getSizes() as $size) {
                 try {
                     $image = InterventionImage::make(public_path($images['original']['src']));
-
                 } catch (NotReadableException $e) {
                     continue;
                 }
