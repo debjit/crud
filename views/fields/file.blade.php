@@ -13,7 +13,7 @@
                 <div class="row" data-multiply>
                     <div class="col-sm-11">
                         {!!  CRUDForm::file($field->getName() . '[]', $field->getAttributes())  !!}
-                        {!!  $value  !!}
+                        <a target="_blank" href="{{asset($value)}}">{{$value}}</a>
                     </div>
                     <div class="col-sm-1">
                         <div class="field-infinite">
@@ -30,7 +30,7 @@
             @endforeach
         @else
             {!! CRUDForm::file($field->getName(), $field->getAttributes())  !!}
-            {!! $field->getValue() !!}
+            <a target="_blank" href="{{asset($field->getValue())}}">{{$field->getValue()}}</a>
         @endif
 
         @if ($field->getDescription())

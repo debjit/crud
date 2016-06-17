@@ -6,7 +6,7 @@
     <div class="container-fluid breadcrumb-container">
         <div class="container">
             <ol class="breadcrumb">
-                <li><a href="{{URL::route('crud.home')}}"><i class="fa fa-dashboard"></i> {{trans('crud::views.dashboard.title')}}</a></li>
+                <li><a href="{{URL::route('crud.home')}}"><i class="fa fa-fw fa-dashboard"></i>{{trans('crud::views.dashboard.title')}}</a></li>
                 <li><a href="{{ route('crud.index', $ModelName) }}"><i class="fa fa-list"></i> {{ trans('crud::index.list-title', ['model' => $MasterInstance->getModelPluralName()]) }}</a></li>
                 <li class="active"><i class="fa fa-plus"></i>  {{ trans('crud::form.title.create-model', ['model' => $MasterInstance->getModelSingularName()]) }}</li>
             </ol>

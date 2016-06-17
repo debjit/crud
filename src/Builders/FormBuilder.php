@@ -269,7 +269,7 @@ class FormBuilder extends BaseBuilder
         if (method_exists($admin, 'create')) {
             $model = $admin->create($this->getRequest(), $model);
         } else {
-            $model = $model::create($this->getRequest()->all());
+            $model = $model::create($this->getRequest()->input());
         }
 
         /* Set the primary id from the `new` model */
@@ -294,41 +294,42 @@ class FormBuilder extends BaseBuilder
     /**
      * Update a model from input.
      *
-     * @param array $input
+     * @param Request $request
      *
      * @return FormBuilder
      */
-    public function update($input)
+    public function update($request)
     {
         $mapper = $this->getPlanner();
         $admin = $mapper->getCRUDMasterInstance();
         /** @var Model $model */
         $model = $this->getModel();
-        $this->setRequest($input);
+        $this->setRequest($request);
         // Field pre update
+
         /** @var BaseField $field */
         foreach ($this->getPlanner()->getFields() as $field) {
-            $this->setRequest($field->preSubmitHook($this->getRequest()));
+            $field->preSubmitHook();
 
             /* Is this a multiple field? */
             if ($field->checkIfMultiple()) {
-                $value = Value::encode(Config::get('crud::multiple-serializer'), $input[$field->getName()]);
-                $this->setInputVariable($field->getName(), $value);
+                $value = Value::encode(Config::get('crud::multiple-serializer'), $request->input($field->getName()));
+                $this->getRequest()->offsetSet($field->getName(),$value);
             }
             if ($field->hasSaving()) {
                 $saving = $field->getSaving();
-                $this->setInputVariable($field->getName(), $saving($input[$field->getName()]));
+                $this->getRequest()->offsetSet($field->getName(),$saving($request->input($field->getName())));
             }
         }
 
         /* Model before update hook */
         if (method_exists($admin, 'beforeUpdate')) {
-            $this->setRequest($admin->beforeUpdate($this->getRequest()));
+            $admin->beforeUpdate();
         }
 
         /* Validate */
         if (property_exists($model, 'rulesOnUpdate')) {
-            $validator = Validator::make($this->getRequest(), $model::$rulesOnUpdate);
+            $validator = Validator::make($this->getRequest()->all(), $model::$rulesOnUpdate);
             if ($validator->fails()) {
                 return $validator;
             }
@@ -339,12 +340,12 @@ class FormBuilder extends BaseBuilder
             $this->getPlanner()->getCRUDMasterInstance()->update($this->getRequest(), $model::find($this->getIdentifier()));
         } else {
             $model::find($this->getIdentifier())
-                ->update($this->getRequest());
+                ->update($this->getRequest()->input());
         }
 
         /* Field post update */
         foreach ($this->getPlanner()->getFields() as $field) {
-            $field->postSubmitHook($this->getRequest(), $model::find($this->getIdentifier()));
+            $field->postSubmitHook($model::find($this->getIdentifier()));
         }
 
         /* Model after update hook */

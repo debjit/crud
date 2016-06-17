@@ -184,7 +184,7 @@ class CRUDController extends OriginController
         $model = Master::getInstance($modelNameWithNamespace);
         $result = $model->buildForm($id)
             ->getFormBuilder()
-            ->update(Input::all());
+            ->update($request);
         // Check validation errors
         if (get_class($result) === 'Illuminate\Validation\Validator') {
             Session::flash('message.error', trans('crud::messages.error.validation-errors'));

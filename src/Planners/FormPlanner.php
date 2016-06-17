@@ -129,7 +129,7 @@ class FormPlanner extends BasePlanner
      */
     public function file($name = '')
     {
-        return $this->call('image', $name);
+        return $this->call('file', $name);
     }
 
     /**

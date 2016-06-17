@@ -85,36 +85,43 @@ class FileField extends BaseField
         return $this->originalName;
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\File\UploadedFile $file
+     * @return string
+     */
+    public function slugifyFileName($file) {
+        $name = str_slug($file->getClientOriginalName());
+        $name = substr($name,0, (-1 * strlen($file->getClientOriginalExtension()))) . '.' . $file->getClientOriginalExtension();
+        return $name;
+    }
+    
     public function preSubmitHook()
     {
-        /*
-        $formBuilder = $this->getMasterInstance()->getFormBuilder();
+        
+        $request = $this->getMasterInstance()->getFormBuilder()->getRequest();
 
         $fieldName = $this->getName();
 
+        if ($request->hasFile($fieldName)) {
 
-        if (\Input::hasFile($this->getName())) {
-            $file = \Input::file($this->getName());
+            $file = $request->file($fieldName);
 
-            $this->setOriginalName($file->getClientOriginalName());
+            $this->setOriginalName($this->slugifyFileName($file));
 
-            $fileName = $file->getClientOriginalName();
-
-            $fileName = $this->handleNaming($fileName, $file->getClientOriginalExtension());
+            $fileName = $this->handleNaming($this->slugifyFileName($file), $file->getClientOriginalExtension());
 
             $this->setValue($fileName);
 
             $file->move(public_path($this->getLocation()), $fileName);
 
             $value = sprintf('%s/%s', $this->getLocation(), $fileName);
+            
 
-            $formBuilder->setInputVariable($fieldName, $value);
-
-            $input[$fieldName] = $value;
+            $request->offsetSet($fieldName,$value);
+            
         } else {
-            unset($input[$fieldName]);
+            $request->offsetUnset($fieldName);
         }
-        */
     }
 
     /**

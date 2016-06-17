@@ -74,17 +74,21 @@ class ImageField extends FileField
     /**
      * Upload the image.
      *
-     * @param array $input
      * @param Model $model
      */
     public function postSubmitHook($model)
     {
-        if (array_key_exists($this->name, $input)) {
-            $imageName = $this->getValue();
+        /* Get the Request object */
+        $request = $this->getMasterInstance()->getFormBuilder()->getRequest();
 
+        /* Check our image file */
+        if ($request->hasFile($this->getName())) {
+
+
+            /* Create our 'original image' entry */
             $images = [
                 'original' => [
-                    'src' => sprintf('%s/%s', $this->getLocation(), $imageName),
+                    'src' => sprintf('%s/%s', $this->getLocation(), $this->getValue()),
                 ],
             ];
 
@@ -95,7 +99,8 @@ class ImageField extends FileField
 
             foreach ($this->getSizes() as $size) {
                 try {
-                    $image = InterventionImage::make(sprintf('%s/%s', $this->getLocation(), $imageName));
+                    $image = InterventionImage::make(public_path($images['original']['src']));
+
                 } catch (NotReadableException $e) {
                     continue;
                 }
@@ -115,12 +120,12 @@ class ImageField extends FileField
                 }
 
                 if (array_key_exists(3, $size)) {
-                    $saveLocation = sprintf('%s/%s', $this->getLocation(), $size[3].'-'.$imageName);
+                    $saveLocation = sprintf('%s/%s-%s', $this->getLocation(), $size[3], $this->getValue());
                     $images[$size[3]]['src'] = $saveLocation;
                     $images[$size[3]]['width'] = $size[0];
                     $images[$size[3]]['height'] = $size[1];
                 } else {
-                    $saveLocation = sprintf('%s/%s', $this->getLocation(), $size[0].'x'.$size[1].'-'.$imageName);
+                    $saveLocation = sprintf('%s/%s-%s', $this->getLocation(), $size[0].'x'.$size[1], $this->getValue());
                     $images[$size[0].'x'.$size[1]]['src'] = $saveLocation;
                     $images[$size[0].'x'.$size[1]]['width'] = $size[0];
                     $images[$size[0].'x'.$size[1]]['height'] = $size[1];
