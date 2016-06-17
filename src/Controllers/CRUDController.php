@@ -123,22 +123,25 @@ class CRUDController extends OriginController
 
         // Check validation errors
         if (get_class($result) === 'Illuminate\Validation\Validator') {
-            Session::flash('message.error', trans('crud::messages.error.validation-errors'));
 
-            return Redirect::route('crud.create', [$modelName])
+            return redirect()
+                ->route('crud.create',[$modelName])
+                ->with('message.error',trans('crud::messages.error.validation-errors'))
                 ->withInput()
                 ->withErrors($result);
+
         }
-        // Set the flash message
-        Session::flash('message.success', trans('crud::messages.success.model-created', [
-            'model' => $master->getModelSingularName(),
-        ]));
+
         // afterStore hook
         if (method_exists($modelNameWithNamespace, 'afterStore')) {
             return $modelNameWithNamespace->afterStore(Redirect::route('admin.model.index', $modelName));
         }
 
-        return Redirect::route('crud.index', [$modelName]);
+        return redirect()
+            ->route('crud.index',[$modelName])
+            ->with('message.success',trans('crud::messages.success.model-created', [
+                'model' => $master->getModelSingularName(),
+            ]));
     }
 
     /**
@@ -185,20 +188,23 @@ class CRUDController extends OriginController
         $result = $model->buildForm($id)
             ->getFormBuilder()
             ->update($request);
+
         // Check validation errors
         if (get_class($result) === 'Illuminate\Validation\Validator') {
-            Session::flash('message.error', trans('crud::messages.error.validation-errors'));
 
-            return Redirect::route('crud.edit', [$modelName, $id])
+            return redirect()
+                ->route('crud.edit',[$modelName, $id])
+                ->with('message.error',trans('crud::messages.error.validation-errors'))
                 ->withInput()
                 ->withErrors($result);
-        }
-        // Set the flash message
-        Session::flash('message.success', trans('crud::messages.success.model-updated', [
-            'model' => $model->getModelSingularName(),
-        ]));
 
-        return Redirect::route('crud.index', $modelName);
+        }
+
+        return redirect()
+            ->route('crud.index',[$modelName])
+            ->with('message.success', trans('crud::messages.success.model-updated', [
+                'model' => $model->getModelSingularName(),
+            ]));
     }
 
     /**
