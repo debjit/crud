@@ -75,7 +75,7 @@ class CreateAdminCommand extends Command
 
         $user->password = bcrypt($password);
 
-        if (!is_null($this->option('name'))) {
+        if (! is_null($this->option('name'))) {
             $user->name = $this->option('name');
         }
 

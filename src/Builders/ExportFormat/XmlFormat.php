@@ -48,7 +48,7 @@ class XmlFormat extends BaseFormat
         foreach ($this->getIndexBuilder()->getResult() as $item) {
             foreach ($item->getFields() as $field) {
                 $value = $field->getValue();
-                if (!is_string($value)) {
+                if (! is_string($value)) {
                     $value = $value->toArray();
                 }
                 $result[$item->getIdentifier()][$field->getName()] = $value;
@@ -72,7 +72,7 @@ class XmlFormat extends BaseFormat
     {
         foreach ($result as $key => $value) {
             if (is_array($value)) {
-                if (!is_numeric($key)) {
+                if (! is_numeric($key)) {
                     $subnode = $xml->addChild((string) $key);
                 } else {
                     $subnode = $xml->addChild('item_'.$key);

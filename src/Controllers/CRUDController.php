@@ -64,7 +64,7 @@ class CRUDController extends OriginController
      */
     public function index($modelName = '')
     {
-        if (!\Auth::user()->hasPermission($modelName.'.read')) {
+        if (! \Auth::user()->hasPermission($modelName.'.read')) {
             return view('crud::errors.403');
         }
 
@@ -88,7 +88,7 @@ class CRUDController extends OriginController
      */
     public function create($modelName = '')
     {
-        if (!\Auth::user()->hasPermission($modelName.'.create')) {
+        if (! \Auth::user()->hasPermission($modelName.'.create')) {
             return view('crud::errors.403');
         }
 
@@ -112,7 +112,7 @@ class CRUDController extends OriginController
      */
     public function store(Request $request, $modelName = '')
     {
-        if (!\Auth::user()->hasPermission($modelName.'.create')) {
+        if (! \Auth::user()->hasPermission($modelName.'.create')) {
             return view('crud::errors.403');
         }
 
@@ -151,7 +151,7 @@ class CRUDController extends OriginController
      */
     public function edit($modelName, $id)
     {
-        if (!\Auth::user()->hasPermission($modelName.'.update')) {
+        if (! \Auth::user()->hasPermission($modelName.'.update')) {
             return view('crud::errors.403');
         }
 
@@ -176,7 +176,7 @@ class CRUDController extends OriginController
      */
     public function update(Request $request, $modelName, $id)
     {
-        if (!\Auth::user()->hasPermission($modelName.'.update')) {
+        if (! \Auth::user()->hasPermission($modelName.'.update')) {
             return view('crud::errors.403');
         }
 
@@ -212,7 +212,7 @@ class CRUDController extends OriginController
      */
     public function multiDestroy($modelName)
     {
-        if (!\Auth::user()->hasPermission($modelName.'.delete')) {
+        if (! \Auth::user()->hasPermission($modelName.'.delete')) {
             abort(403);
         }
 
