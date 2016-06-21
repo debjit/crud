@@ -28,7 +28,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">{{Config::get('crud.title')}}</a>
+            <a class="navbar-brand" href="{{route('crud.home')}}">{{Config::get('crud.title')}}</a>
         </div>
         <div id="navbar-primary" class="collapse navbar-collapse">
             {{-- Menu generator comes here --}}
