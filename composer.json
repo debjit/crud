@@ -3,7 +3,8 @@
   "description": "A Laravel 5.1 CRUD package based on krafthaus/bauhaus, although greatly modified...",
   "keywords": ["laravel","crud","bauhaus alternative","admin generator"],
   "minimum-stability": "dev",
-  "license": "MIT",
+  "license": "GPL-2.0",
+  "homepage": "http://blackfyrestudio.github.io/crud/",
   "authors": [
     {
       "name": "Galicz Miklós",
@@ -29,6 +30,7 @@
   },
   "autoload": {
     "classmap": ["src/"],
+    "exclude-from-classmap": ["/Migrations/"],
     "psr-0": {
       "BlackfyreStudio\\CRUD\\": "src/"
     },
@@ -37,5 +39,9 @@
       "BlackfyreStudio\\CRUD\\Tests\\": "tests/",
       "BlackfyreStudio\\CRUD\\Console\\": "src/Console"
     }
+  },
+  "suggest": {
+    "barryvdh/laravel-ide-helper": "Auto completion assistant for PHPStorm and Sublime",
+    "barryvdh/laravel-debugbar": "Fast and easy runtime debugging"
   }
 }
