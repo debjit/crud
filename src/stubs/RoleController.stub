@@ -26,6 +26,7 @@ use BlackfyreStudio\CRUD\Planner\FilterPlanner;
 use BlackfyreStudio\CRUD\Planner\FormPlanner;
 use BlackfyreStudio\CRUD\Planner\IndexPlanner;
 use BlackfyreStudio\CRUD\Planner\ScopePlanner;
+use Request;
 
 /**
  * Class GalleryItemController
@@ -89,12 +90,16 @@ class RoleController extends Master
 
     /**
      * Custom create rule
-     * @param array $input
+     *
+     * @param Request $request
+     * @param Role $model
+     *
      * @return static
      */
-    public function create($input) {
-        $input['name'] = str_slug($input['label']);
+    public function create($request, $model) {
 
-        return Role::create($input);
+        $request->offsetSet('name',str_slug($request->get('label')));
+
+        return $model->create($request->all());
     }
 }

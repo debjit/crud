@@ -26,6 +26,7 @@ use BlackfyreStudio\CRUD\Planner\FilterPlanner;
 use BlackfyreStudio\CRUD\Planner\FormPlanner;
 use BlackfyreStudio\CRUD\Planner\IndexPlanner;
 use BlackfyreStudio\CRUD\Planner\ScopePlanner;
+use Request;
 
 /**
  * Class UserController
@@ -94,17 +95,21 @@ class UserController extends Master
 
     /**
      * Custom create rule
-     * @param array $input
+     * @param Request $request
      * @return static
      */
-    public function create($input) {
+    public function create($request) {
 
+        if ($request->has('password') && $request->has('password_confirm')) {
 
-        if ($input['password']===$input['password_confirm']) {
+            if ($request->input('password') === $request->input('password_confirm')) {
 
-            $input['password'] = bcrypt($input['password']);
+                $request->offsetUnset('password_confirm');
+                $request->offsetSet('password', bcrypt($request->input('password')));
 
-            return User::create($input);
+                return User::create($request->all());
+
+            }
 
         }
     }
@@ -112,29 +117,31 @@ class UserController extends Master
     /**
      * Update hook.
      *
-     * @param  array $input
-     *
+     * @param Request $request
+     * @param User $model
      * @access public
-     * @return void
      */
-    public function update($input)
+    public function update($request, $model)
     {
-        $user = User::find($input['user_id']);
 
-        if (empty($input['password'])) {
-            unset($input['password']);
+        if ($request->has('password')) {
 
-        } else {
-            if ($input['password']===$input['password_confirm']) {
+            if ($request->input('password') === $request->input('password_confirm')) {
 
-                $input['password'] = bcrypt($input['password']);
-
+                $request->offsetUnset('password_confirm');
+                $request->offsetSet('password', bcrypt($request->input('password')));
 
             }
+
+        } else {
+
+            $request->offsetUnset('password');
+            $request->offsetUnset('password_confirm');
+
         }
 
+        $model->update($request->all());
 
-        $user->update($input);
     }
 
 }
