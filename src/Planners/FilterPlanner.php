@@ -18,14 +18,12 @@
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 namespace BlackfyreStudio\CRUD\Planner;
-use BlackfyreStudio\CRUD\Exceptions\PlannerException;
 
 /**
  * Class FilterPlanner.
  */
 class FilterPlanner extends BasePlanner
 {
-
     /**
      * Create a simple string in the index view.
      *
