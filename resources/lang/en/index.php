@@ -36,7 +36,7 @@ return [
     ],
 
     'filter' => [
-        'title' => 'Filters'
-    ]
+        'title' => 'Filters',
+    ],
 
 ];
