@@ -35,4 +35,8 @@ return [
         'export' => 'Export ...',
     ],
 
+    'filter' => [
+        'title' => 'Filters'
+    ]
+
 ];

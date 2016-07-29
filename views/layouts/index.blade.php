@@ -23,7 +23,7 @@
             {{-- No content --}}
 
             <div class="row">
-                <div class="col-sm-4 col-sm-offset-4">
+                <div class="col-sm-4 col-sm-offset-2">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <h1 class="panel-title">{{$MasterInstance->getModelPluralName()}}</h1>
@@ -45,6 +45,32 @@
                         </div>
                     </div>
                 </div>
+
+
+                {{-- Filter --}}
+
+                @if($MasterInstance->getFilterBuilder()->getResult()->getFields())
+                    <div class="col-sm-4 col-sm-offset-2">
+                        <div class="well well-sm">
+                            {!! CRUDForm::open(['method' => 'get', 'class' => 'form-horizontal']) !!}
+                            <fieldset>
+                                <legend><i class="fa fa-fw fa-filter"></i> {{trans('crud::index.filter.title')}}</legend>
+                            </fieldset>
+
+                            @foreach ($MasterInstance->getFilterBuilder()->getResult()->getFields() as $field)
+                                {!! $field->render() !!}
+                            @endforeach
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-sm">Apply</button>
+                            </div>
+
+                            {!! CRUDForm::close() !!}
+
+                        </div>
+                    </div>
+                @endif
+
             </div>
 
 
@@ -52,7 +78,7 @@
 
             {{-- Has content --}}
             <div class="row">
-                <div class="col-sm-{{ $MasterInstance->getFilterBuilder()->getResult()->getFields() ? 9 : 12 }}">
+                <div class="col-sm-{{ $MasterInstance->getFilterBuilder()->getResult()->getFields() ? 8 : 12 }}">
 
                     <div class="row index-title">
                         <div class="col-sm-6">
@@ -212,44 +238,22 @@
                 {{-- Filter --}}
 
                 @if($MasterInstance->getFilterBuilder()->getResult()->getFields())
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
                         <div class="well well-sm">
-                            <form>
+                            {!! CRUDForm::open(['method' => 'get', 'class' => 'form-horizontal']) !!}
                                 <fieldset>
-                                    <legend><i class="fa fa-fw fa-filter"></i> Filters</legend>
+                                    <legend><i class="fa fa-fw fa-filter"></i> {{trans('crud::index.filter.title')}}</legend>
                                 </fieldset>
 
-                                <div class="form-group">
-                                    <label for="filter-content">Content</label>
-                                    <input class="form-control input-sm" type="text" id="filter-content">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="updated-at-from">Updated at between</label>
-                                    <div class="input-group">
-                    <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                                        <input class="form-control" type="text" data-format="YYYY-MM-DD" data-provide="date-range"
-                                               data-range="start" data-counterpart="#updated-at-to" id="updated-at-from">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="updated-at-to">and</label>
-                                    <div class="input-group">
-                    <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                                        <input class="form-control" type="text" data-format="YYYY-MM-DD" data-provide="date-range"
-                                               data-range="end" data-counterpart="#updated-at-from" id="updated-at-to">
-                                    </div>
-                                </div>
+                                @foreach ($MasterInstance->getFilterBuilder()->getResult()->getFields() as $field)
+                                    {!! $field->render() !!}
+                                @endforeach
 
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary btn-sm">Apply</button>
                                 </div>
 
-                            </form>
+                            {!! CRUDForm::close() !!}
 
                         </div>
                     </div>

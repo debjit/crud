@@ -1,7 +1,17 @@
 {
   "name": "blackfyrestudio/crud",
   "description": "A Laravel 5.1 CRUD package based on krafthaus/bauhaus, although greatly modified...",
-  "keywords": ["laravel","crud","bauhaus alternative","admin generator"],
+  "keywords": [
+    "laravel",
+    "crud",
+    "bauhaus alternative",
+    "crud generator",
+    "laravel crud generator",
+    "crud for laravel",
+    "scaffolding",
+    "scaffolding laravel",
+    "admin generator"
+  ],
   "minimum-stability": "dev",
   "license": "GPL-2.0",
   "homepage": "http://blackfyrestudio.github.io/crud/",
@@ -29,8 +39,12 @@
     "codeclimate/php-test-reporter": "dev-master"
   },
   "autoload": {
-    "classmap": ["src/"],
-    "exclude-from-classmap": ["/Migrations/"],
+    "classmap": [
+      "src/"
+    ],
+    "exclude-from-classmap": [
+      "/Migrations/"
+    ],
     "psr-0": {
       "BlackfyreStudio\\CRUD\\": "src/"
     },

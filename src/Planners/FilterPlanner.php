@@ -18,10 +18,33 @@
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 namespace BlackfyreStudio\CRUD\Planner;
+use BlackfyreStudio\CRUD\Exceptions\PlannerException;
 
 /**
  * Class FilterPlanner.
  */
 class FilterPlanner extends BasePlanner
 {
+
+    /**
+     * Create a simple string in the index view.
+     *
+     * @param string $name
+     *
+     * @return \BlackfyreStudio\CRUD\Fields\StringField
+     */
+    public function string($name = '')
+    {
+        return $this->call('string', $name);
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return \BlackfyreStudio\CRUD\Fields\TextField
+     */
+    public function text($name = '')
+    {
+        return $this->call('text', $name);
+    }
 }

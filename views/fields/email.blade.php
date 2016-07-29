@@ -31,7 +31,7 @@
         @endif
 
         @if ($field->getDescription())
-            <p class="help-block">{{ $field->getDescription() }}</p>
+            <p class="help-block">{!! $field->getDescription() !!}</p>
         @endif
     </div>
 </div>

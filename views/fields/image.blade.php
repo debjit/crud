@@ -53,13 +53,13 @@
                 </div>
 
                 @if ($field->getDescription())
-                    <p class="help-block">{{ $field->getDescription() }}</p>
+                    <p class="help-block">{!! $field->getDescription() !!}</p>
                 @endif
             @else
                 {!!  CRUDForm::file($field->getName(), $field->getAttributes()) !!}
 
                 @if ($field->getDescription())
-                    <p class="help-block">{{ $field->getDescription() }}</p>
+                    <p class="help-block">{!! $field->getDescription() !!}</p>
                 @endif
 
                 @if ($field->getValue() !== null && is_array($field->getValue()))

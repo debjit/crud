@@ -10,7 +10,7 @@
         {!! CRUDForm::select($field->getName(), $field->getOptions(), $field->getValue(), $field->getAttributes()) !!}
 
         @if ($field->getDescription())
-            <p class="help-block">{{ $field->getDescription() }}</p>
+            <p class="help-block">{!! $field->getDescription() !!}</p>
         @endif
     </div>
 </div>

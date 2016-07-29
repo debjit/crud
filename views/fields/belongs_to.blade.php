@@ -8,7 +8,7 @@
     <div class="col-sm-{{ $field->getInline() ? 6 : 9 }}">
         {!! CRUDForm::select($field->getName() . '_id', $items, $field->getValue(), $field->getAttributes())  !!}
         @if ($field->getDescription())
-            <p class="help-block">{{ $field->getDescription() }}</p>
+            <p class="help-block">{!! $field->getDescription() !!}</p>
         @endif
     </div>
 
